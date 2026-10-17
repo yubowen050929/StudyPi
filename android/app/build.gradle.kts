@@ -26,9 +26,19 @@ android {
         versionCode = flutter.versionCode
         versionName = flutter.versionName
         // Flutter controls APK ABI filtering, including --split-per-abi.
+        // STUDYPI_ABIS=arm64-v8a limits the native build for the arm64 CI job.
+        val studypiAbis = System.getenv("STUDYPI_ABIS")
+            ?.split(",")
+            ?.map { it.trim() }
+            ?.filter { it.isNotEmpty() }
+        val nativeAbis = if (studypiAbis.isNullOrEmpty()) {
+            listOf("armeabi-v7a", "arm64-v8a", "x86_64")
+        } else {
+            studypiAbis
+        }
         externalNativeBuild {
             cmake {
-                abiFilters += listOf("armeabi-v7a", "arm64-v8a", "x86_64")
+                abiFilters += nativeAbis
             }
         }
     }

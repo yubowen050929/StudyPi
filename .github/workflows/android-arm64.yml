@@ -1,0 +1,47 @@
+# StudyPi 的第一份 Android 包。只打 arm64-v8a，不发布 Release。
+# 在仓库的 Actions 页选择这个工作流，点 Run workflow。
+# 构建结束后，在该次运行的 Artifacts 里下载 APK。
+name: Android arm64-v8a
+
+on:
+  workflow_dispatch:
+
+jobs:
+  apk:
+    name: Build arm64-v8a APK
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: zulu
+          java-version: '17'
+          cache: gradle
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.47.6'
+          channel: stable
+          cache: true
+
+      - name: Resolve dependencies
+        run: flutter pub get
+
+      - name: Build release APK
+        env:
+          STUDYPI_ABIS: arm64-v8a
+        run: flutter build apk --release --target-platform android-arm64
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: studypi-android-arm64-v8a
+          path: build/app/outputs/flutter-apk/app-release.apk
+          if-no-files-found: error
+          retention-days: 14

@@ -39,3 +39,22 @@ PATH="$PWD/.scratch/flutter/bin:$PATH" dart analyze --fatal-infos lib test integ
 
 验证记录见 [ROADMAP](ROADMAP.md)。单元与组件测试只能证明接线、数据与界面逻辑；
 真实模型的教学行为、Android 麦克风和后台运行必须另行验收。
+
+## 本地语料
+
+第一份学习材料留在本机，不提交进仓库。目录里按科目放置 `教材/` 和 `讲解/`，
+各自包含 `PDF/` 原件和 `AI专用/` 解析稿。索引只记录路径、页码范围和文件大小：
+
+```bash
+dart run tool/scan_study_corpus.dart "/path/to/corpus"
+```
+
+旁边若有 `study-app/output/import-bundle.json`，索引会读取其中的文档、题目和
+片段数量，不把正文复制出来。
+
+## Android arm64 构建
+
+`.github/workflows/android-arm64.yml` 是手动工作流，只构建 `arm64-v8a` release APK。
+打开 GitHub 仓库的 Actions，选择 “Android arm64-v8a”，再点 “Run workflow”。
+完成后在该次运行的 Artifacts 下载 `studypi-android-arm64-v8a`。
+这个工作流不会创建 Release。仓库里原有的多平台构建工作流仍然保留。
