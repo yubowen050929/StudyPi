@@ -62,4 +62,6 @@ dart run tool/scan_study_corpus.dart "/path/to/corpus"
 开发证书在本机 `android/app/studypi-dev.jks`，密码在 `android/key.properties`，
 这两份文件不进入仓库。Actions 使用同名的 GitHub Secrets 签出同一把证书。
 以后覆盖安装必须继续用这把证书。
+正式包会压缩代码。`android/app/proguard-rules.pro` 保留 Kotlin 协程和
+`shared_preferences` 的原始名称，否则 JNI 找不到 `getAll`，启动会在读取偏好设置时失败。
 仓库里原有的多平台构建工作流仍然保留。
