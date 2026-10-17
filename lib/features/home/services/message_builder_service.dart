@@ -24,6 +24,7 @@ import '../../../core/services/chat/document_text_extractor.dart';
 import '../../../utils/mcp_structured_image.dart';
 import '../../../utils/sandbox_path_resolver.dart';
 import '../../../core/services/chat/prompt_transformer.dart';
+import '../../../core/services/study/study_prompts.dart';
 import '../../../core/services/logging/context_log_models.dart';
 import '../../../core/services/memory/memory_block_builder.dart';
 import '../../../core/services/memory/memory_prompts.dart';
@@ -1874,14 +1875,14 @@ class MessageBuilderService {
     return buf.toString();
   }
 
-  /// Inject system prompt into apiMessages.
+  /// Inject the stable StudyPi core and resolved user instructions.
   void injectSystemPrompt(
     List<Map<String, dynamic>> apiMessages,
     Assistant? assistant,
     String modelId, {
     Conversation? conversation,
   }) {
-    final prompt = ConversationPromptSettings.fromExtras(
+    var prompt = ConversationPromptSettings.fromExtras(
       conversation?.extras ?? const {},
     ).effectiveSystemPrompt(assistant);
     if (assistant != null && prompt.trim().isNotEmpty) {
@@ -1892,15 +1893,16 @@ class MessageBuilderService {
         modelName: modelId,
         userNickname: contextProvider.read<UserProvider>().name,
       );
-      final sys = PromptTransformer.replacePlaceholders(prompt, vars);
-      final sysMessage = <String, dynamic>{'role': 'system', 'content': sys};
-      ContextSegmentTags.replaceWithSingle(
-        sysMessage,
-        source: ContextSource.systemPrompt,
-        length: sys.length,
-      );
-      apiMessages.insert(0, sysMessage);
+      prompt = PromptTransformer.replacePlaceholders(prompt, vars);
     }
+    final sys = StudyPrompts.compose(prompt);
+    final sysMessage = <String, dynamic>{'role': 'system', 'content': sys};
+    ContextSegmentTags.replaceWithSingle(
+      sysMessage,
+      source: ContextSource.systemPrompt,
+      length: sys.length,
+    );
+    apiMessages.insert(0, sysMessage);
   }
 
   /// Inject §11 memory rules into the system message.

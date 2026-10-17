@@ -1635,6 +1635,12 @@ void main() {
           isFalse,
         );
 
+        // Keep both size declarations oversized: archive 4.5.2 reads the
+        // central directory in preference to the trailing data descriptor.
+        await _overwriteCentralDirectoryUncompressedSize(
+          backupFile,
+          16 * 1024 * 1024 + 1,
+        );
         await _overwriteLastDataDescriptorUncompressedSize(
           backupFile,
           16 * 1024 * 1024 + 1,

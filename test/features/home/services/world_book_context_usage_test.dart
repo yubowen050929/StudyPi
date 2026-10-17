@@ -19,8 +19,10 @@ import 'package:Kelivo/core/providers/user_provider.dart';
 import 'package:Kelivo/core/providers/world_book_provider.dart';
 import 'package:Kelivo/core/services/chat/chat_service.dart';
 import 'package:Kelivo/core/services/mcp/mcp_tool_service.dart';
+import 'package:Kelivo/core/services/study/study_prompts.dart';
 import 'package:Kelivo/core/services/world_book_activation.dart';
 import 'package:Kelivo/core/services/workspace/workspace_tools_service.dart';
+import 'package:Kelivo/core/utils/token_estimator.dart';
 import 'package:Kelivo/features/home/controllers/generation_controller.dart';
 import 'package:Kelivo/features/home/controllers/stream_controller.dart'
     as stream_ctrl;
@@ -322,6 +324,9 @@ void main() {
       ) async {
         await tester.runAsync(() async {
           await mount(tester, scoped: scoped, active: !force);
+          final systemTokens = estimateTokens(StudyPrompts.soul);
+          final withoutWorldBookTokens =
+              systemTokens + estimateTokens(message.content);
           final prepared = await anchor();
           await books.setBookCollapsed(book.id, true);
           await books.addBook(
@@ -374,7 +379,12 @@ void main() {
             usage.snapshot(conversationId)!.state,
             ContextUsageState.estimated,
           );
-          expect(usage.snapshot(conversationId)!.usedTokens, 1);
+          expect(
+            usage.snapshot(conversationId)!.usedTokens,
+            withoutWorldBookTokens,
+          );
+          expect(usage.snapshot(conversationId)!.buckets.system, systemTokens);
+          expect(usage.snapshot(conversationId)!.buckets.worldBook, 0);
 
           await books.updateBook(changed);
           await anchor();
@@ -384,7 +394,12 @@ void main() {
             usage.snapshot(conversationId)!.state,
             ContextUsageState.estimated,
           );
-          expect(usage.snapshot(conversationId)!.usedTokens, 1);
+          expect(
+            usage.snapshot(conversationId)!.usedTokens,
+            withoutWorldBookTokens,
+          );
+          expect(usage.snapshot(conversationId)!.buckets.system, systemTokens);
+          expect(usage.snapshot(conversationId)!.buckets.worldBook, 0);
         });
       });
     }
