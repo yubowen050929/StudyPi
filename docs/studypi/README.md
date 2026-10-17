@@ -58,4 +58,8 @@ dart run tool/scan_study_corpus.dart "/path/to/corpus"
 推送到 `codex/studypi-foundation` 会开始一次构建。GitHub 只在工作流文件进入
 默认分支后才显示 “Run workflow” 按钮，所以合并到 `master` 之前要用上面的推送触发。
 完成后在该次运行的 Artifacts 下载 `studypi-android-arm64-v8a`。
+安装包必须带开发者签名，否则手机会提示缺少开发者证书。
+开发证书在本机 `android/app/studypi-dev.jks`，密码在 `android/key.properties`，
+这两份文件不进入仓库。Actions 使用同名的 GitHub Secrets 签出同一把证书。
+以后覆盖安装必须继续用这把证书。
 仓库里原有的多平台构建工作流仍然保留。
