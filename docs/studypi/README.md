@@ -54,7 +54,8 @@ dart run tool/scan_study_corpus.dart "/path/to/corpus"
 
 ## Android arm64 构建
 
-`.github/workflows/android-arm64.yml` 是手动工作流，只构建 `arm64-v8a` release APK。
-打开 GitHub 仓库的 Actions，选择 “Android arm64-v8a”，再点 “Run workflow”。
+`.github/workflows/android-arm64.yml` 只构建 `arm64-v8a` release APK，不创建 Release。
+推送到 `codex/studypi-foundation` 会开始一次构建。GitHub 只在工作流文件进入
+默认分支后才显示 “Run workflow” 按钮，所以合并到 `master` 之前要用上面的推送触发。
 完成后在该次运行的 Artifacts 下载 `studypi-android-arm64-v8a`。
-这个工作流不会创建 Release。仓库里原有的多平台构建工作流仍然保留。
+仓库里原有的多平台构建工作流仍然保留。

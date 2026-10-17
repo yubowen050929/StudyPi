@@ -1,10 +1,14 @@
 # StudyPi 的第一份 Android 包。只打 arm64-v8a，不发布 Release。
-# 在仓库的 Actions 页选择这个工作流，点 Run workflow。
+# 推送到 codex/studypi-foundation 会开始构建。
+# 合并到 master 之后，Actions 页才会出现 Run workflow 按钮。
 # 构建结束后，在该次运行的 Artifacts 里下载 APK。
 name: Android arm64-v8a
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - codex/studypi-foundation
 
 jobs:
   apk:
