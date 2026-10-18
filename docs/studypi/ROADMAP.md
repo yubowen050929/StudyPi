@@ -55,7 +55,11 @@
 更新入口改为读取本仓库 GitHub Releases，没有 Release 时不提示。`android-arm64.yml` 产出只含
 arm64-v8a 的签名 APK。仍保留 Kelivo 名称的部分：Kotlin 包与 namespace、Dart 包名（便于合并上游）、
 iOS bundle ID 与 App Group（需要 Apple 账号侧同步切换）、桌面端可执行文件名（决定桌面数据目录），
-以及应用内 `kelivo-file://` 等数据协议标识。版本号仍沿用 1.3.1+80。
+以及应用内 `kelivo-file://` 等数据协议标识。
+
+首个预发布 v0.1.0（2026-10-18）：版本号从 StudyPi 自己的 0.1.0 起算，构建号接着 Kelivo 的 80 递增为 81，
+已安装早期测试包的设备可以直接覆盖安装。GitHub Release 附 arm64-v8a 签名 APK，标为 Pre-release；
+应用内更新检查只读取正式版（`releases/latest`），预发布不会触发提示。
 
 范围：
 
@@ -140,7 +144,7 @@ iOS bundle ID 与 App Group（需要 Apple 账号侧同步切换）、桌面端�
 
 ## 仍需在对应阶段确定
 
-- M1：StudyPi 自己的版本号起点（目前沿用 Kelivo 的 1.3.1+80）；iOS 标识切换时间。
+- M1：iOS 标识切换时间；首个正式版的发布时机（真机验收之后）。
 - M2：用户希望用于小模型、主 agent、复核及多模态的可用模型与预算。
 - M3：服务器运行条件、资源上限与连接方式。
 - M4：登录方式、服务端部署、同步范围、保留与删除要求。
