@@ -208,7 +208,7 @@ UI 消费事件并更新投影，不以网络连接是否存在推断任务状�
 
 ## 10. 品牌与上游维护
 
-Android 标识建议为 `io.github.yubowen050929.studypi`，正式采用时统一检查：
+Android 发行标识为 `app.studypi`（已切换 applicationId；namespace 与 Kotlin 包暂保留 Kelivo 名称）。完整切换需统一检查：
 Gradle applicationId/namespace、Kotlin/Java 包与 manifest、FileProvider、深链、
 原生通道标识、通知、备份目录、升级来源、签名和打包脚本。
 Dart 包名可在独立变更中统一替换，避免把发行包名和 Dart import 名称混为一谈。

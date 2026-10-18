@@ -202,6 +202,10 @@ flutter test
 - 全量测试（第三轮，2026-10-18）：8,096 项通过，1 项跳过，0 失败。日志：`.scratch/quality-review/round3-full-tests.log`。
   `flutter gen-l10n` 重新生成后无差异。
   第一轮记录的“全部通过”经复查不成立：同一工作区当时有 12 项失败，已在第二轮修复。
+- 品牌切换（2026-10-18）：全量 8,103 项通过，1 项跳过，0 失败；Android `OAuthLifecycleTest` 54 项通过；
+  arm64 release APK 经 `aapt2`/`apksigner` 核对：包名 `app.studypi`、名称 StudyPi、仅 arm64-v8a、
+  OAuth scheme 与全部 provider authority 均为 `app.studypi` 前缀，已签名。
+  工作区不要放在 iCloud 同步目录（如桌面）：文件被换成占位后读取变慢，静态门禁与计时类测试会超时。
 - 第二轮的独立复审由 `gpt-6-luna-YG` 子代理完成 3 次（取消链路、索引与存储、引用协议），结论均已处理或列入已知限制。
 
 单元/组件测试不替代 Android 真机安装、后台运行、语音权限和真实模型教学行为验收。

@@ -175,8 +175,8 @@ STT 接口统一表达：待机、连接、录音、中间转写、最终转写�
 
 ## 9. 账号与品牌
 
-StudyPi 是工作名称。建议 Android 发行标识为 `io.github.yubowen050929.studypi`，
-正式切换在首次 StudyPi APK 里程碑执行，连同 FileProvider、深链、签名、更新源与备份标识一起核对。
+StudyPi 是发行名称，Android 发行标识为 `app.studypi`（2026-10-18 确定，对应域名 studypi.app）。
+Android 已切换并核对 FileProvider、OAuth 回调 scheme、签名与更新源；iOS 标识需随 Apple 账号配置另行切换。
 图标方向：抽象的开放书页、探索路径与 π，保证小尺寸、深浅背景和 Android 自适应图标下可辨识。
 最终图形需要单独制作并预览，不把概念草图当成已完成的发行资产。
 
