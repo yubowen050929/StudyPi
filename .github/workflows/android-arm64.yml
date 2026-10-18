@@ -60,7 +60,7 @@ jobs:
           STUDYPI_ABIS: arm64-v8a
         run: flutter build apk --release --target-platform android-arm64
 
-      - name: Require a signed APK
+      - name: Require a signed arm64-only APK
         run: |
           python3 - <<'PY'
           import zipfile
@@ -70,6 +70,9 @@ jobs:
           signed = any(name.startswith("META-INF/") and name.endswith(".SF") for name in names)
           if not signed:
               sys.exit("APK is unsigned")
+          abis = {name.split("/")[1] for name in names if name.startswith("lib/")}
+          if abis != {"arm64-v8a"}:
+              sys.exit(f"APK native ABIs are {sorted(abis)}, expected only arm64-v8a")
           PY
 
       - name: Upload APK

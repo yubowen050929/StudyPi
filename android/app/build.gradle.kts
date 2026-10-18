@@ -26,7 +26,12 @@ android {
         versionCode = flutter.versionCode
         versionName = flutter.versionName
         // Flutter controls APK ABI filtering, including --split-per-abi.
-        // STUDYPI_ABIS=arm64-v8a limits the native build for the arm64 CI job.
+        // STUDYPI_ABIS=arm64-v8a limits the whole APK for the arm64 CI job.
+        // --target-platform only covers Flutter's own libraries. The Flutter Gradle
+        // plugin fills ndk.abiFilters with every Flutter ABI when it is applied, so
+        // prebuilt plugin libraries (onnxruntime, ML Kit, proot, ...) would still
+        // ship for all of them; replace that set here. Without STUDYPI_ABIS,
+        // Flutter's defaults and --split-per-abi stay untouched.
         val studypiAbis = System.getenv("STUDYPI_ABIS")
             ?.split(",")
             ?.map { it.trim() }
@@ -35,6 +40,12 @@ android {
             listOf("armeabi-v7a", "arm64-v8a", "x86_64")
         } else {
             studypiAbis
+        }
+        if (!studypiAbis.isNullOrEmpty()) {
+            ndk {
+                abiFilters.clear()
+                abiFilters += studypiAbis
+            }
         }
         externalNativeBuild {
             cmake {
