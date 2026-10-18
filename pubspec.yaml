@@ -225,33 +225,17 @@ flutter:
 #      fonts:
 #        - asset: assets/fonts/JetBrainsMono-Regular.ttf
 
-flutter_launcher_icons:
-  android: true
-  ios: true
-  image_path: assets/app_icon_foreground.png
-  adaptive_icon_background: "#FFFFFF"
-  adaptive_icon_foreground: assets/app_icon_foreground.png
-  remove_alpha_ios: true
+# Launcher icons are configured in flutter_launcher_icons.yaml.
 
+# StudyPi launch screen: brand mark on the icon's deep teal in light and dark
+# mode. Sources in assets/brand; run `dart run flutter_native_splash:create`.
 flutter_native_splash:
-  # Apply to both platforms
   android: true
   ios: true
-
-  # Background colors (fix iOS dark-mode white flash)
-  color: "#FFFFFF"
-  color_dark: "#000000"
-
-  # Center image (re-use app icon foreground)
-  image: assets/start.png
-  image_dark: assets/start.png
-
-  # iOS content mode to keep logo centered
+  color: "#0E4E5A"
+  image: assets/brand/studypi_splash.png
   ios_content_mode: center
-
-  # Android 12+ splash config (optional but keeps parity)
   android_12:
-    color: "#FFFFFF"
-    color_dark: "#000000"
-    image: assets/start.png
-    image_dark: assets/start.png
+    color: "#0E4E5A"
+    image: assets/brand/studypi_splash_android12.png
+    icon_background_color: "#0E4E5A"
