@@ -4065,12 +4065,8 @@ class _SideDrawerState extends State<SideDrawer> with TickerProviderStateMixin {
               if (info == null) return const SizedBox.shrink();
               final url = info.bestDownloadUrl();
               if (url == null || url.isEmpty) return const SizedBox.shrink();
-              final ver = info.version;
-              final build = info.build;
               final l10n = AppLocalizations.of(context)!;
-              final title = build != null
-                  ? l10n.sideDrawerUpdateTitleWithBuild(ver, build)
-                  : l10n.sideDrawerUpdateTitle(ver);
+              final title = l10n.sideDrawerUpdateTitle(info.version);
               final cs2 = Theme.of(context).colorScheme;
               return Padding(
                 padding: const EdgeInsets.only(bottom: 12),

@@ -177,7 +177,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get storageSpaceClearDisplacedDatabasesConfirmMessage =>
-      'Delete these set-aside databases? Kelivo kept them when it rebuilt its database, and they may be the only surviving copy of those chats and settings. This cannot be undone.';
+      'Delete these set-aside databases? StudyPi kept them when it rebuilt its database, and they may be the only surviving copy of those chats and settings. This cannot be undone.';
 
   @override
   String get storageSpaceRestoreTracesHint =>
@@ -1666,45 +1666,45 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get backupPageRestartContent =>
-      'Import successful. Restart Kelivo to apply it safely.';
+      'Import successful. Restart StudyPi to apply it safely.';
 
   @override
   String backupPageRestartContentWithSkipped(int count) {
-    return 'Import completed, but $count conversations with invalid message ordering were skipped. Restart Kelivo to apply the imported data safely.';
+    return 'Import completed, but $count conversations with invalid message ordering were skipped. Restart StudyPi to apply the imported data safely.';
   }
 
   @override
   String get restartAppFailedMessage =>
-      'Kelivo could not restart automatically. Fully close it, then open it again.';
+      'StudyPi could not restart automatically. Fully close it, then open it again.';
 
   @override
   String get backupRestoreRolledBackTitle => 'Restore was rolled back';
 
   @override
   String get backupRestoreRolledBackContent =>
-      'The restore could not be completed. Kelivo verified and kept your previous data.';
+      'The restore could not be completed. StudyPi verified and kept your previous data.';
 
   @override
   String get backupRestoreFailureTitle => 'Restore requires attention';
 
   @override
   String get backupRestoreFailureContent =>
-      'Kelivo could not verify a complete old or new data set, so chat data was not opened. Close Kelivo and try again. If this repeats, keep the diagnostic code for support.';
+      'StudyPi could not verify a complete old or new data set, so chat data was not opened. Close StudyPi and try again. If this repeats, keep the diagnostic code for support.';
 
   @override
   String get backupRestoreBusinessLeaseUnavailableTitle =>
-      'Kelivo is already running';
+      'StudyPi is already running';
 
   @override
   String get backupRestoreBusinessLeaseUnavailableContent =>
-      'Kelivo\'s data is still in use by another app process. Close any other Kelivo window, then restart. Your chat data has not been opened by this process.';
+      'StudyPi\'s data is still in use by another app process. Close any other StudyPi window, then restart. Your chat data has not been opened by this process.';
 
   @override
   String get restoreProgressTitle => 'Restoring your backup';
 
   @override
   String get restoreProgressWarning =>
-      'Keep Kelivo open until this finishes. If you close it now, the next launch starts this over.';
+      'Keep StudyPi open until this finishes. If you close it now, the next launch starts this over.';
 
   @override
   String get restoreProgressStageCheckingBackup => 'Checking the backup';
@@ -1726,7 +1726,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get restoreProgressStageFinishing => 'Finishing up';
 
   @override
-  String get backupRestoreFailureRestartButton => 'Restart Kelivo';
+  String get backupRestoreFailureRestartButton => 'Restart StudyPi';
 
   @override
   String get backupRestoreFailureCopyButton => 'Copy diagnostic code';
@@ -1767,14 +1767,14 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get startupRecoveryResetFailed =>
-      'Reset failed. Fully close Kelivo, then open it again.';
+      'Reset failed. Fully close StudyPi, then open it again.';
 
   @override
   String get startupRecoveryResetDialogTitle => 'Reset all data?';
 
   @override
   String get startupRecoveryResetDialogContent =>
-      'This permanently deletes Kelivo\'s database on this device and starts fresh. If you might need this data, export a copy first. This cannot be undone.';
+      'This permanently deletes StudyPi\'s database on this device and starts fresh. If you might need this data, export a copy first. This cannot be undone.';
 
   @override
   String get startupRecoveryResetDialogConfirm => 'Reset and restart';
@@ -1889,18 +1889,18 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get startupRecoveryDangerBody =>
-      'Resetting permanently deletes Kelivo\'s database on this device. Export a copy of your data first — a reset also destroys the evidence needed to fix the underlying problem.';
+      'Resetting permanently deletes StudyPi\'s database on this device. Export a copy of your data first — a reset also destroys the evidence needed to fix the underlying problem.';
 
   @override
   String get startupRecoveryResetAcknowledge =>
       'I exported a copy, or I do not need this data.';
 
   @override
-  String get startupDatabaseUpdateRequiredTitle => 'Update Kelivo to continue';
+  String get startupDatabaseUpdateRequiredTitle => 'Update StudyPi to continue';
 
   @override
   String get startupDatabaseUpdateRequiredContent =>
-      'The chat database on this device was created by a newer version of Kelivo and cannot be opened by this version. Your data has not been changed. Install the latest version of Kelivo, then open it again.';
+      'The chat database on this device was created by a newer version of StudyPi and cannot be opened by this version. Your data has not been changed. Install the latest version of StudyPi, then open it again.';
 
   @override
   String get startupDatabaseUpdateRequiredDowngradeTitle =>
@@ -1912,7 +1912,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get startupDatabaseUpdateRequiredDowngradeStep1 =>
-      'Install and open the latest Kelivo, then export a backup from Settings → Backup.';
+      'Install and open the latest StudyPi, then export a backup from Settings → Backup.';
 
   @override
   String startupDatabaseUpdateRequiredDowngradeStep2(String url) {
@@ -1971,7 +1971,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String backupPageForwardCompatBody(int backupVersion, int currentVersion) {
-    return 'This backup was created by a newer version of Kelivo (data format $backupVersion; this version supports $currentVersion), and it does not say whether older versions can read it.\n\nYou can continue: anything this version does not recognise will be skipped, and the backup file itself is not modified. But if the newer version changed how existing data is stored, some content may be imported incorrectly.\n\nUpdating Kelivo first is the safer choice.';
+    return 'This backup was created by a newer version of StudyPi (data format $backupVersion; this version supports $currentVersion), and it does not say whether older versions can read it.\n\nYou can continue: anything this version does not recognise will be skipped, and the backup file itself is not modified. But if the newer version changed how existing data is stored, some content may be imported incorrectly.\n\nUpdating StudyPi first is the safer choice.';
   }
 
   @override
@@ -1982,7 +1982,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get backupPageSchemaTooNewMessage =>
-      'This backup was created by a newer version of Kelivo and cannot be read by this version. Please update Kelivo and try again.';
+      'This backup was created by a newer version of StudyPi and cannot be read by this version. Please update StudyPi and try again.';
 
   @override
   String get backupPageBackupUploaded => 'Backup uploaded';
@@ -2168,7 +2168,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String backupPageCherryStudioUnsupportedBackupVersion(String version) {
-    return 'This backup uses Cherry Studio format version $version, which Kelivo cannot import yet. Export from Cherry Studio v1 instead, or wait for a Kelivo update that supports Cherry Studio v2 backups.';
+    return 'This backup uses Cherry Studio format version $version, which StudyPi cannot import yet. Export from Cherry Studio v1 instead, or wait for a StudyPi update that supports Cherry Studio v2 backups.';
   }
 
   @override
@@ -3081,11 +3081,6 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String sideDrawerUpdateTitle(String version) {
     return 'New version: $version';
-  }
-
-  @override
-  String sideDrawerUpdateTitleWithBuild(String version, int build) {
-    return 'New version: $version ($build)';
   }
 
   @override
@@ -5092,7 +5087,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'You\'ve already been through this door.';
 
   @override
-  String get aboutPageAppName => 'Kelivo';
+  String get aboutPageAppName => 'StudyPi';
 
   @override
   String get aboutPageAppDescription => 'Open-source AI Assistant';
@@ -6236,7 +6231,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get settingsShare => 'Kelivo - Open Source AI Assistant';
+  String get settingsShare => 'StudyPi - Open Source AI Assistant';
 
   @override
   String get searchProviderBingLocalDescription =>
@@ -6738,7 +6733,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get healthDataSettingsDescription =>
-      'HealthKit signals available to the current assistant in daily conversation. Switches control what Kelivo may try to read; iOS still manages actual Health access.';
+      'HealthKit signals available to the current assistant in daily conversation. Switches control what StudyPi may try to read; iOS still manages actual Health access.';
 
   @override
   String healthDataSettingsBadge(int selected, int total) {
@@ -8742,11 +8737,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get migrationIntroSubtitle =>
-      'Kelivo is moving chat history to a faster SQLite database. The upgrade runs before the app opens so your data stays consistent.';
+      'StudyPi is moving chat history to a faster SQLite database. The upgrade runs before the app opens so your data stays consistent.';
 
   @override
   String get migrationBackupNote =>
-      'Before migration starts, Kelivo exports a ZIP backup with settings, chat history, and local files.';
+      'Before migration starts, StudyPi exports a ZIP backup with settings, chat history, and local files.';
 
   @override
   String get migrationPerformanceNote =>
@@ -8786,14 +8781,14 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get migrationBackingUpSubtitle =>
-      'Exporting settings, chat history, uploaded files, images, and fonts. Keep Kelivo open until this finishes.';
+      'Exporting settings, chat history, uploaded files, images, and fonts. Keep StudyPi open until this finishes.';
 
   @override
   String get migrationMigratingTitle => 'Migrating to SQLite';
 
   @override
   String get migrationMigratingSubtitle =>
-      'Writing conversations and messages in batches so large histories do not overload memory. Keep Kelivo in the foreground until migration finishes.';
+      'Writing conversations and messages in batches so large histories do not overload memory. Keep StudyPi in the foreground until migration finishes.';
 
   @override
   String migrationBackingUpDetail(String fileName) {
@@ -8853,7 +8848,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get migrationCompleteSubtitle =>
-      'Your chat history is now stored in SQLite. Restart Kelivo to enter the upgraded app.';
+      'Your chat history is now stored in SQLite. Restart StudyPi to enter the upgraded app.';
 
   @override
   String get migrationConversationCount => 'Conversations';
@@ -8871,7 +8866,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get migrationMissingFilesCount => 'Missing files';
 
   @override
-  String get migrationRestartButton => 'Restart Kelivo';
+  String get migrationRestartButton => 'Restart StudyPi';
 
   @override
   String get migrationFailedTitle => 'Migration Failed';
@@ -8897,7 +8892,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get migrationSkipDialogMessage =>
-      'Kelivo will start with an empty chat database. Your old chat history stays on disk (renamed with a .retired suffix) but will NOT be migrated and will not appear in the app. Use your backup ZIP if you need to recover it later.';
+      'StudyPi will start with an empty chat database. Your old chat history stays on disk (renamed with a .retired suffix) but will NOT be migrated and will not appear in the app. Use your backup ZIP if you need to recover it later.';
 
   @override
   String get migrationSkipDialogCancel => 'Cancel';
@@ -9325,7 +9320,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get localSnapshotEnabledSubtitle =>
-      'Kelivo periodically saves a copy of its database on this device, so it is never the only one.';
+      'StudyPi periodically saves a copy of its database on this device, so it is never the only one.';
 
   @override
   String get localSnapshotIntervalTitle => 'How often';
@@ -9440,7 +9435,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get localSnapshotCopiesScopeNote =>
-      'Local copies live on this device only. They protect against damage to your data inside the app, not against losing the device or uninstalling Kelivo — use WebDAV or S3 backup for that.';
+      'Local copies live on this device only. They protect against damage to your data inside the app, not against losing the device or uninstalling StudyPi — use WebDAV or S3 backup for that.';
 
   @override
   String get localSnapshotOriginAutomatic => 'Automatic';
@@ -10165,7 +10160,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get workspaceEnvUpToDate => 'You\'re up to date';
 
   @override
-  String get workspaceEnvRestartBanner => 'Restart Kelivo to finish';
+  String get workspaceEnvRestartBanner => 'Restart StudyPi to finish';
 
   @override
   String get workspaceEnvDetectingMirrors => 'Detecting fastest mirrors…';
@@ -10282,7 +10277,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get workspaceEnvNativeExplanation =>
-      'On desktop, Kelivo uses your system shell instead of a Linux sandbox.';
+      'On desktop, StudyPi uses your system shell instead of a Linux sandbox.';
 
   @override
   String workspaceEnvNativeShellPath(String path) {
@@ -11223,7 +11218,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get workspaceDesktopManagedHint =>
-      'Kelivo creates and manages a folder for this project.';
+      'StudyPi creates and manages a folder for this project.';
 
   @override
   String get workspaceDesktopHostHint =>
@@ -11480,7 +11475,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get workspaceExternalStorageMessage =>
-      'To read and write external folders in the workspace and Shell, allow Kelivo to manage files in Android settings. On Android 11 or later, enable All files access. Then select an on-device folder to mount.';
+      'To read and write external folders in the workspace and Shell, allow StudyPi to manage files in Android settings. On Android 11 or later, enable All files access. Then select an on-device folder to mount.';
 
   @override
   String get workspaceExternalGrantAccess => 'Grant access';
@@ -11704,7 +11699,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get backgroundSettingsTitle => 'Background tasks';
 
   @override
-  String get backgroundTaskTitle => 'Kelivo task';
+  String get backgroundTaskTitle => 'StudyPi task';
 
   @override
   String get backgroundCompleted => 'Generation complete';
@@ -11840,7 +11835,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get backgroundOverlayIcon => 'Floating icon';
 
   @override
-  String get backgroundIconDefault => 'Kelivo icon';
+  String get backgroundIconDefault => 'StudyPi icon';
 
   @override
   String get backgroundIconImage => 'Choose image';
@@ -12061,7 +12056,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get startupRecoverySnapshotBody =>
-      'Choose a snapshot on this device to recover your chats and settings, even when the database cannot open. Do not uninstall Kelivo: uninstalling also removes these snapshots.';
+      'Choose a snapshot on this device to recover your chats and settings, even when the database cannot open. Do not uninstall StudyPi: uninstalling also removes these snapshots.';
 
   @override
   String get startupRecoverySnapshotEmpty =>
@@ -12072,7 +12067,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String startupRecoverySnapshotConfirm(String when) {
-    return 'Restore chats and settings from $when? Changes made after this snapshot will not be included. Existing attachment files and the snapshot will be kept. Kelivo will restart to complete the restore.';
+    return 'Restore chats and settings from $when? Changes made after this snapshot will not be included. Existing attachment files and the snapshot will be kept. StudyPi will restart to complete the restore.';
   }
 
   @override
@@ -12082,7 +12077,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get startupRecoverySnapshotReady =>
-      'The snapshot is ready. Restart Kelivo to complete the restore.';
+      'The snapshot is ready. Restart StudyPi to complete the restore.';
 
   @override
   String get scheduledTasksTitle => 'Scheduled tasks';
@@ -12156,7 +12151,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get scheduledTasksReliability =>
-      'Keep Kelivo unrestricted in battery settings for more reliable execution. Force stopping the app cancels alarms until you reopen it. Missed runs are skipped; tasks follow the device time zone.';
+      'Keep StudyPi unrestricted in battery settings for more reliable execution. Force stopping the app cancels alarms until you reopen it. Missed runs are skipped; tasks follow the device time zone.';
 
   @override
   String get scheduledTasksExecutionDetail =>
@@ -12344,7 +12339,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get scheduledTasksDesktopReliability =>
-      'Tasks run only while Kelivo is running, including when minimized or in the system tray. Missed times are skipped after quitting or computer sleep. Kelivo will not start automatically.';
+      'Tasks run only while StudyPi is running, including when minimized or in the system tray. Missed times are skipped after quitting or computer sleep. StudyPi will not start automatically.';
 
   @override
   String get scheduledTasksDesktopExecutionDetail =>
@@ -12659,7 +12654,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get scheduledTasksIOSDetail =>
-      'iOS background limits prevent Kelivo from waking at a set time to run a model. Instead, content is prepared while the app can run, and the system shows a notification at the scheduled time. Only the next occurrence is prepared. Preparation may not finish after leaving the app; reopen Kelivo to prepare subsequent occurrences.';
+      'iOS background limits prevent StudyPi from waking at a set time to run a model. Instead, content is prepared while the app can run, and the system shows a notification at the scheduled time. Only the next occurrence is prepared. Preparation may not finish after leaving the app; reopen StudyPi to prepare subsequent occurrences.';
 
   @override
   String get scheduledTasksContextPolicy => 'Conversation context';
@@ -12725,7 +12720,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get scheduledTasksReminderBody =>
-      'Your scheduled task is due. Open Kelivo to continue.';
+      'Your scheduled task is due. Open StudyPi to continue.';
 
   @override
   String get scheduledTasksResultBody => 'Your scheduled task result is ready.';
@@ -12739,7 +12734,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get scheduledTasksAllowPreparationTip =>
-      'Generate the next result before its scheduled time, while Kelivo can run. The result stays out of the chat until it is due. Preparation uses text only, without tools, attachments or custom request bodies. It may incur model charges.';
+      'Generate the next result before its scheduled time, while StudyPi can run. The result stays out of the chat until it is due. Preparation uses text only, without tools, attachments or custom request bodies. It may incur model charges.';
 
   @override
   String get scheduledTasksContextPolicyTip =>
@@ -12747,7 +12742,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get scheduledTasksPreparationWindowTip =>
-      'How far ahead of the scheduled time preparation may begin, up to 24 hours. For example, opening Kelivo at noon can prepare the next morning’s reminder. A larger window gives more chances to prepare, but the result may be less current. It does not change the scheduled time or guarantee background execution. Prepare now bypasses this automatic waiting period and all attempt limits.';
+      'How far ahead of the scheduled time preparation may begin, up to 24 hours. For example, opening StudyPi at noon can prepare the next morning’s reminder. A larger window gives more chances to prepare, but the result may be less current. It does not change the scheduled time or guarantee background execution. Prepare now bypasses this automatic waiting period and all attempt limits.';
 
   @override
   String get scheduledTasksPreparationAttemptsTip =>
@@ -12759,7 +12754,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get scheduledTasksUnavailableTip =>
-      'If no prepared result is available and the task cannot run when due, send a reminder or skip the occurrence. A reminder contains no generated answer and requires notifications to be enabled. If Kelivo is open when the task is due, it can run the task then.';
+      'If no prepared result is available and the task cannot run when due, send a reminder or skip the occurrence. A reminder contains no generated answer and requires notifications to be enabled. If StudyPi is open when the task is due, it can run the task then.';
 
   @override
   String get scheduledTasksNotifyTip =>
@@ -12962,14 +12957,14 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get phoneControlAssistantHint =>
-      'Both permissions are required: enable Kelivo phone control in system Accessibility settings, then enable Phone Control under your assistant’s Local Tools (also available in the chat tools menu). Each assistant is configured separately. Keep the phone unlocked while running a task.';
+      'Both permissions are required: enable StudyPi phone control in system Accessibility settings, then enable Phone Control under your assistant’s Local Tools (also available in the chat tools menu). Each assistant is configured separately. Keep the phone unlocked while running a task.';
 
   @override
   String get phoneControlRestrictedTitle => 'Accessibility switch unavailable?';
 
   @override
   String get phoneControlRestrictedHint =>
-      'For some downloaded APKs, Android requires “Allow restricted settings” in the app info menu first. Tap to open Kelivo’s app info, then return to Accessibility settings.';
+      'For some downloaded APKs, Android requires “Allow restricted settings” in the app info menu first. Tap to open StudyPi’s app info, then return to Accessibility settings.';
 
   @override
   String get phoneControlEnableAssistant =>

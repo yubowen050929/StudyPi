@@ -32,7 +32,7 @@ import org.robolectric.annotation.Config
 @Config(sdk = [28, 35], application = OAuthLifecycleTest.TestApplication::class, manifest = Config.NONE)
 class OAuthLifecycleTest {
     private val activity = Robolectric.buildActivity(Activity::class.java).setup().get()
-    private val redirect = "psyche.kelivo://mcp-oauth-callback/test"
+    private val redirect = "app.studypi://mcp-oauth-callback/test"
     private val sessions = mutableListOf<String>()
     private val browser = ComponentName("test.browser", "test.browser.CustomTabsService")
     private val application get() = activity.application as TestApplication
@@ -335,7 +335,7 @@ class OAuthLifecycleTest {
         assertEquals("https://auth.example.com/authorize?state=$id", launched.data.toString())
         assertEquals(authTab, launched.getBooleanExtra(AuthTabIntent.EXTRA_LAUNCH_AUTH_TAB, false))
         if (authTab) {
-            assertEquals("psyche.kelivo", launched.getStringExtra(AuthTabIntent.EXTRA_REDIRECT_SCHEME))
+            assertEquals("app.studypi", launched.getStringExtra(AuthTabIntent.EXTRA_REDIRECT_SCHEME))
             OAuthHandler.completeAuthTab(id, Uri.parse("$redirect?code=ok&state=$id"))
         } else {
             assertTrue(OAuthHandler.handleCallback(Uri.parse("$redirect?code=ok&state=$id")))

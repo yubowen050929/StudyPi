@@ -204,7 +204,7 @@ class MobileBackgroundCoordinator extends ChangeNotifier
           await _notificationSender(
             conversationId: task.conversationId,
             title: _settings.privacyMode || task.title.trim().isEmpty
-                ? (l10n?.backgroundTaskTitle ?? 'Kelivo')
+                ? (l10n?.backgroundTaskTitle ?? 'StudyPi')
                 : task.title,
             body:
                 task.scheduled &&
@@ -248,7 +248,7 @@ class MobileBackgroundCoordinator extends ChangeNotifier
       'id': task.id,
       'conversationId': task.conversationId,
       'title': _settings.privacyMode
-          ? (_l10n?.backgroundTaskTitle ?? 'Kelivo')
+          ? (_l10n?.backgroundTaskTitle ?? 'StudyPi')
           : task.title,
       'detail': _settings.privacyMode
           ? (_l10n?.backgroundWorking ?? 'Working')
@@ -273,7 +273,7 @@ class MobileBackgroundCoordinator extends ChangeNotifier
     'tasks': _tasks.values.map(_taskMap).toList(),
     'terminal': terminal,
     'labels': {
-      'app': 'Kelivo',
+      'app': 'StudyPi',
       'working': _l10n?.backgroundWorking ?? 'Working',
       'tasks': _l10n?.backgroundTasks ?? 'Tasks',
       'stop': _l10n?.backgroundStopTasks ?? 'Stop tasks',
@@ -293,7 +293,7 @@ class MobileBackgroundCoordinator extends ChangeNotifier
         'privacyMode': true,
       };
       void redact(Map<String, Object?> task, {bool terminal = false}) {
-        task['title'] = _l10n?.backgroundTaskTitle ?? 'Kelivo';
+        task['title'] = _l10n?.backgroundTaskTitle ?? 'StudyPi';
         if (!terminal) task['detail'] = _l10n?.backgroundWorking ?? 'Working';
         task['tokens'] = 0;
       }
