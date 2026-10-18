@@ -138,7 +138,7 @@ void main() {
           ),
         );
         final result = cancel
-            ? expectLater(download, throwsStateError)
+            ? expectLater(download, throwsA(isA<ToolCallCancelledException>()))
             : expectLater(download, completion(isNull));
         await connected.future.timeout(const Duration(seconds: 3));
         if (cancel) cancellation.complete();

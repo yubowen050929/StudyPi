@@ -1,5 +1,12 @@
 import 'dart:async';
 
+class ToolCallCancelledException implements Exception {
+  const ToolCallCancelledException();
+
+  @override
+  String toString() => 'tool_call_cancelled';
+}
+
 /// The generation owning a tool call, including work after the HTTP response.
 class ToolCallCancellation {
   const ToolCallCancellation({
@@ -22,6 +29,11 @@ class ToolCallCancellation {
   /// I/O before or after the tool handler itself (for example image replay).
   Stream<T> runStream<T>(Stream<T> Function() action) {
     return Stream<T>.multi((controller) {
+      if (isCancelled()) {
+        controller.addErrorSync(const ToolCallCancelledException());
+        controller.closeSync();
+        return;
+      }
       final subscription = runZoned(
         () => action().listen(
           controller.addSync,
@@ -37,6 +49,6 @@ class ToolCallCancellation {
   }
 
   void throwIfCancelled() {
-    if (isCancelled()) throw StateError('tool_call_cancelled');
+    if (isCancelled()) throw const ToolCallCancelledException();
   }
 }

@@ -132,10 +132,11 @@ void main() {
     final source = File(
       'lib/features/home/controllers/chat_actions.dart',
     ).readAsStringSync();
+    // Paths owned by a generation attempt await it through `attempt.run`.
     expect(
-      'await _contextReadLimit(assistant, conversation)'
-          .allMatches(source)
-          .length,
+      RegExp(
+        r'await (attempt\.run\(\s*\(\) => )?_contextReadLimit\(assistant, conversation\)',
+      ).allMatches(source).length,
       3,
       reason: 'send, regenerate, and continue must each await resolved counts',
     );

@@ -5751,5 +5751,215 @@
   "mcpOAuthDiscovering": "Discovering authorization server…",
   "mcpOAuthRegistering": "Preparing authorization…",
   "mcpOAuthWaitingBrowser": "Waiting for browser authorization…",
-  "mcpOAuthExchangingToken": "Completing sign-in…"
+  "mcpOAuthExchangingToken": "Completing sign-in…",
+  "studyProjectsTitle": "Study Projects",
+  "studyProjectCreate": "New Project",
+  "studyProjectEdit": "Edit Project",
+  "studyProjectDelete": "Delete Project",
+  "studyProjectDeleteMessage": "Delete project \"{title}\"? Its materials and notes will be removed, while bound conversations stay as ordinary chats.",
+  "@studyProjectDeleteMessage": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "studyProjectsEmptyTitle": "No study projects yet",
+  "studyProjectsEmptyDescription": "Materials, discussions, and notes stay together in a project, and citations link back to the original source.",
+  "studyProjectsSelectHint": "Select a study project on the left to view materials, discussions, and notes.",
+  "studyProjectTitleLabel": "Project Title",
+  "studyProjectTitleHint": "e.g., Cognitive Load Theory",
+  "studyProjectGoalLabel": "Learning Goal (optional)",
+  "studyProjectGoalHint": "What problem, chapter, or question are you working on?",
+  "studyProjectGoalEmpty": "No learning goal set",
+  "studyProjectModeLabel": "Study Mode",
+  "studyModeExplain": "Direct Explanation",
+  "studyModeGuidedPractice": "Guided Practice",
+  "studyProjectUpdatedAt": "Updated {date}",
+  "@studyProjectUpdatedAt": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "studyProjectMaterialCount": "{count} materials",
+  "@studyProjectMaterialCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "studyProjectSave": "Save",
+  "studyProjectCancel": "Cancel",
+  "studyProjectConfirmDelete": "Delete",
+  "studyProjectMoreActions": "More actions",
+  "studyMaterialsSection": "Materials",
+  "studyMaterialsImport": "Import",
+  "studyMaterialsImporting": "Importing materials…",
+  "studyMaterialsEmpty": "No materials imported yet. Import PDF, Markdown, or text files.",
+  "studyMaterialsImportFailed": "Failed to import materials: {error}",
+  "@studyMaterialsImportFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "studyDocStatusReady": "Ready",
+  "studyDocStatusScannedNeedsOcr": "Scanned PDF, parse needed",
+  "studyDocStatusUnreadable": "Unreadable",
+  "studyDocStatusPendingSourceLink": "Source PDF pending confirmation",
+  "studyDocScannedHint": "Parse with MinerU and attach the Markdown parse to read and cite.",
+  "studyDocPhysicalPages": "{count} pages",
+  "@studyDocPhysicalPages": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "studyDocCorpusPages": "Textbook pp. {range}",
+  "@studyDocCorpusPages": {
+    "placeholders": {
+      "range": {
+        "type": "String"
+      }
+    }
+  },
+  "studyDocIndexed": "Indexed",
+  "studyDocNotIndexed": "Not indexed",
+  "studyDocIndexing": "Indexing",
+  "studyDocActionRead": "Read",
+  "studyDocActionBuildIndex": "Build Index",
+  "studyDocActionRebuildIndex": "Rebuild Index",
+  "studyDocActionAttachParse": "Attach Parse",
+  "studyDocActionConfirmSource": "Confirm Source PDF",
+  "studyDocActionDelete": "Delete",
+  "studyDocDeleteTitle": "Delete Material",
+  "studyDocDeleteMessage": "Delete \"{title}\" from this project?",
+  "@studyDocDeleteMessage": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "studyDocConfirmSourceTitle": "Confirm Source PDF",
+  "studyDocAttachMarkdownTitle": "Select Parsed Markdown (.md)",
+  "studyDocAttachContentListTitle": "Select Content List (.json, optional)",
+  "studyDocIndexFailed": "Failed to build index: {error}",
+  "@studyDocIndexFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "studyDiscussionsSection": "Discussions",
+  "studyDiscussionsStart": "Start Discussion",
+  "studyDiscussionsEmpty": "No bound discussions yet.",
+  "studyDiscussionsCaption": "In project discussions, replies cite source materials and indicate whether each citation is verified.",
+  "studyDiscussionsUnnamed": "Untitled discussion",
+  "studyNotesSection": "Notes",
+  "studyNotesEmpty": "No project notes yet. Save citations from replies or add notes as you study.",
+  "studyNoteEvidenceGrounded": "Grounded in source",
+  "studyNoteEvidenceInsufficient": "Insufficient evidence",
+  "studyNoteAnchorsCount": "{count} citations",
+  "@studyNoteAnchorsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "studyNoteDetailTitle": "Note Details",
+  "studyNoteAnchorsHeading": "Source Anchors",
+  "studyNoteNoAnchors": "No source anchors attached.",
+  "studyNoteViewSource": "View Source",
+  "studyNoteDeleteTitle": "Delete Note",
+  "studyNoteDeleteMessage": "Delete note \"{title}\"?",
+  "@studyNoteDeleteMessage": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "studyReaderSections": "Sections",
+  "studyReaderSectionPdfPages": "PDF pp. {range}",
+  "@studyReaderSectionPdfPages": {
+    "placeholders": {
+      "range": {
+        "type": "String"
+      }
+    }
+  },
+  "studyReaderSectionSinglePdfPage": "PDF p. {page}",
+  "@studyReaderSectionSinglePdfPage": {
+    "placeholders": {
+      "page": {
+        "type": "int"
+      }
+    }
+  },
+  "studyReaderPrevSection": "Previous section",
+  "studyReaderNextSection": "Next section",
+  "studyReaderHighlightedQuote": "Cited Passage",
+  "studyReaderNoIndexNotice": "Section index not built yet",
+  "studyReaderBuildIndex": "Build Index",
+  "studyReaderEmptyText": "No readable text in this document.",
+  "studyReaderOpenOriginal": "Open Original File",
+  "studyReaderOpenOriginalFailed": "Unable to open original file: {error}",
+  "@studyReaderOpenOriginalFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "studyCitationSheetTitle": "Citation Check",
+  "studyCitationUnavailable": "Citation details are currently unavailable",
+  "studyCitationChecking": "Checking citation…",
+  "studyCitationStatusGrounded": "Verified in source",
+  "studyCitationStatusLocatedNoQuote": "Located, no source quote attached",
+  "studyCitationStatusUnverified": "Unable to verify",
+  "studyCitationMaterialLabel": "Material",
+  "studyCitationSectionLabel": "Section",
+  "studyCitationPdfPage": "PDF p. {page}",
+  "@studyCitationPdfPage": {
+    "placeholders": {
+      "page": {
+        "type": "int"
+      }
+    }
+  },
+  "studyCitationBookPage": "Textbook p. {page}",
+  "@studyCitationBookPage": {
+    "placeholders": {
+      "page": {
+        "type": "int"
+      }
+    }
+  },
+  "studyCitationSaveAsNote": "Save as Note",
+  "studyCitationSaveNoteTitle": "Save as Note",
+  "studyCitationNoteTitleLabel": "Title",
+  "studyCitationNoteBodyLabel": "Note Content",
+  "studyCitationNoteBodyHint": "Write your understanding, questions, or takeaways…",
+  "studyCitationNoteSavedGrounded": "Saved to project notes",
+  "studyCitationNoteSavedInsufficient": "Saved, but evidence is insufficient",
+  "studyCitationIssueMalformed": "Malformed citation marker",
+  "studyCitationIssueUnknownDocument": "This material is not in the project",
+  "studyCitationIssueDocumentNotReady": "Material is not readable yet",
+  "studyCitationIssueSourceVersionMismatch": "Source file has changed",
+  "studyCitationIssueMissingLocator": "No section, page, or quote locator provided",
+  "studyCitationIssueUnknownSection": "Section not found in index",
+  "studyCitationIssueSectionUnavailable": "Section index is unavailable or outdated; please rebuild the index",
+  "studyCitationIssuePhysicalPageOutOfRange": "Exceeds PDF page count",
+  "studyCitationIssuePhysicalPageOutsideSection": "Page number does not match the section containing the quote",
+  "studyCitationIssueCorpusPageOutOfRange": "Outside textbook page range",
+  "studyCitationIssueQuoteTooShort": "Quote is too short to serve as evidence",
+  "studyCitationIssueQuoteNotFound": "Quote not found in source text"
 }

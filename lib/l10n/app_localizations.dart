@@ -23333,6 +23333,636 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Completing sign-in…'**
   String get mcpOAuthExchangingToken;
+
+  /// No description provided for @studyProjectsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Study Projects'**
+  String get studyProjectsTitle;
+
+  /// No description provided for @studyProjectCreate.
+  ///
+  /// In en, this message translates to:
+  /// **'New Project'**
+  String get studyProjectCreate;
+
+  /// No description provided for @studyProjectEdit.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Project'**
+  String get studyProjectEdit;
+
+  /// No description provided for @studyProjectDelete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Project'**
+  String get studyProjectDelete;
+
+  /// No description provided for @studyProjectDeleteMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete project \"{title}\"? Its materials and notes will be removed, while bound conversations stay as ordinary chats.'**
+  String studyProjectDeleteMessage(String title);
+
+  /// No description provided for @studyProjectsEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No study projects yet'**
+  String get studyProjectsEmptyTitle;
+
+  /// No description provided for @studyProjectsEmptyDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Materials, discussions, and notes stay together in a project, and citations link back to the original source.'**
+  String get studyProjectsEmptyDescription;
+
+  /// No description provided for @studyProjectsSelectHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Select a study project on the left to view materials, discussions, and notes.'**
+  String get studyProjectsSelectHint;
+
+  /// No description provided for @studyProjectTitleLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Project Title'**
+  String get studyProjectTitleLabel;
+
+  /// No description provided for @studyProjectTitleHint.
+  ///
+  /// In en, this message translates to:
+  /// **'e.g., Cognitive Load Theory'**
+  String get studyProjectTitleHint;
+
+  /// No description provided for @studyProjectGoalLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Learning Goal (optional)'**
+  String get studyProjectGoalLabel;
+
+  /// No description provided for @studyProjectGoalHint.
+  ///
+  /// In en, this message translates to:
+  /// **'What problem, chapter, or question are you working on?'**
+  String get studyProjectGoalHint;
+
+  /// No description provided for @studyProjectGoalEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No learning goal set'**
+  String get studyProjectGoalEmpty;
+
+  /// No description provided for @studyProjectModeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Study Mode'**
+  String get studyProjectModeLabel;
+
+  /// No description provided for @studyModeExplain.
+  ///
+  /// In en, this message translates to:
+  /// **'Direct Explanation'**
+  String get studyModeExplain;
+
+  /// No description provided for @studyModeGuidedPractice.
+  ///
+  /// In en, this message translates to:
+  /// **'Guided Practice'**
+  String get studyModeGuidedPractice;
+
+  /// No description provided for @studyProjectUpdatedAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Updated {date}'**
+  String studyProjectUpdatedAt(String date);
+
+  /// No description provided for @studyProjectMaterialCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} materials'**
+  String studyProjectMaterialCount(int count);
+
+  /// No description provided for @studyProjectSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get studyProjectSave;
+
+  /// No description provided for @studyProjectCancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get studyProjectCancel;
+
+  /// No description provided for @studyProjectConfirmDelete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get studyProjectConfirmDelete;
+
+  /// No description provided for @studyProjectMoreActions.
+  ///
+  /// In en, this message translates to:
+  /// **'More actions'**
+  String get studyProjectMoreActions;
+
+  /// No description provided for @studyMaterialsSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Materials'**
+  String get studyMaterialsSection;
+
+  /// No description provided for @studyMaterialsImport.
+  ///
+  /// In en, this message translates to:
+  /// **'Import'**
+  String get studyMaterialsImport;
+
+  /// No description provided for @studyMaterialsImporting.
+  ///
+  /// In en, this message translates to:
+  /// **'Importing materials…'**
+  String get studyMaterialsImporting;
+
+  /// No description provided for @studyMaterialsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No materials imported yet. Import PDF, Markdown, or text files.'**
+  String get studyMaterialsEmpty;
+
+  /// No description provided for @studyMaterialsImportFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to import materials: {error}'**
+  String studyMaterialsImportFailed(String error);
+
+  /// No description provided for @studyDocStatusReady.
+  ///
+  /// In en, this message translates to:
+  /// **'Ready'**
+  String get studyDocStatusReady;
+
+  /// No description provided for @studyDocStatusScannedNeedsOcr.
+  ///
+  /// In en, this message translates to:
+  /// **'Scanned PDF, parse needed'**
+  String get studyDocStatusScannedNeedsOcr;
+
+  /// No description provided for @studyDocStatusUnreadable.
+  ///
+  /// In en, this message translates to:
+  /// **'Unreadable'**
+  String get studyDocStatusUnreadable;
+
+  /// No description provided for @studyDocStatusPendingSourceLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Source PDF pending confirmation'**
+  String get studyDocStatusPendingSourceLink;
+
+  /// No description provided for @studyDocScannedHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Parse with MinerU and attach the Markdown parse to read and cite.'**
+  String get studyDocScannedHint;
+
+  /// No description provided for @studyDocPhysicalPages.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} pages'**
+  String studyDocPhysicalPages(int count);
+
+  /// No description provided for @studyDocCorpusPages.
+  ///
+  /// In en, this message translates to:
+  /// **'Textbook pp. {range}'**
+  String studyDocCorpusPages(String range);
+
+  /// No description provided for @studyDocIndexed.
+  ///
+  /// In en, this message translates to:
+  /// **'Indexed'**
+  String get studyDocIndexed;
+
+  /// No description provided for @studyDocNotIndexed.
+  ///
+  /// In en, this message translates to:
+  /// **'Not indexed'**
+  String get studyDocNotIndexed;
+
+  /// No description provided for @studyDocIndexing.
+  ///
+  /// In en, this message translates to:
+  /// **'Indexing'**
+  String get studyDocIndexing;
+
+  /// No description provided for @studyDocActionRead.
+  ///
+  /// In en, this message translates to:
+  /// **'Read'**
+  String get studyDocActionRead;
+
+  /// No description provided for @studyDocActionBuildIndex.
+  ///
+  /// In en, this message translates to:
+  /// **'Build Index'**
+  String get studyDocActionBuildIndex;
+
+  /// No description provided for @studyDocActionRebuildIndex.
+  ///
+  /// In en, this message translates to:
+  /// **'Rebuild Index'**
+  String get studyDocActionRebuildIndex;
+
+  /// No description provided for @studyDocActionAttachParse.
+  ///
+  /// In en, this message translates to:
+  /// **'Attach Parse'**
+  String get studyDocActionAttachParse;
+
+  /// No description provided for @studyDocActionConfirmSource.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Source PDF'**
+  String get studyDocActionConfirmSource;
+
+  /// No description provided for @studyDocActionDelete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get studyDocActionDelete;
+
+  /// No description provided for @studyDocDeleteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Material'**
+  String get studyDocDeleteTitle;
+
+  /// No description provided for @studyDocDeleteMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete \"{title}\" from this project?'**
+  String studyDocDeleteMessage(String title);
+
+  /// No description provided for @studyDocConfirmSourceTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Source PDF'**
+  String get studyDocConfirmSourceTitle;
+
+  /// No description provided for @studyDocAttachMarkdownTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Parsed Markdown (.md)'**
+  String get studyDocAttachMarkdownTitle;
+
+  /// No description provided for @studyDocAttachContentListTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Content List (.json, optional)'**
+  String get studyDocAttachContentListTitle;
+
+  /// No description provided for @studyDocIndexFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to build index: {error}'**
+  String studyDocIndexFailed(String error);
+
+  /// No description provided for @studyDiscussionsSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Discussions'**
+  String get studyDiscussionsSection;
+
+  /// No description provided for @studyDiscussionsStart.
+  ///
+  /// In en, this message translates to:
+  /// **'Start Discussion'**
+  String get studyDiscussionsStart;
+
+  /// No description provided for @studyDiscussionsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No bound discussions yet.'**
+  String get studyDiscussionsEmpty;
+
+  /// No description provided for @studyDiscussionsCaption.
+  ///
+  /// In en, this message translates to:
+  /// **'In project discussions, replies cite source materials and indicate whether each citation is verified.'**
+  String get studyDiscussionsCaption;
+
+  /// No description provided for @studyDiscussionsUnnamed.
+  ///
+  /// In en, this message translates to:
+  /// **'Untitled discussion'**
+  String get studyDiscussionsUnnamed;
+
+  /// No description provided for @studyNotesSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Notes'**
+  String get studyNotesSection;
+
+  /// No description provided for @studyNotesEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No project notes yet. Save citations from replies or add notes as you study.'**
+  String get studyNotesEmpty;
+
+  /// No description provided for @studyNoteEvidenceGrounded.
+  ///
+  /// In en, this message translates to:
+  /// **'Grounded in source'**
+  String get studyNoteEvidenceGrounded;
+
+  /// No description provided for @studyNoteEvidenceInsufficient.
+  ///
+  /// In en, this message translates to:
+  /// **'Insufficient evidence'**
+  String get studyNoteEvidenceInsufficient;
+
+  /// No description provided for @studyNoteAnchorsCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} citations'**
+  String studyNoteAnchorsCount(int count);
+
+  /// No description provided for @studyNoteDetailTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Note Details'**
+  String get studyNoteDetailTitle;
+
+  /// No description provided for @studyNoteAnchorsHeading.
+  ///
+  /// In en, this message translates to:
+  /// **'Source Anchors'**
+  String get studyNoteAnchorsHeading;
+
+  /// No description provided for @studyNoteNoAnchors.
+  ///
+  /// In en, this message translates to:
+  /// **'No source anchors attached.'**
+  String get studyNoteNoAnchors;
+
+  /// No description provided for @studyNoteViewSource.
+  ///
+  /// In en, this message translates to:
+  /// **'View Source'**
+  String get studyNoteViewSource;
+
+  /// No description provided for @studyNoteDeleteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Note'**
+  String get studyNoteDeleteTitle;
+
+  /// No description provided for @studyNoteDeleteMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete note \"{title}\"?'**
+  String studyNoteDeleteMessage(String title);
+
+  /// No description provided for @studyReaderSections.
+  ///
+  /// In en, this message translates to:
+  /// **'Sections'**
+  String get studyReaderSections;
+
+  /// No description provided for @studyReaderSectionPdfPages.
+  ///
+  /// In en, this message translates to:
+  /// **'PDF pp. {range}'**
+  String studyReaderSectionPdfPages(String range);
+
+  /// No description provided for @studyReaderSectionSinglePdfPage.
+  ///
+  /// In en, this message translates to:
+  /// **'PDF p. {page}'**
+  String studyReaderSectionSinglePdfPage(int page);
+
+  /// No description provided for @studyReaderPrevSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Previous section'**
+  String get studyReaderPrevSection;
+
+  /// No description provided for @studyReaderNextSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Next section'**
+  String get studyReaderNextSection;
+
+  /// No description provided for @studyReaderHighlightedQuote.
+  ///
+  /// In en, this message translates to:
+  /// **'Cited Passage'**
+  String get studyReaderHighlightedQuote;
+
+  /// No description provided for @studyReaderNoIndexNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Section index not built yet'**
+  String get studyReaderNoIndexNotice;
+
+  /// No description provided for @studyReaderBuildIndex.
+  ///
+  /// In en, this message translates to:
+  /// **'Build Index'**
+  String get studyReaderBuildIndex;
+
+  /// No description provided for @studyReaderEmptyText.
+  ///
+  /// In en, this message translates to:
+  /// **'No readable text in this document.'**
+  String get studyReaderEmptyText;
+
+  /// No description provided for @studyReaderOpenOriginal.
+  ///
+  /// In en, this message translates to:
+  /// **'Open Original File'**
+  String get studyReaderOpenOriginal;
+
+  /// No description provided for @studyReaderOpenOriginalFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Unable to open original file: {error}'**
+  String studyReaderOpenOriginalFailed(String error);
+
+  /// No description provided for @studyCitationSheetTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Citation Check'**
+  String get studyCitationSheetTitle;
+
+  /// No description provided for @studyCitationUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Citation details are currently unavailable'**
+  String get studyCitationUnavailable;
+
+  /// No description provided for @studyCitationChecking.
+  ///
+  /// In en, this message translates to:
+  /// **'Checking citation…'**
+  String get studyCitationChecking;
+
+  /// No description provided for @studyCitationStatusGrounded.
+  ///
+  /// In en, this message translates to:
+  /// **'Verified in source'**
+  String get studyCitationStatusGrounded;
+
+  /// No description provided for @studyCitationStatusLocatedNoQuote.
+  ///
+  /// In en, this message translates to:
+  /// **'Located, no source quote attached'**
+  String get studyCitationStatusLocatedNoQuote;
+
+  /// No description provided for @studyCitationStatusUnverified.
+  ///
+  /// In en, this message translates to:
+  /// **'Unable to verify'**
+  String get studyCitationStatusUnverified;
+
+  /// No description provided for @studyCitationMaterialLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Material'**
+  String get studyCitationMaterialLabel;
+
+  /// No description provided for @studyCitationSectionLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Section'**
+  String get studyCitationSectionLabel;
+
+  /// No description provided for @studyCitationPdfPage.
+  ///
+  /// In en, this message translates to:
+  /// **'PDF p. {page}'**
+  String studyCitationPdfPage(int page);
+
+  /// No description provided for @studyCitationBookPage.
+  ///
+  /// In en, this message translates to:
+  /// **'Textbook p. {page}'**
+  String studyCitationBookPage(int page);
+
+  /// No description provided for @studyCitationSaveAsNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Save as Note'**
+  String get studyCitationSaveAsNote;
+
+  /// No description provided for @studyCitationSaveNoteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Save as Note'**
+  String get studyCitationSaveNoteTitle;
+
+  /// No description provided for @studyCitationNoteTitleLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Title'**
+  String get studyCitationNoteTitleLabel;
+
+  /// No description provided for @studyCitationNoteBodyLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Note Content'**
+  String get studyCitationNoteBodyLabel;
+
+  /// No description provided for @studyCitationNoteBodyHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Write your understanding, questions, or takeaways…'**
+  String get studyCitationNoteBodyHint;
+
+  /// No description provided for @studyCitationNoteSavedGrounded.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved to project notes'**
+  String get studyCitationNoteSavedGrounded;
+
+  /// No description provided for @studyCitationNoteSavedInsufficient.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved, but evidence is insufficient'**
+  String get studyCitationNoteSavedInsufficient;
+
+  /// No description provided for @studyCitationIssueMalformed.
+  ///
+  /// In en, this message translates to:
+  /// **'Malformed citation marker'**
+  String get studyCitationIssueMalformed;
+
+  /// No description provided for @studyCitationIssueUnknownDocument.
+  ///
+  /// In en, this message translates to:
+  /// **'This material is not in the project'**
+  String get studyCitationIssueUnknownDocument;
+
+  /// No description provided for @studyCitationIssueDocumentNotReady.
+  ///
+  /// In en, this message translates to:
+  /// **'Material is not readable yet'**
+  String get studyCitationIssueDocumentNotReady;
+
+  /// No description provided for @studyCitationIssueSourceVersionMismatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Source file has changed'**
+  String get studyCitationIssueSourceVersionMismatch;
+
+  /// No description provided for @studyCitationIssueMissingLocator.
+  ///
+  /// In en, this message translates to:
+  /// **'No section, page, or quote locator provided'**
+  String get studyCitationIssueMissingLocator;
+
+  /// No description provided for @studyCitationIssueUnknownSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Section not found in index'**
+  String get studyCitationIssueUnknownSection;
+
+  /// No description provided for @studyCitationIssueSectionUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Section index is unavailable or outdated; please rebuild the index'**
+  String get studyCitationIssueSectionUnavailable;
+
+  /// No description provided for @studyCitationIssuePhysicalPageOutOfRange.
+  ///
+  /// In en, this message translates to:
+  /// **'Exceeds PDF page count'**
+  String get studyCitationIssuePhysicalPageOutOfRange;
+
+  /// No description provided for @studyCitationIssuePhysicalPageOutsideSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Page number does not match the section containing the quote'**
+  String get studyCitationIssuePhysicalPageOutsideSection;
+
+  /// No description provided for @studyCitationIssueCorpusPageOutOfRange.
+  ///
+  /// In en, this message translates to:
+  /// **'Outside textbook page range'**
+  String get studyCitationIssueCorpusPageOutOfRange;
+
+  /// No description provided for @studyCitationIssueQuoteTooShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Quote is too short to serve as evidence'**
+  String get studyCitationIssueQuoteTooShort;
+
+  /// No description provided for @studyCitationIssueQuoteNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'Quote not found in source text'**
+  String get studyCitationIssueQuoteNotFound;
 }
 
 class _AppLocalizationsDelegate

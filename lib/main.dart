@@ -1,5 +1,6 @@
 import 'core/services/scheduled_tasks_service.dart';
 import 'core/services/auth/provider_oauth_service.dart';
+import 'features/study/providers/study_project_provider.dart';
 import 'package:Kelivo/core/services/sandbox/workspace_channel.dart';
 import 'package:Kelivo/core/providers/external_mounts_provider.dart';
 import 'package:Kelivo/core/services/sandbox/environment_dependencies.dart';
@@ -771,6 +772,10 @@ class MyApp extends StatelessWidget {
             store: ctx.read<ExtensionEntityStore>(),
             assistants: ctx.read<AssistantProvider>(),
           ),
+        ),
+        ChangeNotifierProvider(
+          create: (ctx) =>
+              StudyProjectProvider(entities: ctx.read<ExtensionEntityStore>()),
         ),
         ChangeNotifierProvider(
           create: (ctx) => SkillsService(

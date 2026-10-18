@@ -1,4 +1,5 @@
 import '../../../shared/widgets/markdown_line_lexer.dart';
+import '../study/study_citation_syntax.dart';
 
 enum TtsTextSelectionMode {
   fullText,
@@ -27,7 +28,8 @@ class TtsTextSelection {
     required TtsTextSelectionMode mode,
     bool fallbackToOriginal = true,
   }) {
-    final original = input.trim();
+    // Study citation markers are references, not prose to read aloud.
+    final original = StudyCitationSyntax.stripMarkers(input).trim();
     if (original.isEmpty) return '';
     final source = mode == TtsTextSelectionMode.fullText
         ? original

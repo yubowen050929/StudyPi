@@ -7,6 +7,7 @@ import '../../../core/models/message_part.dart';
 import '../../../core/models/token_usage.dart';
 import '../../../core/providers/settings_provider.dart';
 import '../../../core/services/api/chat_api_service.dart';
+import '../../../core/services/chat/generation_attempt.dart';
 import '../../../core/services/api/stream/stream_chunk.dart';
 import '../../../core/services/api/stream/stream_chunk_handler.dart';
 import '../../../core/services/api/stream/stream_text_buffer.dart';
@@ -1609,6 +1610,7 @@ class StreamController {
 /// Context object for message generation.
 class GenerationContext {
   GenerationContext({
+    GenerationAttempt? attempt,
     required this.assistantMessage,
     required this.apiMessages,
     this.contextUsageConfiguration,
@@ -1633,8 +1635,14 @@ class GenerationContext {
     this.scheduled = false,
     this.scheduledNotify = true,
     this.scheduledPreview = true,
-  });
+  }) : attempt =
+           attempt ??
+           GenerationAttempt(
+             conversationId: assistantMessage.conversationId,
+             messageId: assistantMessage.id,
+           );
 
+  final GenerationAttempt attempt;
   final ChatMessage assistantMessage;
   final List<Map<String, dynamic>> apiMessages;
   final Object? contextUsageConfiguration;

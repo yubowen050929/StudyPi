@@ -23,6 +23,7 @@ import '../../../core/services/api/stream/stream_chunk.dart';
 import '../../../core/services/api/stream/stream_chunk_handler.dart';
 import '../../../core/services/api/tool_call_cancellation.dart';
 import '../../../core/services/chat/chat_service.dart';
+import '../../../core/services/chat/generation_attempt.dart';
 import '../../../core/services/mobile_background.dart';
 import '../../../core/services/logging/flutter_logger.dart';
 import '../../../l10n/app_localizations.dart';
@@ -371,6 +372,31 @@ class ChatActions {
       <String, _GenerationCheckpointCursor>{};
   final ActiveStreamingMessageStore _activeAssistantMessages =
       ActiveStreamingMessageStore();
+  // Keep the latest small attempt token until its successor starts. A completed
+  // attempt can still have a delayed terminal callback, including for the same
+  // persisted message id; starting its successor invalidates that token too.
+  final Map<String, GenerationAttempt> _generationAttempts = {};
+
+  GenerationAttempt _beginGenerationAttempt(
+    ChatMessage message, {
+    GenerationAttempt? attempt,
+  }) {
+    final previous = _generationAttempts[message.conversationId];
+    if (previous != null && !identical(previous, attempt)) {
+      previous.cancel();
+      ChatApiService.cancelRequest(previous.requestId);
+    }
+    final current =
+        attempt ??
+        GenerationAttempt(
+          conversationId: message.conversationId,
+          messageId: message.id,
+        );
+    _generationAttempts[message.conversationId] = current;
+    _activeAssistantMessages.put(message);
+    return current;
+  }
+
   final Map<String, stream_ctrl.StreamingState> _streamingStates =
       <String, stream_ctrl.StreamingState>{};
   final Map<String, Future<void>> _cancelStreamingFutures =
@@ -398,6 +424,12 @@ class ChatActions {
   Map<String, StreamSubscription<dynamic>> get _conversationStreams =>
       chatController.conversationStreams;
 
+  bool _isLatestAttempt(GenerationAttempt attempt) =>
+      identical(_generationAttempts[attempt.conversationId], attempt);
+
+  bool _canPublishAttempt(GenerationAttempt attempt) =>
+      _isLatestAttempt(attempt) && !attempt.isCancelled;
+
   bool _hasActiveGeneration(String conversationId) =>
       _conversationStreams.containsKey(conversationId) ||
       _activeAssistantMessages[conversationId] != null ||
@@ -414,8 +446,17 @@ class ChatActions {
       _activeAssistantMessages.messageIds;
 
   @visibleForTesting
-  void debugTrackActiveMessage(ChatMessage message) {
-    _activeAssistantMessages.put(message);
+  GenerationAttempt debugTrackActiveMessage(ChatMessage message) {
+    return _beginGenerationAttempt(message);
+  }
+
+  @visibleForTesting
+  void debugTrackStreamingState(stream_ctrl.StreamingState state) {
+    _streamingStates[state.messageId] = state;
+    _beginGenerationAttempt(
+      state.ctx.assistantMessage,
+      attempt: state.ctx.attempt,
+    );
   }
 
   /// Rebuild retry countdown UI from surviving [StreamingState] after the
@@ -521,11 +562,15 @@ class ChatActions {
   }
 
   void _scheduleStreamingCheckpoint(stream_ctrl.StreamingState state) {
+    final attempt = state.ctx.attempt;
+    if (!_canPublishAttempt(attempt) || state.finishHandled) return;
     final writer = _checkpointWriters[state.messageId];
-    if (writer == null || state.finishHandled) return;
+    if (writer == null) return;
     writer.add(() {
       final message = _streamingMessageSnapshot(state);
-      _activeAssistantMessages.put(message);
+      if (_canPublishAttempt(attempt)) {
+        _activeAssistantMessages.put(message);
+      }
       return _createStreamingCheckpoint(message);
     });
   }
@@ -565,11 +610,18 @@ class ChatActions {
     );
   }
 
-  Future<void> _finalizeStreamingCheckpoint(
+  Future<bool> _finalizeStreamingCheckpoint(
     ChatMessage message, {
+    required GenerationAttempt attempt,
     required GenerationRunState terminalState,
     String? errorCode,
   }) async {
+    if (!_isLatestAttempt(attempt) ||
+        (attempt.isCancelled &&
+            terminalState != GenerationRunState.cancelled &&
+            terminalState != GenerationRunState.interrupted)) {
+      return false;
+    }
     final writer = _checkpointWriters.remove(message.id);
     final cursor = _generationCheckpointCursors[message.id];
     final checkpointSeq =
@@ -599,21 +651,45 @@ class ChatActions {
       }
       committed = true;
     } finally {
-      if (committed) _clearGenerationRuntimeState(message);
+      if (committed) _clearGenerationRuntimeState(message, attempt);
     }
+    return committed;
   }
 
-  void _clearGenerationRuntimeState(ChatMessage message) {
+  void _clearGenerationRuntimeState(
+    ChatMessage message,
+    GenerationAttempt attempt,
+  ) {
+    if (!_isLatestAttempt(attempt)) return;
     _generationCheckpointCursors.remove(message.id);
     _streamingToolEvents.remove(message.id);
     _streamingStates.remove(message.id);
     _activeAssistantMessages.removeIfMatches(message);
   }
 
+  PrepareErrorAction _preparationErrorAction(
+    Object error,
+    ChatMessage message,
+    GenerationAttempt attempt,
+  ) {
+    // OCR, context reads and extraction may finish after Stop has returned, or
+    // after a replacement run has started in this same conversation.
+    if (!_canPublishAttempt(attempt) ||
+        attempt.isFinished ||
+        !_activeAssistantMessages.isActive(message)) {
+      return PrepareErrorAction.skip;
+    }
+    return prepareErrorAction(
+      error,
+      requestCancelled: isStopping(message.conversationId),
+    );
+  }
+
   Future<void> _finishPrepareError(
     String conversationId,
     ChatMessage fallback,
     PrepareErrorAction action,
+    GenerationAttempt attempt,
   ) async {
     switch (action) {
       case PrepareErrorAction.skip:
@@ -622,17 +698,23 @@ class ChatActions {
         await _finishPreparingMessage(
           conversationId,
           fallback,
+          attempt: attempt,
           terminalState: GenerationRunState.cancelled,
           errorCode: null,
         );
       case PrepareErrorAction.failed:
-        await _finishPreparingMessage(conversationId, fallback);
+        await _finishPreparingMessage(
+          conversationId,
+          fallback,
+          attempt: attempt,
+        );
     }
   }
 
   Future<void> _finishPreparingMessage(
     String conversationId,
     ChatMessage fallback, {
+    required GenerationAttempt attempt,
     GenerationRunState terminalState = GenerationRunState.failed,
     String? errorCode = 'preparation_failed',
   }) async {
@@ -646,15 +728,22 @@ class ChatActions {
     try {
       await _finalizeStreamingCheckpoint(
         message,
+        attempt: attempt,
         terminalState: terminalState,
         errorCode: errorCode,
       );
     } finally {
-      _clearGenerationRuntimeState(message);
-      if (chatController.publishTerminalMessage(message)) {
-        onMessagesChanged?.call();
+      _clearGenerationRuntimeState(message, attempt);
+      if (_canPublishAttempt(attempt)) {
+        if (chatController.publishTerminalMessage(message)) {
+          onMessagesChanged?.call();
+        }
+        if (_activeAssistantMessages[conversationId] == null &&
+            !isSendInFlight(conversationId)) {
+          _setConversationLoading(conversationId, false);
+        }
       }
-      _setConversationLoading(conversationId, false);
+      attempt.finish();
     }
   }
 
@@ -847,8 +936,18 @@ class ChatActions {
     return List<MessagePart>.of(parts);
   }
 
+  void _ensureTrackedAttemptForDebug(stream_ctrl.StreamingState state) {
+    final attempt = state.ctx.attempt;
+    if (_generationAttempts[state.conversationId] == null &&
+        !attempt.isCancelled &&
+        !attempt.isFinished) {
+      _beginGenerationAttempt(state.ctx.assistantMessage, attempt: attempt);
+    }
+  }
+
   @visibleForTesting
   Future<void> debugFinishStreaming(stream_ctrl.StreamingState state) {
+    _ensureTrackedAttemptForDebug(state);
     return _finishStreaming(state);
   }
 
@@ -857,6 +956,7 @@ class ChatActions {
     Object error,
     stream_ctrl.StreamingState state,
   ) {
+    _ensureTrackedAttemptForDebug(state);
     return _handleStreamError(error, state);
   }
 
@@ -865,7 +965,10 @@ class ChatActions {
     StreamChunk chunk,
     stream_ctrl.StreamingState state,
   ) {
-    state.recordFirstOutput(chunk);
+    _ensureTrackedAttemptForDebug(state);
+    if (_canPublishAttempt(state.ctx.attempt)) {
+      state.recordFirstOutput(chunk);
+    }
     return _handleStreamChunk(chunk, state);
   }
 
@@ -1240,7 +1343,7 @@ class ChatActions {
     } catch (e) {
       return ChatActionResult.error(e.toString());
     }
-    _activeAssistantMessages.put(assistantMessage);
+    final attempt = _beginGenerationAttempt(assistantMessage);
     _setConversationLoading(conversation.id, true);
     // The loading guard now owns re-entry exclusion for this conversation.
     _sendInFlightClaims.remove(conversation.id);
@@ -1267,6 +1370,7 @@ class ChatActions {
     // point surface through onStreamError and the message itself.
     unawaited(
       _runSendGeneration(
+        attempt: attempt,
         input: input,
         conversation: conversation,
         settings: settings,
@@ -1291,6 +1395,7 @@ class ChatActions {
   }
 
   Future<void> _runSendGeneration({
+    required GenerationAttempt attempt,
     required ChatInputData input,
     required Conversation conversation,
     required SettingsProvider settings,
@@ -1313,12 +1418,15 @@ class ChatActions {
       // depends on it, so it runs after the pair is already visible. The pair
       // itself is persisted by now and comes back in this read — drop it here
       // and let the caller re-append it in generation order.
-      final contextLimit = await _contextReadLimit(assistant, conversation);
-      final persistedContext = await chatController
-          .messagesForGenerationContext(
-            conversation,
-            maxMessages: contextLimit + 2,
-          );
+      final contextLimit = await attempt.run(
+        () => _contextReadLimit(assistant, conversation),
+      );
+      final persistedContext = await attempt.run(
+        () => chatController.messagesForGenerationContext(
+          conversation,
+          maxMessages: contextLimit + 2,
+        ),
+      );
       final existingContextMessages = <ChatMessage>[
         for (final message in persistedContext)
           if (message.id != userMessage.id && message.id != assistantMessage.id)
@@ -1340,30 +1448,34 @@ class ChatActions {
           );
       // Prepare API messages
       _bindFileProcessingCallbacks();
-      await messageGenerationService.initializeReasoningState(
-        messageId: assistantMessage.id,
-        enableReasoning: enableReasoning,
+      await attempt.run(
+        () => messageGenerationService.initializeReasoningState(
+          messageId: assistantMessage.id,
+          enableReasoning: enableReasoning,
+        ),
       );
       final apiContextMessages = <ChatMessage>[
         ...existingContextMessages,
         userMessage,
         assistantMessage,
       ];
-      final prepared = await messageGenerationService
-          .prepareApiMessagesWithInjections(
-            messages: apiContextMessages,
-            versionSelections: _versionSelections,
-            currentConversation: conversation.copyWith(truncateIndex: -1),
-            settings: settings,
-            assistant: assistant,
-            assistantId: assistantId,
-            providerKey: providerKey,
-            modelId: modelId,
-            approvalService: approvalService,
-            askUserService: askUserService,
-            processingMessageId: assistantMessage.id,
-            requiredAttachmentMessageId: userMessage.id,
-          );
+      final prepared = await attempt.run(
+        () => messageGenerationService.prepareApiMessagesWithInjections(
+          attempt: attempt,
+          messages: apiContextMessages,
+          versionSelections: _versionSelections,
+          currentConversation: conversation.copyWith(truncateIndex: -1),
+          settings: settings,
+          assistant: assistant,
+          assistantId: assistantId,
+          providerKey: providerKey,
+          modelId: modelId,
+          approvalService: approvalService,
+          askUserService: askUserService,
+          processingMessageId: assistantMessage.id,
+          requiredAttachmentMessageId: userMessage.id,
+        ),
+      );
 
       // Build user image paths
       final userImagePaths = messageGenerationService.buildUserImagePaths(
@@ -1376,6 +1488,7 @@ class ChatActions {
 
       // Execute generation
       final ctx = messageGenerationService.buildGenerationContext(
+        attempt: attempt,
         assistantMessage: assistantMessage,
         prepared: prepared,
         userImagePaths: userImagePaths,
@@ -1393,12 +1506,14 @@ class ChatActions {
         generationRunId: generationRunId,
       );
 
+      attempt.check();
       if (!_activeAssistantMessages.isActive(assistantMessage)) {
         return;
       }
       await _executeGeneration(ctx);
     } catch (e) {
       await handleSendGenerationFailure(
+        attempt: attempt,
         error: e,
         conversationId: conversation.id,
         assistantMessage: assistantMessage,
@@ -1414,18 +1529,35 @@ class ChatActions {
   /// unhandled async error behind a silent empty assistant message.
   @visibleForTesting
   Future<void> handleSendGenerationFailure({
+    GenerationAttempt? attempt,
     required Object error,
     required String conversationId,
     required ChatMessage assistantMessage,
   }) async {
+    final resolvedAttempt =
+        attempt ??
+        (_generationAttempts[conversationId]?.messageId == assistantMessage.id
+            ? _generationAttempts[conversationId]!
+            : (GenerationAttempt(
+                conversationId: conversationId,
+                messageId: assistantMessage.id,
+              )..cancel()));
     // Ensure file processing indicator is cleared on error
-    onFileProcessingFinished?.call(assistantMessage.id);
-    final action = prepareErrorAction(
+    if (_canPublishAttempt(resolvedAttempt)) {
+      onFileProcessingFinished?.call(assistantMessage.id);
+    }
+    final action = _preparationErrorAction(
       error,
-      requestCancelled: isStopping(conversationId),
+      assistantMessage,
+      resolvedAttempt,
     );
     try {
-      await _finishPrepareError(conversationId, assistantMessage, action);
+      await _finishPrepareError(
+        conversationId,
+        assistantMessage,
+        action,
+        resolvedAttempt,
+      );
     } catch (cleanupError, stackTrace) {
       FlutterLogger.log(
         '[ChatActions] finishPreparingMessage failed after send error: '
@@ -1433,7 +1565,12 @@ class ChatActions {
         tag: 'ChatActions',
       );
     }
-    if (action != PrepareErrorAction.failed) return;
+    if (action != PrepareErrorAction.failed ||
+        !_canPublishAttempt(resolvedAttempt) ||
+        _activeAssistantMessages[conversationId] != null ||
+        isSendInFlight(conversationId)) {
+      return;
+    }
     onStreamError?.call(error.toString());
   }
 
@@ -1680,7 +1817,7 @@ class ChatActions {
     }
     final assistantMessage = begin.assistantMessage;
     _registerGenerationRun(assistantMessage.id, begin.runId);
-    _activeAssistantMessages.put(assistantMessage);
+    final attempt = _beginGenerationAttempt(assistantMessage);
 
     // Pre-create streaming notifier BEFORE adding message to list
     // so that MessageListView can detect it's streaming on first render
@@ -1711,6 +1848,12 @@ class ChatActions {
         )) {
       viewModel.restoreMessageUiState();
     }
+    if (attempt.isCancelled) {
+      return ChatActionResult.success(
+        assistantMessage,
+        generationRunId: begin.runId,
+      );
+    }
     onMessagesChanged?.call();
 
     _setConversationLoading(conversation.id, true);
@@ -1733,32 +1876,36 @@ class ChatActions {
           );
       _bindFileProcessingCallbacks();
       try {
-        await messageGenerationService.initializeReasoningState(
-          messageId: assistantMessage.id,
-          enableReasoning: enableReasoning,
+        await attempt.run(
+          () => messageGenerationService.initializeReasoningState(
+            messageId: assistantMessage.id,
+            enableReasoning: enableReasoning,
+          ),
         );
 
         // Prepare API messages
-        final prepared = await messageGenerationService
-            .prepareApiMessagesWithInjections(
-              messages: regenerationMessages,
-              versionSelections: regenerationVersionSelections,
-              currentConversation: isTemporaryConversation
-                  ? _conversationForMessageContext(
-                      conversation,
-                      regenerationMessages,
-                      maxRawTruncateIndex: versioning.lastKeep,
-                    )
-                  : conversation.copyWith(truncateIndex: -1),
-              settings: settings,
-              assistant: assistant,
-              assistantId: assistantId,
-              providerKey: providerKey,
-              modelId: modelId,
-              approvalService: regenApprovalService,
-              askUserService: regenAskUserService,
-              processingMessageId: assistantMessage.id,
-            );
+        final prepared = await attempt.run(
+          () => messageGenerationService.prepareApiMessagesWithInjections(
+            attempt: attempt,
+            messages: regenerationMessages,
+            versionSelections: regenerationVersionSelections,
+            currentConversation: isTemporaryConversation
+                ? _conversationForMessageContext(
+                    conversation,
+                    regenerationMessages,
+                    maxRawTruncateIndex: versioning.lastKeep,
+                  )
+                : conversation.copyWith(truncateIndex: -1),
+            settings: settings,
+            assistant: assistant,
+            assistantId: assistantId,
+            providerKey: providerKey,
+            modelId: modelId,
+            approvalService: regenApprovalService,
+            askUserService: regenAskUserService,
+            processingMessageId: assistantMessage.id,
+          ),
+        );
 
         // Build user image paths
         final userImagePaths = messageGenerationService.buildUserImagePaths(
@@ -1771,6 +1918,7 @@ class ChatActions {
 
         // Execute generation
         final ctx = messageGenerationService.buildGenerationContext(
+          attempt: attempt,
           assistantMessage: assistantMessage,
           prepared: prepared,
           userImagePaths: userImagePaths,
@@ -1788,6 +1936,7 @@ class ChatActions {
           generationRunId: begin.runId,
         );
 
+        attempt.check();
         if (!_activeAssistantMessages.isActive(assistantMessage)) {
           return ChatActionResult.success(
             assistantMessage,
@@ -1800,12 +1949,17 @@ class ChatActions {
           generationRunId: begin.runId,
         );
       } catch (e) {
-        final action = prepareErrorAction(
-          e,
-          requestCancelled: isStopping(conversation.id),
+        final action = _preparationErrorAction(e, assistantMessage, attempt);
+        await _finishPrepareError(
+          conversation.id,
+          assistantMessage,
+          action,
+          attempt,
         );
-        await _finishPrepareError(conversation.id, assistantMessage, action);
-        if (action != PrepareErrorAction.failed) {
+        if (action != PrepareErrorAction.failed ||
+            !_canPublishAttempt(attempt) ||
+            _activeAssistantMessages[conversation.id] != null ||
+            isSendInFlight(conversation.id)) {
           return ChatActionResult.success(
             assistantMessage,
             generationRunId: begin.runId,
@@ -1832,10 +1986,48 @@ class ChatActions {
     required Conversation conversation,
     bool allowImagesApiRouting = true,
   }) async {
-    if (isSendInFlight(conversation.id)) {
+    if (isSendInFlight(conversation.id) ||
+        _loadingConversationIds.contains(conversation.id)) {
       return ChatActionResult.inFlight();
     }
+    final attempt = _beginGenerationAttempt(message);
+    _setConversationLoading(conversation.id, true);
+    try {
+      return await attempt.run(
+        () => _continueAssistantMessageAfterToolAnswer(
+          message: message,
+          conversation: conversation,
+          allowImagesApiRouting: allowImagesApiRouting,
+          attempt: attempt,
+        ),
+      );
+    } catch (error) {
+      await handleSendGenerationFailure(
+        error: error,
+        conversationId: conversation.id,
+        assistantMessage: message,
+        attempt: attempt,
+      );
+      return attempt.isCancelled
+          ? ChatActionResult.success(message)
+          : ChatActionResult.error(error.toString());
+    } finally {
+      if (_canPublishAttempt(attempt) &&
+          !identical(_streamingStates[message.id]?.ctx.attempt, attempt)) {
+        _clearGenerationRuntimeState(message, attempt);
+        _setConversationLoading(conversation.id, false);
+        attempt.finish();
+      }
+    }
+  }
 
+  Future<ChatActionResult> _continueAssistantMessageAfterToolAnswer({
+    required GenerationAttempt attempt,
+    required ChatMessage message,
+    required Conversation conversation,
+    bool allowImagesApiRouting = true,
+  }) async {
+    attempt.check();
     final settings = contextProvider.read<SettingsProvider>();
     final assistantProvider = contextProvider.read<AssistantProvider>();
     ToolApprovalService? approvalService;
@@ -1851,6 +2043,7 @@ class ChatActions {
     } catch (e) {
       return ChatActionResult.error(e.toString());
     }
+    attempt.check();
     final assistant = assistantProvider.resolveConversationAssistant(
       conversation.assistantId,
     );
@@ -1861,11 +2054,17 @@ class ChatActions {
     if (visibleIndex < 0 || message.role != 'assistant') {
       return ChatActionResult.error('message_not_found');
     }
-    final completeMessages = await chatController.messagesForGenerationContext(
-      conversation,
-      maxMessages: await _contextReadLimit(assistant, conversation),
-      throughRevisionId: message.id,
+    final contextLimit = await attempt.run(
+      () => _contextReadLimit(assistant, conversation),
     );
+    final completeMessages = await attempt.run(
+      () => chatController.messagesForGenerationContext(
+        conversation,
+        maxMessages: contextLimit,
+        throughRevisionId: message.id,
+      ),
+    );
+    attempt.check();
     final contextIndex = completeMessages.indexWhere(
       (candidate) => candidate.id == message.id,
     );
@@ -1906,9 +2105,10 @@ class ChatActions {
     );
     _activeAssistantMessages.put(streamingMessage);
     chatController.publishGenerationStarted(streamingMessage);
-    await chatService.updateMessage(streamingMessage.id, isStreaming: true);
+    await attempt.run(
+      () => chatService.updateMessage(streamingMessage.id, isStreaming: true),
+    );
     onMessagesChanged?.call();
-    _setConversationLoading(conversation.id, true);
 
     final supportsReasoning = _isReasoningModel(providerKey, modelId);
     final enableReasoning =
@@ -1926,20 +2126,22 @@ class ChatActions {
     try {
       final apiContextMessages = List<ChatMessage>.of(completeMessages);
       apiContextMessages[contextIndex] = streamingMessage;
-      final prepared = await messageGenerationService
-          .prepareApiMessagesWithInjections(
-            messages: apiContextMessages,
-            versionSelections: _versionSelections,
-            currentConversation: conversation.copyWith(truncateIndex: -1),
-            settings: settings,
-            assistant: assistant,
-            assistantId: assistant?.id,
-            providerKey: providerKey,
-            modelId: modelId,
-            approvalService: approvalService,
-            askUserService: askUserService,
-            processingMessageId: streamingMessage.id,
-          );
+      final prepared = await attempt.run(
+        () => messageGenerationService.prepareApiMessagesWithInjections(
+          attempt: attempt,
+          messages: apiContextMessages,
+          versionSelections: _versionSelections,
+          currentConversation: conversation.copyWith(truncateIndex: -1),
+          settings: settings,
+          assistant: assistant,
+          assistantId: assistant?.id,
+          providerKey: providerKey,
+          modelId: modelId,
+          approvalService: approvalService,
+          askUserService: askUserService,
+          processingMessageId: streamingMessage.id,
+        ),
+      );
 
       final userImagePaths = messageGenerationService.buildUserImagePaths(
         input: null,
@@ -1950,6 +2152,7 @@ class ChatActions {
       );
 
       final ctx = messageGenerationService.buildGenerationContext(
+        attempt: attempt,
         assistantMessage: streamingMessage,
         prepared: prepared,
         userImagePaths: userImagePaths,
@@ -1963,18 +2166,24 @@ class ChatActions {
         generateTitleOnFinish: false,
       );
 
+      attempt.check();
       if (!_activeAssistantMessages.isActive(streamingMessage)) {
         return ChatActionResult.success(streamingMessage);
       }
       await _executeGeneration(ctx);
       return ChatActionResult.success(streamingMessage);
     } catch (e) {
-      final action = prepareErrorAction(
-        e,
-        requestCancelled: isStopping(conversation.id),
+      final action = _preparationErrorAction(e, streamingMessage, attempt);
+      await _finishPrepareError(
+        conversation.id,
+        streamingMessage,
+        action,
+        attempt,
       );
-      await _finishPrepareError(conversation.id, streamingMessage, action);
-      if (action != PrepareErrorAction.failed) {
+      if (action != PrepareErrorAction.failed ||
+          !_canPublishAttempt(attempt) ||
+          _activeAssistantMessages[conversation.id] != null ||
+          isSendInFlight(conversation.id)) {
         return ChatActionResult.success(streamingMessage);
       }
       return ChatActionResult.error(e.toString());
@@ -1997,12 +2206,20 @@ class ChatActions {
     final existing = _cancelStreamingFutures[cid];
     if (existing != null) return existing;
 
+    final attempt = _generationAttempts[cid];
+    attempt?.cancel();
+    if (attempt != null) ChatApiService.cancelRequest(attempt.requestId);
+
     late final Future<void> operation;
     operation = Future<void>.microtask(() => _cancelStreamingByIdOnce(cid))
         .whenComplete(() {
           if (identical(_cancelStreamingFutures[cid], operation)) {
             _cancelStreamingFutures.remove(cid);
-            _setConversationLoading(cid, false);
+            if ((attempt == null || _isLatestAttempt(attempt)) &&
+                _activeAssistantMessages[cid] == null &&
+                !_sendInFlightClaims.containsKey(cid)) {
+              _setConversationLoading(cid, false);
+            }
           }
         });
     _cancelStreamingFutures[cid] = operation;
@@ -2057,6 +2274,8 @@ class ChatActions {
       streamController.cleanupTimers(visibleStreaming.id);
       final cancelState = _streamingStates[visibleStreaming.id];
       if (cancelState != null) {
+        cancelState.ctx.attempt.cancel();
+        ChatApiService.cancelRequest(cancelState.ctx.attempt.requestId);
         cancelState.finishRequestTiming();
         _setRetryStatus(cancelState, null);
       }
@@ -2097,6 +2316,12 @@ class ChatActions {
 
       streamController.finishReasoningIfNeeded(streaming.id);
       final state = _streamingStates[streaming.id];
+      final attempt =
+          state?.ctx.attempt ??
+          _generationAttempts[cid] ??
+          _beginGenerationAttempt(streaming);
+      attempt.cancel();
+      ChatApiService.cancelRequest(attempt.requestId);
       final backgroundTaskId = state == null
           ? (_generationCheckpointCursors[streaming.id]?.runId ?? streaming.id)
           : _backgroundTaskId(state.ctx);
@@ -2110,8 +2335,9 @@ class ChatActions {
               .copyWith(parts: assistantParts, isStreaming: false);
       var cancellationPersisted = false;
       try {
-        await _finalizeStreamingCheckpoint(
+        cancellationPersisted = await _finalizeStreamingCheckpoint(
           finalizedMessage,
+          attempt: attempt,
           terminalState: _background.wasInterrupted(backgroundTaskId)
               ? GenerationRunState.interrupted
               : GenerationRunState.cancelled,
@@ -2119,13 +2345,15 @@ class ChatActions {
               ? 'background_interrupted'
               : null,
         );
-        cancellationPersisted = true;
       } finally {
-        _clearGenerationRuntimeState(finalizedMessage);
-        if (chatController.publishTerminalMessage(finalizedMessage)) {
-          onMessagesChanged?.call();
+        _clearGenerationRuntimeState(finalizedMessage, attempt);
+        if (_isLatestAttempt(attempt)) {
+          if (chatController.publishTerminalMessage(finalizedMessage)) {
+            onMessagesChanged?.call();
+          }
+          streamController.removeStreamingNotifier(streaming.id);
         }
-        streamController.removeStreamingNotifier(streaming.id);
+        attempt.finish();
         await _background.finish(
           backgroundTaskId,
           BackgroundTaskOutcome.cancelled,
@@ -2150,6 +2378,9 @@ class ChatActions {
 
   /// Execute generation with the given context.
   Future<void> _executeGeneration(stream_ctrl.GenerationContext ctx) async {
+    final attempt = ctx.attempt;
+    if (attempt.isCancelled || attempt.isFinished) return;
+    _beginGenerationAttempt(ctx.assistantMessage, attempt: attempt);
     final state = stream_ctrl.StreamingState(
       ctx,
       responsesTurnPrefix: chatService.getProviderArtifactForMessage(
@@ -2199,6 +2430,10 @@ class ChatActions {
     final onToolCall = toolHandler == null
         ? null
         : (String name, Map<String, dynamic> args, {String? toolCallId}) async {
+            attempt.check();
+            if (!_canPublishAttempt(attempt)) {
+              throw const ToolCallCancelledException();
+            }
             _background.update(
               _backgroundTaskId(ctx),
               phase: BackgroundTaskPhase.tool,
@@ -2208,16 +2443,22 @@ class ChatActions {
             try {
               if (!ctx.streamOutput) {
                 await _checkpointWriters[state.messageId]?.barrier();
+                attempt.check();
                 ToolCallCancellation.current?.throwIfCancelled();
               }
-              return await toolHandler(name, args, toolCallId: toolCallId);
+              return await attempt.cancellation.run(
+                () => toolHandler(name, args, toolCallId: toolCallId),
+              );
             } finally {
-              _scheduleBackgroundGenerationUpdate(state);
+              if (_canPublishAttempt(attempt)) {
+                _scheduleBackgroundGenerationUpdate(state);
+              }
             }
           };
     try {
       await _startBackgroundGeneration(ctx);
-      if (!_activeAssistantMessages.isActive(ctx.assistantMessage)) {
+      if (!_canPublishAttempt(attempt) ||
+          !_activeAssistantMessages.isActive(ctx.assistantMessage)) {
         await _background.finish(
           _backgroundTaskId(ctx),
           BackgroundTaskOutcome.cancelled,
@@ -2236,6 +2477,13 @@ class ChatActions {
           expectedStateRevision: cursor.stateRevision,
           nextState: GenerationRunState.requesting,
         );
+        if (!_canPublishAttempt(attempt)) {
+          await _background.finish(
+            _backgroundTaskId(ctx),
+            BackgroundTaskOutcome.cancelled,
+          );
+          return;
+        }
         state.generationStateRevision = run.stateRevision;
         cursor
           ..state = run.state
@@ -2247,47 +2495,62 @@ class ChatActions {
         ChatApiService.cancelRequest(conversationId);
         await _cancelSubscriptionWithTimeout(previousSub);
       }
+      if (!_canPublishAttempt(attempt)) {
+        await _background.finish(
+          _backgroundTaskId(ctx),
+          BackgroundTaskOutcome.cancelled,
+        );
+        return;
+      }
 
       state.requestStartedAt = DateTime.now();
-      final stream = ChatApiService.sendMessageStream(
-        config: ctx.config,
-        modelId: ctx.modelId,
-        messages: ctx.apiMessages,
-        userImagePaths: ctx.userImagePaths,
-        reasoning: selectReasoningRequest(
-          settings: ctx.settings,
+      final stream = attempt.cancellation.runStream(
+        () => ChatApiService.sendMessageStream(
           config: ctx.config,
           modelId: ctx.modelId,
-          assistant: assistant,
+          messages: ctx.apiMessages,
+          userImagePaths: ctx.userImagePaths,
+          reasoning: selectReasoningRequest(
+            settings: ctx.settings,
+            config: ctx.config,
+            modelId: ctx.modelId,
+            assistant: assistant,
+          ),
+          temperature: assistant?.temperature,
+          topP: assistant?.topP,
+          maxTokens: assistant?.maxTokens,
+          tools: ctx.toolDefs.isEmpty ? null : ctx.toolDefs,
+          onToolCall: onToolCall,
+          extraHeaders: ctx.extraHeaders,
+          extraBody: ctx.extraBody,
+          stream: ctx.streamOutput,
+          requestId: attempt.requestId,
+          conversationId: conversationId,
+          allowImagesApiRouting: ctx.allowImagesApiRouting,
+          ocrActive: ctx.ocrActive,
+          parseMarkdownImageLinks: ctx.settings.sendMarkdownImageLinksAsImages,
         ),
-        temperature: assistant?.temperature,
-        topP: assistant?.topP,
-        maxTokens: assistant?.maxTokens,
-        tools: ctx.toolDefs.isEmpty ? null : ctx.toolDefs,
-        onToolCall: onToolCall,
-        extraHeaders: ctx.extraHeaders,
-        extraBody: ctx.extraBody,
-        stream: ctx.streamOutput,
-        requestId: conversationId,
-        conversationId: conversationId,
-        allowImagesApiRouting: ctx.allowImagesApiRouting,
-        ocrActive: ctx.ocrActive,
-        parseMarkdownImageLinks: ctx.settings.sendMarkdownImageLinksAsImages,
       );
 
       if (!ctx.streamOutput) {
         // HTTP JSON responses still emit tool rounds. Consume them as they
         // arrive so a paused tool has a durable transcript before it resumes.
         await for (final chunk in stream) {
+          if (!_canPublishAttempt(attempt)) return;
           await _handleStreamChunk(chunk, state);
         }
+        if (!_canPublishAttempt(attempt)) return;
         await _handleStreamDone(state);
         return;
       }
 
       final sub = listenSequentiallyToStream<StreamChunk>(
         stream: stream,
-        onReceived: state.recordFirstOutput,
+        onReceived: (chunk) {
+          if (_canPublishAttempt(attempt)) {
+            state.recordFirstOutput(chunk);
+          }
+        },
         onData: (chunk) => _handleStreamChunk(chunk, state),
         onError: (error, stackTrace) => _handleStreamError(error, state),
         onDone: () => _handleStreamDone(state),
@@ -2307,6 +2570,10 @@ class ChatActions {
     StreamChunk chunk,
     stream_ctrl.StreamingState state,
   ) async {
+    final attempt = state.ctx.attempt;
+    if (!_canPublishAttempt(attempt) || attempt.isFinished) {
+      return;
+    }
     if (chunk is RetryPending) {
       _setRetryStatus(state, chunk);
     } else {
@@ -2314,6 +2581,9 @@ class ChatActions {
     }
     if (chunk is! RetryPending && chunk is! RetryAttemptStart) {
       await _markGenerationStreaming(state);
+      if (!_canPublishAttempt(attempt) || attempt.isFinished) {
+        return;
+      }
     }
     state.partsHandler.handle(chunk);
     switch (chunk) {
@@ -2379,21 +2649,24 @@ class ChatActions {
   Future<void> _persistProviderArtifact(
     stream_ctrl.StreamingState state,
     ProviderArtifact artifact,
-  ) => chatService.setProviderArtifact(
-    state.messageId,
-    artifact.kind,
-    switch (artifact.kind) {
-      responsesTurnArtifactKind => appendResponsesTurn(
-        state.responsesTurnPrefix,
-        artifact.payload,
-      ),
-      claudeTurnArtifactKind => appendClaudeTurn(
-        state.claudeTurnPrefix,
-        artifact.payload,
-      ),
-      _ => artifact.payload,
-    },
-  );
+  ) async {
+    if (!_canPublishAttempt(state.ctx.attempt)) return;
+    await chatService.setProviderArtifact(
+      state.messageId,
+      artifact.kind,
+      switch (artifact.kind) {
+        responsesTurnArtifactKind => appendResponsesTurn(
+          state.responsesTurnPrefix,
+          artifact.payload,
+        ),
+        claudeTurnArtifactKind => appendClaudeTurn(
+          state.claudeTurnPrefix,
+          artifact.payload,
+        ),
+        _ => artifact.payload,
+      },
+    );
+  }
 
   void _applyUsage(stream_ctrl.StreamingState state) {
     state.usage = state.partsHandler.usage;
@@ -2403,6 +2676,8 @@ class ChatActions {
   Future<void> _markGenerationStreaming(
     stream_ctrl.StreamingState state,
   ) async {
+    final attempt = state.ctx.attempt;
+    if (!_canPublishAttempt(attempt)) return;
     final runId = state.ctx.generationRunId;
     final expectedRevision = state.generationStateRevision;
     if (runId == null ||
@@ -2416,6 +2691,7 @@ class ChatActions {
       expectedStateRevision: expectedRevision,
       nextState: GenerationRunState.streaming,
     );
+    if (!_canPublishAttempt(attempt)) return;
     state
       ..generationStateRevision = run.stateRevision
       ..generationStreamingStarted = true;
@@ -2432,6 +2708,7 @@ class ChatActions {
     String reasoning,
     stream_ctrl.StreamingState state,
   ) async {
+    if (!_canPublishAttempt(state.ctx.attempt)) return;
     await streamController.handleReasoningChunk(reasoning, state);
     _publishAssistantParts(state);
   }
@@ -2441,6 +2718,7 @@ class ChatActions {
     StreamChunk chunk,
     stream_ctrl.StreamingState state,
   ) async {
+    if (!_canPublishAttempt(state.ctx.attempt)) return;
     await streamController.handleToolCallsChunk(
       chunk,
       state,
@@ -2449,6 +2727,7 @@ class ChatActions {
       },
       setToolEventsInDb:
           (String messageId, List<Map<String, dynamic>> events) async {
+            if (!_canPublishAttempt(state.ctx.attempt)) return;
             _streamingToolEvents[messageId] = events
                 .map((event) => Map<String, dynamic>.from(event))
                 .toList();
@@ -2463,6 +2742,7 @@ class ChatActions {
     StreamChunk chunk,
     stream_ctrl.StreamingState state,
   ) async {
+    if (!_canPublishAttempt(state.ctx.attempt)) return;
     await streamController.handleToolResultsChunk(
       chunk,
       state,
@@ -2475,6 +2755,7 @@ class ChatActions {
             String? content,
             Map<String, dynamic>? metadata,
           }) async {
+            if (!_canPublishAttempt(state.ctx.attempt)) return;
             _upsertStreamingToolEvent(
               messageId,
               id: id,
@@ -2489,7 +2770,11 @@ class ChatActions {
   }
 
   void _publishAssistantParts(stream_ctrl.StreamingState state) {
-    if (!state.ctx.streamOutput || state.finishHandled) return;
+    if (!_canPublishAttempt(state.ctx.attempt) ||
+        !state.ctx.streamOutput ||
+        state.finishHandled) {
+      return;
+    }
     streamController.streamingContentNotifier.getNotifier(state.messageId);
     streamController.schedulePartsUpdate(
       state.messageId,
@@ -2507,7 +2792,7 @@ class ChatActions {
     String chunkContent,
   ) async {
     // Fast bail-out: if _finishStreaming already ran, don't touch state at all.
-    if (state.finishHandled) return;
+    if (!_canPublishAttempt(state.ctx.attempt) || state.finishHandled) return;
 
     final messageId = state.messageId;
     final conversationId = state.conversationId;
@@ -2519,6 +2804,7 @@ class ChatActions {
       await _finishReasoningOnContent(state);
     }
 
+    if (!_canPublishAttempt(state.ctx.attempt) || state.finishHandled) return;
     _scheduleBackgroundGenerationUpdate(state);
 
     // Re-check before scheduling timer — timer creation after _finishStreaming
@@ -2566,6 +2852,10 @@ class ChatActions {
 
   /// Handle stream finish (isDone == true).
   Future<void> _handleStreamFinish(stream_ctrl.StreamingState state) async {
+    final attempt = state.ctx.attempt;
+    if (!_canPublishAttempt(attempt) || attempt.isFinished) {
+      return;
+    }
     final messageId = state.messageId;
     final conversationId = state.conversationId;
     if (!state.ctx.streamOutput) {
@@ -2604,7 +2894,11 @@ class ChatActions {
     final finishFuture = _finishStreaming(state);
     _finishStreamingFutures[messageId] = finishFuture;
     await finishFuture;
-    _finishStreamingFutures.remove(messageId);
+    if (identical(_finishStreamingFutures[messageId], finishFuture)) {
+      _finishStreamingFutures.remove(messageId);
+    }
+
+    if (!_canPublishAttempt(attempt)) return;
 
     // Notify for background notification if needed
     if (!state.finishHandled) {
@@ -2623,6 +2917,10 @@ class ChatActions {
     stream_ctrl.StreamingState state, {
     bool generateTitle = true,
   }) async {
+    final attempt = state.ctx.attempt;
+    if (!_canPublishAttempt(attempt) || attempt.isFinished) {
+      return;
+    }
     state.finishRequestTiming();
     final messageId = state.messageId;
     final conversationId = state.conversationId;
@@ -2634,6 +2932,9 @@ class ChatActions {
     // whole remaining backlog at once, which a bottom-pinned timeline shows as
     // a single large jump just before the reply ends.
     await streamController.drainSmoothStream(messageId);
+    if (!_canPublishAttempt(attempt) || attempt.isFinished) {
+      return;
+    }
 
     // Clean up stream throttle timer and flush final content
     streamController.cleanupTimers(messageId);
@@ -2641,7 +2942,7 @@ class ChatActions {
     final shouldGenerateTitle =
         generateTitle && state.ctx.generateTitleOnFinish && !state.titleQueued;
     if (state.finishHandled) {
-      if (shouldGenerateTitle) {
+      if (shouldGenerateTitle && _canPublishAttempt(attempt)) {
         state.titleQueued = true;
         onMaybeGenerateTitle?.call(conversationId);
       }
@@ -2671,6 +2972,9 @@ class ChatActions {
     final assistantParts = await _sanitizeAssistantImageParts(
       _assistantPartsForState(state),
     );
+    if (!_canPublishAttempt(attempt) || attempt.isFinished) {
+      return;
+    }
     streamController.streamingContentNotifier.updateContent(
       messageId,
       processedContent,
@@ -2712,13 +3016,20 @@ class ChatActions {
       );
     }
     try {
-      await _finalizeStreamingCheckpoint(
+      final committed = await _finalizeStreamingCheckpoint(
         finalizedMessage,
+        attempt: attempt,
         terminalState: GenerationRunState.completed,
       );
+      if (!committed || !_canPublishAttempt(attempt)) {
+        return;
+      }
       state.terminalPersisted = true;
 
       await onAssistantMessageFinished?.call(finalizedMessage);
+      if (!_canPublishAttempt(attempt)) {
+        return;
+      }
 
       if (shouldGenerateTitle) {
         onMaybeGenerateTitle?.call(conversationId);
@@ -2741,16 +3052,21 @@ class ChatActions {
           ).visibleContent,
         );
       }
-      // UI lifecycle cleanup is independent from terminal persistence success.
-      if (chatController.publishTerminalMessage(finalizedMessage)) {
-        onMessagesChanged?.call();
+      if (_canPublishAttempt(attempt)) {
+        // UI lifecycle cleanup is independent from terminal persistence success.
+        if (chatController.publishTerminalMessage(finalizedMessage)) {
+          onMessagesChanged?.call();
+        }
+        streamController.removeStreamingNotifier(messageId);
+        _setConversationLoading(conversationId, false);
+        // Terminal widgets are usually taller than the streaming ones; pin
+        // once more after isGenerating becomes false so layout-phase follow
+        // does not miss that height change.
+        onStreamFinished?.call(conversationId);
       }
-      streamController.removeStreamingNotifier(messageId);
-      _setConversationLoading(conversationId, false);
-      // Terminal widgets are usually taller than the streaming ones; pin
-      // once more after isGenerating becomes false so layout-phase follow
-      // does not miss that height change.
-      onStreamFinished?.call(conversationId);
+      if (state.terminalPersisted) {
+        attempt.finish();
+      }
     }
   }
 
@@ -2759,13 +3075,18 @@ class ChatActions {
     dynamic e,
     stream_ctrl.StreamingState state,
   ) async {
-    if (state.terminalPersisted) return;
+    final attempt = state.ctx.attempt;
+    if (state.terminalPersisted ||
+        !_canPublishAttempt(attempt) ||
+        attempt.isFinished) {
+      return;
+    }
     _setRetryStatus(state, null);
     final messageId = state.messageId;
     final conversationId = state.conversationId;
     if (isCancelledGenerationError(
       e,
-      requestCancelled: isStopping(conversationId),
+      requestCancelled: attempt.isCancelled || isStopping(conversationId),
     )) {
       return;
     }
@@ -2795,6 +3116,9 @@ class ChatActions {
         errorText: errorText,
       ),
     );
+    if (!_canPublishAttempt(attempt) || attempt.isFinished) {
+      return;
+    }
     if (oauthFailure) {
       final providerId =
           e.providerId ?? _streamingMessageSnapshot(state).providerId;
@@ -2808,35 +3132,43 @@ class ChatActions {
       isStreaming: false,
     );
     try {
-      await _finalizeStreamingCheckpoint(
+      final committed = await _finalizeStreamingCheckpoint(
         errorMessage,
+        attempt: attempt,
         terminalState: GenerationRunState.failed,
         errorCode: oauthFailure ? 'oauth_login_required' : 'generation_failed',
       );
-      state.terminalPersisted = true;
+      state.terminalPersisted = committed;
     } finally {
       await _background.finish(
         _backgroundTaskId(state.ctx),
         BackgroundTaskOutcome.failed,
         resultPersisted: state.terminalPersisted,
       );
-      _clearGenerationRuntimeState(errorMessage);
-      if (chatController.publishTerminalMessage(errorMessage)) {
-        onMessagesChanged?.call();
+      _clearGenerationRuntimeState(errorMessage, attempt);
+      if (_canPublishAttempt(attempt)) {
+        if (chatController.publishTerminalMessage(errorMessage)) {
+          onMessagesChanged?.call();
+        }
+        streamController.removeStreamingNotifier(messageId);
+        _setConversationLoading(conversationId, false);
+        // The sequential stream drain owns source cancellation after this error
+        // handler returns. Re-entering its barrier cancel here would wait on this
+        // handler itself and prevent the UI error callback below from firing.
+        _conversationStreams.remove(conversationId);
+        if (!oauthFailure) onStreamError?.call(errorText);
+        onStreamFinished?.call(conversationId);
       }
-      streamController.removeStreamingNotifier(messageId);
-      _setConversationLoading(conversationId, false);
-      // The sequential stream drain owns source cancellation after this error
-      // handler returns. Re-entering its barrier cancel here would wait on this
-      // handler itself and prevent the UI error callback below from firing.
-      _conversationStreams.remove(conversationId);
-      if (!oauthFailure) onStreamError?.call(errorText);
-      onStreamFinished?.call(conversationId);
+      attempt.finish();
     }
   }
 
   /// Handle stream done callback.
   Future<void> _handleStreamDone(stream_ctrl.StreamingState state) async {
+    final attempt = state.ctx.attempt;
+    if (!_canPublishAttempt(attempt)) {
+      return;
+    }
     state.finishRequestTiming();
     final conversationId = state.conversationId;
     final messageId = state.messageId;
@@ -2851,6 +3183,9 @@ class ChatActions {
     // Same reason as in _finishStreaming: drain the smoothing buffer through
     // its own tick instead of dumping it into one frame.
     await streamController.drainSmoothStream(messageId);
+    if (!_canPublishAttempt(attempt)) {
+      return;
+    }
 
     streamController.cleanupTimers(messageId);
 
@@ -2861,11 +3196,15 @@ class ChatActions {
     final inFlight = _finishStreamingFutures[messageId];
     if (inFlight != null) {
       await inFlight;
-    } else if (_loadingConversationIds.contains(conversationId)) {
+    } else if (_loadingConversationIds.contains(conversationId) &&
+        !attempt.isFinished) {
       await _finishStreaming(
         state,
         generateTitle: state.ctx.generateTitleOnFinish,
       );
+    }
+    if (!_canPublishAttempt(attempt)) {
+      return;
     }
     // Idempotent: ensure notifier is removed even if _finishStreaming was skipped
     streamController.removeStreamingNotifier(messageId);

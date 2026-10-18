@@ -13,6 +13,7 @@ import '../../../core/providers/backup_reminder_provider.dart';
 import '../../../core/models/chat_item.dart';
 import '../../../core/providers/user_provider.dart';
 import '../../settings/pages/settings_page.dart';
+import '../../study/pages/study_projects_page.dart';
 import '../../translate/pages/translate_page.dart';
 import '../../backup/pages/backup_page.dart';
 import '../../../core/providers/assistant_provider.dart';
@@ -2895,6 +2896,31 @@ class _SideDrawerState extends State<SideDrawer> with TickerProviderStateMixin {
                                                   builder: (_) =>
                                                       const TranslatePage(),
                                                 ),
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(width: 4),
+                                      // 学习项目按钮（圆形，无水波纹）
+                                      SizedBox(
+                                        width: 45,
+                                        height: 45,
+                                        child: Center(
+                                          child: IosIconButton(
+                                            size: 22,
+                                            color: textBase,
+                                            icon: Lucide.BookOpen,
+                                            tooltip: AppLocalizations.of(
+                                              context,
+                                            )!.studyProjectsTitle,
+                                            semanticLabel: AppLocalizations.of(
+                                              context,
+                                            )!.studyProjectsTitle,
+                                            padding: const EdgeInsets.all(10),
+                                            onTap: () {
+                                              unawaited(
+                                                openStudyProjectsPage(context),
                                               );
                                             },
                                           ),

@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:path/path.dart' as p;
+
 /// A page span parsed from a file or directory name, such as `92-206`.
 class StudyPageRange {
   const StudyPageRange(this.start, this.end);
@@ -103,7 +105,7 @@ const _ignoredDirectories = {
 /// page-range slices. Two slices may share one PDF when the filename contains
 /// both ranges.
 StudyCorpus scanStudyCorpus(String rootPath) {
-  final root = Directory(rootPath);
+  final root = Directory(p.normalize(p.absolute(rootPath)));
   if (!root.existsSync()) {
     throw ArgumentError('Study corpus path does not exist: $rootPath');
   }
@@ -163,43 +165,54 @@ List<StudyMaterial> _scanCollection({
   if (!directory.existsSync()) return const [];
   final pdfs = _pdfs(directory);
   final markdowns = _markdownBuckets(directory);
-  final usedPdfs = <String>{};
+  final usedPdfRanges = <String, Set<StudyPageRange>>{};
   final materials = <StudyMaterial>[];
 
   final slices = markdowns.where((item) => item.range != null).toList()
-    ..sort((a, b) => a.range!.start.compareTo(b.range!.start));
+    ..sort((a, b) {
+      final byStart = a.range!.start.compareTo(b.range!.start);
+      if (byStart != 0) return byStart;
+      final byEnd = a.range!.end.compareTo(b.range!.end);
+      return byEnd != 0 ? byEnd : a.path.compareTo(b.path);
+    });
   for (final markdown in slices) {
-    final pdf = _matchPdf(markdown.range!, pdfs);
-    if (pdf != null) usedPdfs.add(pdf.path);
+    final range = markdown.range!;
+    final pdf = _matchPdf(markdown, pdfs);
+    if (pdf != null) {
+      usedPdfRanges.putIfAbsent(pdf.path, () => {}).add(range);
+    }
     materials.add(
       _material(
         kind: kind,
         scope: StudyMaterialScope.slice,
-        title: sliceTitle(markdown.range!),
-        range: markdown.range,
+        title: sliceTitle(range),
+        range: range,
         pdf: pdf,
         markdownPath: markdown.path,
       ),
     );
   }
 
-  final slicePdfs =
-      pdfs
-          .where((pdf) => pdf.ranges.isNotEmpty && !usedPdfs.contains(pdf.path))
-          .toList()
-        ..sort((a, b) => a.ranges.first.start.compareTo(b.ranges.first.start));
+  final slicePdfs = pdfs.where((pdf) => pdf.ranges.isNotEmpty).toList()
+    ..sort((a, b) {
+      final byStart = a.ranges.first.start.compareTo(b.ranges.first.start);
+      return byStart != 0 ? byStart : a.path.compareTo(b.path);
+    });
   for (final pdf in slicePdfs) {
-    final range = pdf.ranges.length == 1 ? pdf.ranges.single : null;
-    materials.add(
-      _material(
-        kind: kind,
-        scope: StudyMaterialScope.slice,
-        title: range == null ? _stem(pdf.path) : sliceTitle(range),
-        range: range,
-        pdf: pdf,
-        markdownPath: null,
-      ),
-    );
+    // Matching one parse must not consume other ranges in a combined PDF.
+    for (final range in pdf.ranges) {
+      if (usedPdfRanges[pdf.path]?.contains(range) ?? false) continue;
+      materials.add(
+        _material(
+          kind: kind,
+          scope: StudyMaterialScope.slice,
+          title: sliceTitle(range),
+          range: range,
+          pdf: pdf,
+          markdownPath: null,
+        ),
+      );
+    }
   }
 
   for (final pdf in pdfs.where((pdf) => pdf.ranges.isEmpty)) {
@@ -241,10 +254,11 @@ class _PdfFile {
 }
 
 class _MarkdownFile {
-  const _MarkdownFile(this.path, this.range);
+  const _MarkdownFile(this.path, this.range, this.sourceName);
 
   final String path;
   final StudyPageRange? range;
+  final String sourceName;
 }
 
 List<_PdfFile> _pdfs(Directory collection) {
@@ -275,14 +289,14 @@ List<_MarkdownFile> _markdownBuckets(Directory collection) {
     if (entity is! Directory) continue;
     final markdown = _primaryMarkdown(entity);
     if (markdown == null) continue;
-    final ranges = _pageRanges(_baseName(entity.path));
-    files.add(
-      _MarkdownFile(
-        markdown.absolute.path,
-        ranges.isEmpty ? null : ranges.first,
-      ),
-    );
+    final bucketName = _baseName(entity.path);
+    final ranges = _pageRanges(bucketName);
+    final sourceName = _sourceName(bucketName);
+    for (final range in ranges.isEmpty ? <StudyPageRange?>[null] : ranges) {
+      files.add(_MarkdownFile(markdown.absolute.path, range, sourceName));
+    }
   }
+  files.sort((a, b) => a.path.compareTo(b.path));
   return files;
 }
 
@@ -301,16 +315,31 @@ File? _primaryMarkdown(Directory bucket) {
   return markdowns.first;
 }
 
-_PdfFile? _matchPdf(StudyPageRange range, List<_PdfFile> pdfs) {
-  final matches = pdfs.where((pdf) => pdf.ranges.contains(range)).toList();
+_PdfFile? _matchPdf(_MarkdownFile markdown, List<_PdfFile> pdfs) {
+  // A shared page span or an empty source stem is not evidence of identity.
+  if (markdown.sourceName.isEmpty) return null;
+  final matches =
+      pdfs
+          .where(
+            (pdf) =>
+                pdf.ranges.contains(markdown.range) &&
+                _sourceName(_stem(pdf.path)) == markdown.sourceName,
+          )
+          .toList()
+        ..sort((a, b) => a.ranges.length.compareTo(b.ranges.length));
   if (matches.isEmpty) return null;
-  matches.sort((a, b) {
-    final bySpecificity = a.ranges.length.compareTo(b.ranges.length);
-    if (bySpecificity != 0) return bySpecificity;
-    return a.path.compareTo(b.path);
-  });
+  final mostSpecific = matches.first.ranges.length;
+  if (matches.where((pdf) => pdf.ranges.length == mostSpecific).length != 1) {
+    return null;
+  }
   return matches.first;
 }
+
+String _sourceName(String name) => name
+    .replaceAll(_rangePattern, '')
+    .replaceAll(RegExp(r'[\s_–—-]+$'), '')
+    .trim()
+    .toLowerCase();
 
 StudyMaterial _material({
   required StudyMaterialKind kind,
@@ -362,11 +391,19 @@ void _assignIds(StudyMaterialKind kind, List<StudyMaterial> materials) {
   }
 }
 
+/// Page ranges written in a file name, e.g. `当代教育心理学_207-359.pdf`.
+List<StudyPageRange> studyPageRangesInName(String name) => _pageRanges(name);
+
 List<StudyPageRange> _pageRanges(String name) {
-  return [
-    for (final match in _rangePattern.allMatches(name))
-      StudyPageRange(int.parse(match.group(1)!), int.parse(match.group(2)!)),
-  ];
+  final ranges = <StudyPageRange>[];
+  for (final match in _rangePattern.allMatches(name)) {
+    final start = int.parse(match.group(1)!);
+    final end = int.parse(match.group(2)!);
+    if (start > 0 && start <= end) {
+      ranges.add(StudyPageRange(start, end));
+    }
+  }
+  return ranges;
 }
 
 File? _findBundle(Directory root) {

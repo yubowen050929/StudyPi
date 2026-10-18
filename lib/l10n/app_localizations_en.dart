@@ -13072,4 +13072,372 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get mcpOAuthExchangingToken => 'Completing sign-in…';
+
+  @override
+  String get studyProjectsTitle => 'Study Projects';
+
+  @override
+  String get studyProjectCreate => 'New Project';
+
+  @override
+  String get studyProjectEdit => 'Edit Project';
+
+  @override
+  String get studyProjectDelete => 'Delete Project';
+
+  @override
+  String studyProjectDeleteMessage(String title) {
+    return 'Delete project \"$title\"? Its materials and notes will be removed, while bound conversations stay as ordinary chats.';
+  }
+
+  @override
+  String get studyProjectsEmptyTitle => 'No study projects yet';
+
+  @override
+  String get studyProjectsEmptyDescription =>
+      'Materials, discussions, and notes stay together in a project, and citations link back to the original source.';
+
+  @override
+  String get studyProjectsSelectHint =>
+      'Select a study project on the left to view materials, discussions, and notes.';
+
+  @override
+  String get studyProjectTitleLabel => 'Project Title';
+
+  @override
+  String get studyProjectTitleHint => 'e.g., Cognitive Load Theory';
+
+  @override
+  String get studyProjectGoalLabel => 'Learning Goal (optional)';
+
+  @override
+  String get studyProjectGoalHint =>
+      'What problem, chapter, or question are you working on?';
+
+  @override
+  String get studyProjectGoalEmpty => 'No learning goal set';
+
+  @override
+  String get studyProjectModeLabel => 'Study Mode';
+
+  @override
+  String get studyModeExplain => 'Direct Explanation';
+
+  @override
+  String get studyModeGuidedPractice => 'Guided Practice';
+
+  @override
+  String studyProjectUpdatedAt(String date) {
+    return 'Updated $date';
+  }
+
+  @override
+  String studyProjectMaterialCount(int count) {
+    return '$count materials';
+  }
+
+  @override
+  String get studyProjectSave => 'Save';
+
+  @override
+  String get studyProjectCancel => 'Cancel';
+
+  @override
+  String get studyProjectConfirmDelete => 'Delete';
+
+  @override
+  String get studyProjectMoreActions => 'More actions';
+
+  @override
+  String get studyMaterialsSection => 'Materials';
+
+  @override
+  String get studyMaterialsImport => 'Import';
+
+  @override
+  String get studyMaterialsImporting => 'Importing materials…';
+
+  @override
+  String get studyMaterialsEmpty =>
+      'No materials imported yet. Import PDF, Markdown, or text files.';
+
+  @override
+  String studyMaterialsImportFailed(String error) {
+    return 'Failed to import materials: $error';
+  }
+
+  @override
+  String get studyDocStatusReady => 'Ready';
+
+  @override
+  String get studyDocStatusScannedNeedsOcr => 'Scanned PDF, parse needed';
+
+  @override
+  String get studyDocStatusUnreadable => 'Unreadable';
+
+  @override
+  String get studyDocStatusPendingSourceLink =>
+      'Source PDF pending confirmation';
+
+  @override
+  String get studyDocScannedHint =>
+      'Parse with MinerU and attach the Markdown parse to read and cite.';
+
+  @override
+  String studyDocPhysicalPages(int count) {
+    return '$count pages';
+  }
+
+  @override
+  String studyDocCorpusPages(String range) {
+    return 'Textbook pp. $range';
+  }
+
+  @override
+  String get studyDocIndexed => 'Indexed';
+
+  @override
+  String get studyDocNotIndexed => 'Not indexed';
+
+  @override
+  String get studyDocIndexing => 'Indexing';
+
+  @override
+  String get studyDocActionRead => 'Read';
+
+  @override
+  String get studyDocActionBuildIndex => 'Build Index';
+
+  @override
+  String get studyDocActionRebuildIndex => 'Rebuild Index';
+
+  @override
+  String get studyDocActionAttachParse => 'Attach Parse';
+
+  @override
+  String get studyDocActionConfirmSource => 'Confirm Source PDF';
+
+  @override
+  String get studyDocActionDelete => 'Delete';
+
+  @override
+  String get studyDocDeleteTitle => 'Delete Material';
+
+  @override
+  String studyDocDeleteMessage(String title) {
+    return 'Delete \"$title\" from this project?';
+  }
+
+  @override
+  String get studyDocConfirmSourceTitle => 'Confirm Source PDF';
+
+  @override
+  String get studyDocAttachMarkdownTitle => 'Select Parsed Markdown (.md)';
+
+  @override
+  String get studyDocAttachContentListTitle =>
+      'Select Content List (.json, optional)';
+
+  @override
+  String studyDocIndexFailed(String error) {
+    return 'Failed to build index: $error';
+  }
+
+  @override
+  String get studyDiscussionsSection => 'Discussions';
+
+  @override
+  String get studyDiscussionsStart => 'Start Discussion';
+
+  @override
+  String get studyDiscussionsEmpty => 'No bound discussions yet.';
+
+  @override
+  String get studyDiscussionsCaption =>
+      'In project discussions, replies cite source materials and indicate whether each citation is verified.';
+
+  @override
+  String get studyDiscussionsUnnamed => 'Untitled discussion';
+
+  @override
+  String get studyNotesSection => 'Notes';
+
+  @override
+  String get studyNotesEmpty =>
+      'No project notes yet. Save citations from replies or add notes as you study.';
+
+  @override
+  String get studyNoteEvidenceGrounded => 'Grounded in source';
+
+  @override
+  String get studyNoteEvidenceInsufficient => 'Insufficient evidence';
+
+  @override
+  String studyNoteAnchorsCount(int count) {
+    return '$count citations';
+  }
+
+  @override
+  String get studyNoteDetailTitle => 'Note Details';
+
+  @override
+  String get studyNoteAnchorsHeading => 'Source Anchors';
+
+  @override
+  String get studyNoteNoAnchors => 'No source anchors attached.';
+
+  @override
+  String get studyNoteViewSource => 'View Source';
+
+  @override
+  String get studyNoteDeleteTitle => 'Delete Note';
+
+  @override
+  String studyNoteDeleteMessage(String title) {
+    return 'Delete note \"$title\"?';
+  }
+
+  @override
+  String get studyReaderSections => 'Sections';
+
+  @override
+  String studyReaderSectionPdfPages(String range) {
+    return 'PDF pp. $range';
+  }
+
+  @override
+  String studyReaderSectionSinglePdfPage(int page) {
+    return 'PDF p. $page';
+  }
+
+  @override
+  String get studyReaderPrevSection => 'Previous section';
+
+  @override
+  String get studyReaderNextSection => 'Next section';
+
+  @override
+  String get studyReaderHighlightedQuote => 'Cited Passage';
+
+  @override
+  String get studyReaderNoIndexNotice => 'Section index not built yet';
+
+  @override
+  String get studyReaderBuildIndex => 'Build Index';
+
+  @override
+  String get studyReaderEmptyText => 'No readable text in this document.';
+
+  @override
+  String get studyReaderOpenOriginal => 'Open Original File';
+
+  @override
+  String studyReaderOpenOriginalFailed(String error) {
+    return 'Unable to open original file: $error';
+  }
+
+  @override
+  String get studyCitationSheetTitle => 'Citation Check';
+
+  @override
+  String get studyCitationUnavailable =>
+      'Citation details are currently unavailable';
+
+  @override
+  String get studyCitationChecking => 'Checking citation…';
+
+  @override
+  String get studyCitationStatusGrounded => 'Verified in source';
+
+  @override
+  String get studyCitationStatusLocatedNoQuote =>
+      'Located, no source quote attached';
+
+  @override
+  String get studyCitationStatusUnverified => 'Unable to verify';
+
+  @override
+  String get studyCitationMaterialLabel => 'Material';
+
+  @override
+  String get studyCitationSectionLabel => 'Section';
+
+  @override
+  String studyCitationPdfPage(int page) {
+    return 'PDF p. $page';
+  }
+
+  @override
+  String studyCitationBookPage(int page) {
+    return 'Textbook p. $page';
+  }
+
+  @override
+  String get studyCitationSaveAsNote => 'Save as Note';
+
+  @override
+  String get studyCitationSaveNoteTitle => 'Save as Note';
+
+  @override
+  String get studyCitationNoteTitleLabel => 'Title';
+
+  @override
+  String get studyCitationNoteBodyLabel => 'Note Content';
+
+  @override
+  String get studyCitationNoteBodyHint =>
+      'Write your understanding, questions, or takeaways…';
+
+  @override
+  String get studyCitationNoteSavedGrounded => 'Saved to project notes';
+
+  @override
+  String get studyCitationNoteSavedInsufficient =>
+      'Saved, but evidence is insufficient';
+
+  @override
+  String get studyCitationIssueMalformed => 'Malformed citation marker';
+
+  @override
+  String get studyCitationIssueUnknownDocument =>
+      'This material is not in the project';
+
+  @override
+  String get studyCitationIssueDocumentNotReady =>
+      'Material is not readable yet';
+
+  @override
+  String get studyCitationIssueSourceVersionMismatch =>
+      'Source file has changed';
+
+  @override
+  String get studyCitationIssueMissingLocator =>
+      'No section, page, or quote locator provided';
+
+  @override
+  String get studyCitationIssueUnknownSection => 'Section not found in index';
+
+  @override
+  String get studyCitationIssueSectionUnavailable =>
+      'Section index is unavailable or outdated; please rebuild the index';
+
+  @override
+  String get studyCitationIssuePhysicalPageOutOfRange =>
+      'Exceeds PDF page count';
+
+  @override
+  String get studyCitationIssuePhysicalPageOutsideSection =>
+      'Page number does not match the section containing the quote';
+
+  @override
+  String get studyCitationIssueCorpusPageOutOfRange =>
+      'Outside textbook page range';
+
+  @override
+  String get studyCitationIssueQuoteTooShort =>
+      'Quote is too short to serve as evidence';
+
+  @override
+  String get studyCitationIssueQuoteNotFound =>
+      'Quote not found in source text';
 }

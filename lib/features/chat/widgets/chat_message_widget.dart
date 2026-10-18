@@ -69,6 +69,10 @@ import 'workspace_tool_detail.dart';
 import 'workspace_tool_ui.dart';
 import '../../../theme/app_font_weights.dart';
 import '../../home/controllers/streaming_content_notifier.dart';
+import '../../study/providers/study_project_provider.dart';
+import '../../study/utils/study_citation_markup.dart';
+import '../../study/widgets/study_citation_sheet.dart';
+import '../../../core/services/study/study_citation_resolver.dart';
 
 final RegExp _urlSchemeRe = RegExp(r'^[a-zA-Z][a-zA-Z0-9+.-]*:');
 
@@ -2518,20 +2522,35 @@ class _ChatMessageWidgetState extends State<ChatMessageWidget> {
         defaultTargetPlatform == TargetPlatform.linux;
     final double baseAssistant = isDesktop ? 14.0 : 15.7;
 
+    final study = _studyCitations(context, visualContent);
     Widget assistantContent;
     if (enableAssistantMarkdown) {
       assistantContent = MarkdownWithCodeHighlight(
-        text: visualContent,
-        onCitationTap: (id) => _handleCitationTap(id),
+        text: study?.markup.markdown ?? visualContent,
+        onCitationTap: (id) =>
+            study != null && StudyCitationMarkup.isStudyId(id)
+            ? _openStudyCitation(study, id)
+            : _handleCitationTap(id),
         citationIndexResolver: (id) =>
+            study?.markup.labelFor(id) ??
             _resolveCitationIndex(id, citationIndexLookup),
+        citationNeedsReview: study == null
+            ? null
+            : (id) {
+                final citation = study.markup.citationFor(id);
+                final resolver = study.resolver;
+                if (citation == null || resolver == null) return false;
+                return !resolver.resolve(citation).isGroundedEvidence;
+              },
         baseStyle: TextStyle(fontSize: baseAssistant, height: 1.5),
         streaming: widget.message.isStreaming,
         conversationId: widget.message.conversationId,
       );
     } else {
       assistantContent = Text(
-        visualContent,
+        study == null
+            ? visualContent
+            : StudyCitationSyntax.stripMarkers(visualContent),
         style: TextStyle(
           fontSize: baseAssistant,
           height: 1.5,
@@ -3593,6 +3612,64 @@ class _ChatMessageWidgetState extends State<ChatMessageWidget> {
     if (direct != null) return direct;
     final asIndex = int.tryParse(key);
     return asIndex == null ? null : citationIndexLookup[asIndex.toString()];
+  }
+
+  /// Citation capsules for a text block of a reply in a conversation bound
+  /// to a study project. Each block carries its own markup: one reply can be
+  /// split into several blocks by tool calls or paragraph bubbles.
+  ({
+    String projectId,
+    StudyCitationMarkup markup,
+    StudyCitationResolver? resolver,
+  })?
+  _studyCitations(BuildContext context, String text) {
+    final provider = StudyProjectProvider.maybeOf(context);
+    if (provider == null) return null;
+    final conversationId = widget.message.conversationId;
+    final projectId = context.select<StudyProjectProvider, String?>(
+      (p) => p.projectForConversation(conversationId)?.id,
+    );
+    if (projectId == null) return null;
+    final markup = StudyCitationMarkup.rewrite(
+      text,
+      streaming: widget.message.isStreaming,
+    );
+    if (markup == null) return null;
+    final resolver = context
+        .select<StudyProjectProvider, StudyCitationResolver?>(
+          (p) => p.cachedResolver(projectId),
+        );
+    if (resolver == null) provider.resolverFor(projectId);
+    return (projectId: projectId, markup: markup, resolver: resolver);
+  }
+
+  Future<void> _openStudyCitation(
+    ({
+      String projectId,
+      StudyCitationMarkup markup,
+      StudyCitationResolver? resolver,
+    })
+    study,
+    String id,
+  ) async {
+    final provider = StudyProjectProvider.maybeOf(context);
+    final citation = study.markup.citationFor(id);
+    if (provider == null || citation == null) return;
+    StudyResolvedCitation? resolved;
+    try {
+      resolved = (await provider.loadResolver(
+        study.projectId,
+      )).resolve(citation);
+    } catch (_) {
+      resolved = null;
+    }
+    if (!mounted) return;
+    await showStudyCitationDetails(
+      context,
+      projectId: study.projectId,
+      resolved: resolved,
+      conversationId: widget.message.conversationId,
+    );
   }
 
   // Try resolve citation id -> url from the latest search_web tool results of this assistant message

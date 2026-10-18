@@ -19,15 +19,17 @@ class DesktopNavRail extends StatelessWidget {
     required this.onTapChat,
     required this.onTapGlobalSearch,
     required this.onTapTranslate,
+    required this.onTapStudy,
     required this.onTapStorage,
     required this.onTapSettings,
   });
 
-  final int activeIndex; // 0=Chat, 1=Translate, 2=Storage, 3=Settings
+  final int activeIndex; // 0=Chat, 1=Translate, 2=Storage, 3=Settings, 4=Study
   final bool globalSearchActive;
   final VoidCallback onTapChat;
   final VoidCallback onTapGlobalSearch;
   final VoidCallback onTapTranslate;
+  final VoidCallback onTapStudy;
   final VoidCallback onTapStorage;
   final VoidCallback onTapSettings;
 
@@ -44,6 +46,7 @@ class DesktopNavRail extends StatelessWidget {
     final isTranslateActive = activeIndex == 1;
     final isStorageActive = activeIndex == 2;
     final isSettingsActive = activeIndex == 3;
+    final isStudyActive = activeIndex == 4;
 
     return Container(
       width: width,
@@ -78,6 +81,15 @@ class DesktopNavRail extends StatelessWidget {
             size: 40,
             iconSize: 18,
             iconColor: isTranslateActive ? cs.primary : null,
+          ),
+          const SizedBox(height: 8),
+          _CircleAction(
+            tooltip: l10n.studyProjectsTitle,
+            icon: lucide.Lucide.BookOpen,
+            onTap: onTapStudy,
+            size: 40,
+            iconSize: 18,
+            iconColor: isStudyActive ? cs.primary : null,
           ),
           const SizedBox(height: 8),
           _CircleAction(

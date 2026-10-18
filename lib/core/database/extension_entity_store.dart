@@ -43,6 +43,18 @@ class ExtensionEntityStore {
     return [for (final row in rows) _fromRow(row)];
   }
 
+  Future<List<ExtensionEntity>> listByOwner(String kind, String ownerId) async {
+    final rows =
+        await (_db.select(_db.extensionEntityRows)
+              ..where((t) => t.kind.equals(kind) & t.ownerId.equals(ownerId))
+              ..orderBy([
+                (t) => OrderingTerm.asc(t.sortOrder),
+                (t) => OrderingTerm.asc(t.id),
+              ]))
+            .get();
+    return [for (final row in rows) _fromRow(row)];
+  }
+
   Future<ExtensionEntity?> get(String kind, String id) async {
     final row = await (_db.select(
       _db.extensionEntityRows,

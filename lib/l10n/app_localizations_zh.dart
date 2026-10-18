@@ -12478,6 +12478,351 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get mcpOAuthExchangingToken => '正在完成登录…';
+
+  @override
+  String get studyProjectsTitle => '学习项目';
+
+  @override
+  String get studyProjectCreate => '新建项目';
+
+  @override
+  String get studyProjectEdit => '编辑项目';
+
+  @override
+  String get studyProjectDelete => '删除项目';
+
+  @override
+  String studyProjectDeleteMessage(String title) {
+    return '确定删除项目「$title」？项目中的材料和笔记会一并删除，已关联的讨论将保留为普通对话。';
+  }
+
+  @override
+  String get studyProjectsEmptyTitle => '还没有学习项目';
+
+  @override
+  String get studyProjectsEmptyDescription => '材料、讨论、笔记都在项目里，引用可回到原文';
+
+  @override
+  String get studyProjectsSelectHint => '从左侧选择一个学习项目，查看材料、讨论与笔记。';
+
+  @override
+  String get studyProjectTitleLabel => '项目名称';
+
+  @override
+  String get studyProjectTitleHint => '例如：认知负荷理论';
+
+  @override
+  String get studyProjectGoalLabel => '学习目标（可选）';
+
+  @override
+  String get studyProjectGoalHint => '正在解决的问题、章节或研究主题';
+
+  @override
+  String get studyProjectGoalEmpty => '未设置学习目标';
+
+  @override
+  String get studyProjectModeLabel => '学习方式';
+
+  @override
+  String get studyModeExplain => '直接讲解';
+
+  @override
+  String get studyModeGuidedPractice => '引导练习';
+
+  @override
+  String studyProjectUpdatedAt(String date) {
+    return '更新于 $date';
+  }
+
+  @override
+  String studyProjectMaterialCount(int count) {
+    return '$count 份材料';
+  }
+
+  @override
+  String get studyProjectSave => '保存';
+
+  @override
+  String get studyProjectCancel => '取消';
+
+  @override
+  String get studyProjectConfirmDelete => '删除';
+
+  @override
+  String get studyProjectMoreActions => '更多操作';
+
+  @override
+  String get studyMaterialsSection => '材料';
+
+  @override
+  String get studyMaterialsImport => '导入';
+
+  @override
+  String get studyMaterialsImporting => '正在导入材料…';
+
+  @override
+  String get studyMaterialsEmpty => '还没有导入材料，可导入 PDF、Markdown 或文本文件。';
+
+  @override
+  String studyMaterialsImportFailed(String error) {
+    return '导入材料失败：$error';
+  }
+
+  @override
+  String get studyDocStatusReady => '可用';
+
+  @override
+  String get studyDocStatusScannedNeedsOcr => '扫描件，需要解析稿';
+
+  @override
+  String get studyDocStatusUnreadable => '无法读取';
+
+  @override
+  String get studyDocStatusPendingSourceLink => '待确认原文';
+
+  @override
+  String get studyDocScannedHint => '用 MinerU 解析后添加解析稿即可阅读与引用';
+
+  @override
+  String studyDocPhysicalPages(int count) {
+    return '共 $count 页';
+  }
+
+  @override
+  String studyDocCorpusPages(String range) {
+    return '教材 $range 页';
+  }
+
+  @override
+  String get studyDocIndexed => '已建立索引';
+
+  @override
+  String get studyDocNotIndexed => '未建立索引';
+
+  @override
+  String get studyDocIndexing => '正在建立索引';
+
+  @override
+  String get studyDocActionRead => '阅读';
+
+  @override
+  String get studyDocActionBuildIndex => '建立索引';
+
+  @override
+  String get studyDocActionRebuildIndex => '重建索引';
+
+  @override
+  String get studyDocActionAttachParse => '添加解析稿';
+
+  @override
+  String get studyDocActionConfirmSource => '确认原文';
+
+  @override
+  String get studyDocActionDelete => '删除';
+
+  @override
+  String get studyDocDeleteTitle => '删除材料';
+
+  @override
+  String studyDocDeleteMessage(String title) {
+    return '确定从项目中删除「$title」？';
+  }
+
+  @override
+  String get studyDocConfirmSourceTitle => '确认原文 PDF';
+
+  @override
+  String get studyDocAttachMarkdownTitle => '选择解析稿（.md）';
+
+  @override
+  String get studyDocAttachContentListTitle => '选择页码映射（.json，可选）';
+
+  @override
+  String studyDocIndexFailed(String error) {
+    return '建立索引失败：$error';
+  }
+
+  @override
+  String get studyDiscussionsSection => '讨论';
+
+  @override
+  String get studyDiscussionsStart => '开始讨论';
+
+  @override
+  String get studyDiscussionsEmpty => '还没有关联的讨论。';
+
+  @override
+  String get studyDiscussionsCaption => '在项目讨论中，回复会引用材料原文并标注是否核实。';
+
+  @override
+  String get studyDiscussionsUnnamed => '未命名讨论';
+
+  @override
+  String get studyNotesSection => '笔记';
+
+  @override
+  String get studyNotesEmpty => '还没有项目笔记。可从回复引用中保存，或在学习过程中记录。';
+
+  @override
+  String get studyNoteEvidenceGrounded => '有原文依据';
+
+  @override
+  String get studyNoteEvidenceInsufficient => '依据不足';
+
+  @override
+  String studyNoteAnchorsCount(int count) {
+    return '$count 处引用';
+  }
+
+  @override
+  String get studyNoteDetailTitle => '笔记详情';
+
+  @override
+  String get studyNoteAnchorsHeading => '原文锚点';
+
+  @override
+  String get studyNoteNoAnchors => '未附原文锚点。';
+
+  @override
+  String get studyNoteViewSource => '查看原文';
+
+  @override
+  String get studyNoteDeleteTitle => '删除笔记';
+
+  @override
+  String studyNoteDeleteMessage(String title) {
+    return '确定删除笔记「$title」？';
+  }
+
+  @override
+  String get studyReaderSections => '章节目录';
+
+  @override
+  String studyReaderSectionPdfPages(String range) {
+    return 'PDF 第 $range 页';
+  }
+
+  @override
+  String studyReaderSectionSinglePdfPage(int page) {
+    return 'PDF 第 $page 页';
+  }
+
+  @override
+  String get studyReaderPrevSection => '上一节';
+
+  @override
+  String get studyReaderNextSection => '下一节';
+
+  @override
+  String get studyReaderHighlightedQuote => '引用的原文';
+
+  @override
+  String get studyReaderNoIndexNotice => '尚未建立章节索引';
+
+  @override
+  String get studyReaderBuildIndex => '建立索引';
+
+  @override
+  String get studyReaderEmptyText => '该材料暂无可读文本。';
+
+  @override
+  String get studyReaderOpenOriginal => '打开原文件';
+
+  @override
+  String studyReaderOpenOriginalFailed(String error) {
+    return '无法打开原文件：$error';
+  }
+
+  @override
+  String get studyCitationSheetTitle => '引用核查';
+
+  @override
+  String get studyCitationUnavailable => '引用信息暂不可用';
+
+  @override
+  String get studyCitationChecking => '正在核对引用…';
+
+  @override
+  String get studyCitationStatusGrounded => '已核对原文';
+
+  @override
+  String get studyCitationStatusLocatedNoQuote => '已定位，未附原文摘录';
+
+  @override
+  String get studyCitationStatusUnverified => '无法核实';
+
+  @override
+  String get studyCitationMaterialLabel => '材料';
+
+  @override
+  String get studyCitationSectionLabel => '章节';
+
+  @override
+  String studyCitationPdfPage(int page) {
+    return 'PDF 第 $page 页';
+  }
+
+  @override
+  String studyCitationBookPage(int page) {
+    return '教材第 $page 页';
+  }
+
+  @override
+  String get studyCitationSaveAsNote => '存为笔记';
+
+  @override
+  String get studyCitationSaveNoteTitle => '存为笔记';
+
+  @override
+  String get studyCitationNoteTitleLabel => '标题';
+
+  @override
+  String get studyCitationNoteBodyLabel => '笔记内容';
+
+  @override
+  String get studyCitationNoteBodyHint => '记录你的理解、问题或要点…';
+
+  @override
+  String get studyCitationNoteSavedGrounded => '已保存到项目笔记';
+
+  @override
+  String get studyCitationNoteSavedInsufficient => '已保存，但依据不足';
+
+  @override
+  String get studyCitationIssueMalformed => '引用格式有误';
+
+  @override
+  String get studyCitationIssueUnknownDocument => '项目中没有这份材料';
+
+  @override
+  String get studyCitationIssueDocumentNotReady => '材料尚未可读';
+
+  @override
+  String get studyCitationIssueSourceVersionMismatch => '原文已变更';
+
+  @override
+  String get studyCitationIssueMissingLocator => '没有给出任何位置';
+
+  @override
+  String get studyCitationIssueUnknownSection => '索引中没有这个章节';
+
+  @override
+  String get studyCitationIssueSectionUnavailable => '章节索引不可用或已过期，请重建索引';
+
+  @override
+  String get studyCitationIssuePhysicalPageOutOfRange => '超出 PDF 页数';
+
+  @override
+  String get studyCitationIssuePhysicalPageOutsideSection => '页码与摘录所在章节不一致';
+
+  @override
+  String get studyCitationIssueCorpusPageOutOfRange => '超出教材页码范围';
+
+  @override
+  String get studyCitationIssueQuoteTooShort => '摘录太短，无法作为依据';
+
+  @override
+  String get studyCitationIssueQuoteNotFound => '原文中找不到这段摘录';
 }
 
 /// The translations for Chinese, using the Han script (`zh_Hans`).
@@ -24880,6 +25225,351 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
 
   @override
   String get mcpOAuthExchangingToken => '正在完成登录…';
+
+  @override
+  String get studyProjectsTitle => '学习项目';
+
+  @override
+  String get studyProjectCreate => '新建项目';
+
+  @override
+  String get studyProjectEdit => '编辑项目';
+
+  @override
+  String get studyProjectDelete => '删除项目';
+
+  @override
+  String studyProjectDeleteMessage(String title) {
+    return '确定删除项目「$title」？项目中的材料和笔记会一并删除，已关联的讨论将保留为普通对话。';
+  }
+
+  @override
+  String get studyProjectsEmptyTitle => '还没有学习项目';
+
+  @override
+  String get studyProjectsEmptyDescription => '材料、讨论、笔记都在项目里，引用可回到原文';
+
+  @override
+  String get studyProjectsSelectHint => '从左侧选择一个学习项目，查看材料、讨论与笔记。';
+
+  @override
+  String get studyProjectTitleLabel => '项目名称';
+
+  @override
+  String get studyProjectTitleHint => '例如：认知负荷理论';
+
+  @override
+  String get studyProjectGoalLabel => '学习目标（可选）';
+
+  @override
+  String get studyProjectGoalHint => '正在解决的问题、章节或研究主题';
+
+  @override
+  String get studyProjectGoalEmpty => '未设置学习目标';
+
+  @override
+  String get studyProjectModeLabel => '学习方式';
+
+  @override
+  String get studyModeExplain => '直接讲解';
+
+  @override
+  String get studyModeGuidedPractice => '引导练习';
+
+  @override
+  String studyProjectUpdatedAt(String date) {
+    return '更新于 $date';
+  }
+
+  @override
+  String studyProjectMaterialCount(int count) {
+    return '$count 份材料';
+  }
+
+  @override
+  String get studyProjectSave => '保存';
+
+  @override
+  String get studyProjectCancel => '取消';
+
+  @override
+  String get studyProjectConfirmDelete => '删除';
+
+  @override
+  String get studyProjectMoreActions => '更多操作';
+
+  @override
+  String get studyMaterialsSection => '材料';
+
+  @override
+  String get studyMaterialsImport => '导入';
+
+  @override
+  String get studyMaterialsImporting => '正在导入材料…';
+
+  @override
+  String get studyMaterialsEmpty => '还没有导入材料，可导入 PDF、Markdown 或文本文件。';
+
+  @override
+  String studyMaterialsImportFailed(String error) {
+    return '导入材料失败：$error';
+  }
+
+  @override
+  String get studyDocStatusReady => '可用';
+
+  @override
+  String get studyDocStatusScannedNeedsOcr => '扫描件，需要解析稿';
+
+  @override
+  String get studyDocStatusUnreadable => '无法读取';
+
+  @override
+  String get studyDocStatusPendingSourceLink => '待确认原文';
+
+  @override
+  String get studyDocScannedHint => '用 MinerU 解析后添加解析稿即可阅读与引用';
+
+  @override
+  String studyDocPhysicalPages(int count) {
+    return '共 $count 页';
+  }
+
+  @override
+  String studyDocCorpusPages(String range) {
+    return '教材 $range 页';
+  }
+
+  @override
+  String get studyDocIndexed => '已建立索引';
+
+  @override
+  String get studyDocNotIndexed => '未建立索引';
+
+  @override
+  String get studyDocIndexing => '正在建立索引';
+
+  @override
+  String get studyDocActionRead => '阅读';
+
+  @override
+  String get studyDocActionBuildIndex => '建立索引';
+
+  @override
+  String get studyDocActionRebuildIndex => '重建索引';
+
+  @override
+  String get studyDocActionAttachParse => '添加解析稿';
+
+  @override
+  String get studyDocActionConfirmSource => '确认原文';
+
+  @override
+  String get studyDocActionDelete => '删除';
+
+  @override
+  String get studyDocDeleteTitle => '删除材料';
+
+  @override
+  String studyDocDeleteMessage(String title) {
+    return '确定从项目中删除「$title」？';
+  }
+
+  @override
+  String get studyDocConfirmSourceTitle => '确认原文 PDF';
+
+  @override
+  String get studyDocAttachMarkdownTitle => '选择解析稿（.md）';
+
+  @override
+  String get studyDocAttachContentListTitle => '选择页码映射（.json，可选）';
+
+  @override
+  String studyDocIndexFailed(String error) {
+    return '建立索引失败：$error';
+  }
+
+  @override
+  String get studyDiscussionsSection => '讨论';
+
+  @override
+  String get studyDiscussionsStart => '开始讨论';
+
+  @override
+  String get studyDiscussionsEmpty => '还没有关联的讨论。';
+
+  @override
+  String get studyDiscussionsCaption => '在项目讨论中，回复会引用材料原文并标注是否核实。';
+
+  @override
+  String get studyDiscussionsUnnamed => '未命名讨论';
+
+  @override
+  String get studyNotesSection => '笔记';
+
+  @override
+  String get studyNotesEmpty => '还没有项目笔记。可从回复引用中保存，或在学习过程中记录。';
+
+  @override
+  String get studyNoteEvidenceGrounded => '有原文依据';
+
+  @override
+  String get studyNoteEvidenceInsufficient => '依据不足';
+
+  @override
+  String studyNoteAnchorsCount(int count) {
+    return '$count 处引用';
+  }
+
+  @override
+  String get studyNoteDetailTitle => '笔记详情';
+
+  @override
+  String get studyNoteAnchorsHeading => '原文锚点';
+
+  @override
+  String get studyNoteNoAnchors => '未附原文锚点。';
+
+  @override
+  String get studyNoteViewSource => '查看原文';
+
+  @override
+  String get studyNoteDeleteTitle => '删除笔记';
+
+  @override
+  String studyNoteDeleteMessage(String title) {
+    return '确定删除笔记「$title」？';
+  }
+
+  @override
+  String get studyReaderSections => '章节目录';
+
+  @override
+  String studyReaderSectionPdfPages(String range) {
+    return 'PDF 第 $range 页';
+  }
+
+  @override
+  String studyReaderSectionSinglePdfPage(int page) {
+    return 'PDF 第 $page 页';
+  }
+
+  @override
+  String get studyReaderPrevSection => '上一节';
+
+  @override
+  String get studyReaderNextSection => '下一节';
+
+  @override
+  String get studyReaderHighlightedQuote => '引用的原文';
+
+  @override
+  String get studyReaderNoIndexNotice => '尚未建立章节索引';
+
+  @override
+  String get studyReaderBuildIndex => '建立索引';
+
+  @override
+  String get studyReaderEmptyText => '该材料暂无可读文本。';
+
+  @override
+  String get studyReaderOpenOriginal => '打开原文件';
+
+  @override
+  String studyReaderOpenOriginalFailed(String error) {
+    return '无法打开原文件：$error';
+  }
+
+  @override
+  String get studyCitationSheetTitle => '引用核查';
+
+  @override
+  String get studyCitationUnavailable => '引用信息暂不可用';
+
+  @override
+  String get studyCitationChecking => '正在核对引用…';
+
+  @override
+  String get studyCitationStatusGrounded => '已核对原文';
+
+  @override
+  String get studyCitationStatusLocatedNoQuote => '已定位，未附原文摘录';
+
+  @override
+  String get studyCitationStatusUnverified => '无法核实';
+
+  @override
+  String get studyCitationMaterialLabel => '材料';
+
+  @override
+  String get studyCitationSectionLabel => '章节';
+
+  @override
+  String studyCitationPdfPage(int page) {
+    return 'PDF 第 $page 页';
+  }
+
+  @override
+  String studyCitationBookPage(int page) {
+    return '教材第 $page 页';
+  }
+
+  @override
+  String get studyCitationSaveAsNote => '存为笔记';
+
+  @override
+  String get studyCitationSaveNoteTitle => '存为笔记';
+
+  @override
+  String get studyCitationNoteTitleLabel => '标题';
+
+  @override
+  String get studyCitationNoteBodyLabel => '笔记内容';
+
+  @override
+  String get studyCitationNoteBodyHint => '记录你的理解、问题或要点…';
+
+  @override
+  String get studyCitationNoteSavedGrounded => '已保存到项目笔记';
+
+  @override
+  String get studyCitationNoteSavedInsufficient => '已保存，但依据不足';
+
+  @override
+  String get studyCitationIssueMalformed => '引用格式有误';
+
+  @override
+  String get studyCitationIssueUnknownDocument => '项目中没有这份材料';
+
+  @override
+  String get studyCitationIssueDocumentNotReady => '材料尚未可读';
+
+  @override
+  String get studyCitationIssueSourceVersionMismatch => '原文已变更';
+
+  @override
+  String get studyCitationIssueMissingLocator => '没有给出任何位置';
+
+  @override
+  String get studyCitationIssueUnknownSection => '索引中没有这个章节';
+
+  @override
+  String get studyCitationIssueSectionUnavailable => '章节索引不可用或已过期，请重建索引';
+
+  @override
+  String get studyCitationIssuePhysicalPageOutOfRange => '超出 PDF 页数';
+
+  @override
+  String get studyCitationIssuePhysicalPageOutsideSection => '页码与摘录所在章节不一致';
+
+  @override
+  String get studyCitationIssueCorpusPageOutOfRange => '超出教材页码范围';
+
+  @override
+  String get studyCitationIssueQuoteTooShort => '摘录太短，无法作为依据';
+
+  @override
+  String get studyCitationIssueQuoteNotFound => '原文中找不到这段摘录';
 }
 
 /// The translations for Chinese, using the Han script (`zh_Hant`).
@@ -37361,4 +38051,349 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get mcpOAuthExchangingToken => '正在完成登入…';
+
+  @override
+  String get studyProjectsTitle => '學習專案';
+
+  @override
+  String get studyProjectCreate => '新增專案';
+
+  @override
+  String get studyProjectEdit => '編輯專案';
+
+  @override
+  String get studyProjectDelete => '刪除專案';
+
+  @override
+  String studyProjectDeleteMessage(String title) {
+    return '確定刪除專案「$title」？專案中的材料和筆記會一併刪除，已關聯的討論將保留為一般對話。';
+  }
+
+  @override
+  String get studyProjectsEmptyTitle => '還沒有學習專案';
+
+  @override
+  String get studyProjectsEmptyDescription => '材料、討論、筆記都在專案裡，引用可回到原文';
+
+  @override
+  String get studyProjectsSelectHint => '從左側選擇一個學習專案，查看材料、討論與筆記。';
+
+  @override
+  String get studyProjectTitleLabel => '專案名稱';
+
+  @override
+  String get studyProjectTitleHint => '例如：認知負荷理論';
+
+  @override
+  String get studyProjectGoalLabel => '學習目標（選填）';
+
+  @override
+  String get studyProjectGoalHint => '正在解決的問題、章節或研究主題';
+
+  @override
+  String get studyProjectGoalEmpty => '未設定學習目標';
+
+  @override
+  String get studyProjectModeLabel => '學習方式';
+
+  @override
+  String get studyModeExplain => '直接講解';
+
+  @override
+  String get studyModeGuidedPractice => '引導練習';
+
+  @override
+  String studyProjectUpdatedAt(String date) {
+    return '更新於 $date';
+  }
+
+  @override
+  String studyProjectMaterialCount(int count) {
+    return '$count 份材料';
+  }
+
+  @override
+  String get studyProjectSave => '儲存';
+
+  @override
+  String get studyProjectCancel => '取消';
+
+  @override
+  String get studyProjectConfirmDelete => '刪除';
+
+  @override
+  String get studyProjectMoreActions => '更多操作';
+
+  @override
+  String get studyMaterialsSection => '材料';
+
+  @override
+  String get studyMaterialsImport => '匯入';
+
+  @override
+  String get studyMaterialsImporting => '正在匯入材料…';
+
+  @override
+  String get studyMaterialsEmpty => '還沒有匯入材料，可匯入 PDF、Markdown 或文字檔案。';
+
+  @override
+  String studyMaterialsImportFailed(String error) {
+    return '匯入材料失敗：$error';
+  }
+
+  @override
+  String get studyDocStatusReady => '可用';
+
+  @override
+  String get studyDocStatusScannedNeedsOcr => '掃描檔，需要解析稿';
+
+  @override
+  String get studyDocStatusUnreadable => '無法讀取';
+
+  @override
+  String get studyDocStatusPendingSourceLink => '待確認原文';
+
+  @override
+  String get studyDocScannedHint => '用 MinerU 解析後新增解析稿即可閱讀與引用';
+
+  @override
+  String studyDocPhysicalPages(int count) {
+    return '共 $count 頁';
+  }
+
+  @override
+  String studyDocCorpusPages(String range) {
+    return '教材 $range 頁';
+  }
+
+  @override
+  String get studyDocIndexed => '已建立索引';
+
+  @override
+  String get studyDocNotIndexed => '未建立索引';
+
+  @override
+  String get studyDocIndexing => '正在建立索引';
+
+  @override
+  String get studyDocActionRead => '閱讀';
+
+  @override
+  String get studyDocActionBuildIndex => '建立索引';
+
+  @override
+  String get studyDocActionRebuildIndex => '重建索引';
+
+  @override
+  String get studyDocActionAttachParse => '新增解析稿';
+
+  @override
+  String get studyDocActionConfirmSource => '確認原文';
+
+  @override
+  String get studyDocActionDelete => '刪除';
+
+  @override
+  String get studyDocDeleteTitle => '刪除材料';
+
+  @override
+  String studyDocDeleteMessage(String title) {
+    return '確定從專案中刪除「$title」？';
+  }
+
+  @override
+  String get studyDocConfirmSourceTitle => '確認原文 PDF';
+
+  @override
+  String get studyDocAttachMarkdownTitle => '選擇解析稿（.md）';
+
+  @override
+  String get studyDocAttachContentListTitle => '選擇頁碼對應（.json，選填）';
+
+  @override
+  String studyDocIndexFailed(String error) {
+    return '建立索引失敗：$error';
+  }
+
+  @override
+  String get studyDiscussionsSection => '討論';
+
+  @override
+  String get studyDiscussionsStart => '開始討論';
+
+  @override
+  String get studyDiscussionsEmpty => '還沒有關聯的討論。';
+
+  @override
+  String get studyDiscussionsCaption => '在專案討論中，回覆會引用材料原文並標註是否核實。';
+
+  @override
+  String get studyDiscussionsUnnamed => '未命名討論';
+
+  @override
+  String get studyNotesSection => '筆記';
+
+  @override
+  String get studyNotesEmpty => '還沒有專案筆記。可從回覆引用中儲存，或在學習過程中記錄。';
+
+  @override
+  String get studyNoteEvidenceGrounded => '有原文依據';
+
+  @override
+  String get studyNoteEvidenceInsufficient => '依據不足';
+
+  @override
+  String studyNoteAnchorsCount(int count) {
+    return '$count 處引用';
+  }
+
+  @override
+  String get studyNoteDetailTitle => '筆記詳情';
+
+  @override
+  String get studyNoteAnchorsHeading => '原文錨點';
+
+  @override
+  String get studyNoteNoAnchors => '未附原文錨點。';
+
+  @override
+  String get studyNoteViewSource => '查看原文';
+
+  @override
+  String get studyNoteDeleteTitle => '刪除筆記';
+
+  @override
+  String studyNoteDeleteMessage(String title) {
+    return '確定刪除筆記「$title」？';
+  }
+
+  @override
+  String get studyReaderSections => '章節目錄';
+
+  @override
+  String studyReaderSectionPdfPages(String range) {
+    return 'PDF 第 $range 頁';
+  }
+
+  @override
+  String studyReaderSectionSinglePdfPage(int page) {
+    return 'PDF 第 $page 頁';
+  }
+
+  @override
+  String get studyReaderPrevSection => '上一節';
+
+  @override
+  String get studyReaderNextSection => '下一節';
+
+  @override
+  String get studyReaderHighlightedQuote => '引用的原文';
+
+  @override
+  String get studyReaderNoIndexNotice => '尚未建立章節索引';
+
+  @override
+  String get studyReaderBuildIndex => '建立索引';
+
+  @override
+  String get studyReaderEmptyText => '該材料暫無可讀文字。';
+
+  @override
+  String get studyReaderOpenOriginal => '開啟原檔案';
+
+  @override
+  String studyReaderOpenOriginalFailed(String error) {
+    return '無法開啟原檔案：$error';
+  }
+
+  @override
+  String get studyCitationSheetTitle => '引用核查';
+
+  @override
+  String get studyCitationUnavailable => '引用資訊暫不可用';
+
+  @override
+  String get studyCitationChecking => '正在核對引用…';
+
+  @override
+  String get studyCitationStatusGrounded => '已核對原文';
+
+  @override
+  String get studyCitationStatusLocatedNoQuote => '已定位，未附原文摘錄';
+
+  @override
+  String get studyCitationStatusUnverified => '無法核實';
+
+  @override
+  String get studyCitationMaterialLabel => '材料';
+
+  @override
+  String get studyCitationSectionLabel => '章節';
+
+  @override
+  String studyCitationPdfPage(int page) {
+    return 'PDF 第 $page 頁';
+  }
+
+  @override
+  String studyCitationBookPage(int page) {
+    return '教材第 $page 頁';
+  }
+
+  @override
+  String get studyCitationSaveAsNote => '存為筆記';
+
+  @override
+  String get studyCitationSaveNoteTitle => '存為筆記';
+
+  @override
+  String get studyCitationNoteTitleLabel => '標題';
+
+  @override
+  String get studyCitationNoteBodyLabel => '筆記內容';
+
+  @override
+  String get studyCitationNoteBodyHint => '記錄你的理解、問題或要點…';
+
+  @override
+  String get studyCitationNoteSavedGrounded => '已儲存到專案筆記';
+
+  @override
+  String get studyCitationNoteSavedInsufficient => '已儲存，但依據不足';
+
+  @override
+  String get studyCitationIssueMalformed => '引用格式有誤';
+
+  @override
+  String get studyCitationIssueUnknownDocument => '專案中沒有這份材料';
+
+  @override
+  String get studyCitationIssueDocumentNotReady => '材料尚未可讀';
+
+  @override
+  String get studyCitationIssueSourceVersionMismatch => '原文已變更';
+
+  @override
+  String get studyCitationIssueMissingLocator => '沒有給出任何位置';
+
+  @override
+  String get studyCitationIssueUnknownSection => '索引中沒有這個章節';
+
+  @override
+  String get studyCitationIssueSectionUnavailable => '章節索引不可用或已過期，請重建索引';
+
+  @override
+  String get studyCitationIssuePhysicalPageOutOfRange => '超出 PDF 頁數';
+
+  @override
+  String get studyCitationIssuePhysicalPageOutsideSection => '頁碼與摘錄所在章節不一致';
+
+  @override
+  String get studyCitationIssueCorpusPageOutOfRange => '超出教材頁碼範圍';
+
+  @override
+  String get studyCitationIssueQuoteTooShort => '摘錄太短，無法作為依據';
+
+  @override
+  String get studyCitationIssueQuoteNotFound => '原文中找不到這段摘錄';
 }

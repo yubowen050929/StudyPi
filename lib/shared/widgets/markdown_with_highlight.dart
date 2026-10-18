@@ -98,6 +98,7 @@ class MarkdownWithCodeHighlight extends StatefulWidget {
     required this.text,
     this.onCitationTap,
     this.citationIndexResolver,
+    this.citationNeedsReview,
     this.baseStyle,
     this.streaming = false,
     this.useBlockRendering = false,
@@ -112,6 +113,9 @@ class MarkdownWithCodeHighlight extends StatefulWidget {
   /// using the search tool results of the enclosing message. Returns null
   /// when the id has no matching result.
   final String? Function(String id)? citationIndexResolver;
+
+  /// Citations whose source could not be verified render in a warning tone.
+  final bool Function(String id)? citationNeedsReview;
   final TextStyle? baseStyle; // optional override for base markdown text style
   final bool streaming;
 
@@ -416,7 +420,7 @@ class _MarkdownWithCodeHighlightState extends State<MarkdownWithCodeHighlight> {
     // this signature (theme colors, math flags, fonts, font metrics, streaming
     // mode), otherwise a theme/settings change would keep stale rendering.
     final documentRevision =
-        '${_imageRevision(imageUrls)}\u0002${_citationRevision(_documentCitationIds, widget.citationIndexResolver)}';
+        '${_imageRevision(imageUrls)}\u0002${_citationRevision(_documentCitationIds, widget.citationIndexResolver, widget.citationNeedsReview)}';
     final themeSignature =
         '${Theme.of(context).brightness.index}-${cs.surface.toARGB32()}-${inkColor.toARGB32()}-${cs.primary.toARGB32()}-${cs.outlineVariant.toARGB32()}-${settings.enableMathRendering}-${settings.enableDollarLatex}-${widget.streaming}-${baseTextStyle?.fontSize}-${baseTextStyle?.height}-${baseTextStyle?.letterSpacing}-${baseTextStyle?.fontFamily}-$codeFontFamily-$appFontFamily-$documentRevision';
 
@@ -564,6 +568,8 @@ class _MarkdownWithCodeHighlightState extends State<MarkdownWithCodeHighlight> {
               } else {
                 display = '?'; // id-only marker with no matching result
               }
+              final needsReview =
+                  widget.citationNeedsReview?.call(citation.id) ?? false;
               // gpt_markdown embeds this widget baseline-aligned. The capsule is
               // taller than the text ascent, so without correction it hangs
               // below the line. Translate it up (layout-neutral) so it looks
@@ -587,14 +593,20 @@ class _MarkdownWithCodeHighlightState extends State<MarkdownWithCodeHighlight> {
                       height: 20,
                       padding: const EdgeInsets.symmetric(horizontal: 5),
                       decoration: BoxDecoration(
-                        color: cs.primary.withValues(alpha: 0.20),
+                        color: needsReview
+                            ? cs.error.withValues(alpha: 0.16)
+                            : cs.primary.withValues(alpha: 0.20),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Center(
                         widthFactor: 1.0,
                         child: Text(
                           display,
-                          style: TextStyle(fontSize: 12, height: 1.0),
+                          style: TextStyle(
+                            fontSize: 12,
+                            height: 1.0,
+                            color: needsReview ? cs.error : null,
+                          ),
                         ),
                       ),
                     ),
@@ -2578,10 +2590,14 @@ int _imageRevision(List<String> urls) =>
 /// Citation cache key from the actual `(id, resolvedIndex)` pairs. Callback
 /// identity is ignored: a new closure over the same map must not rebuild,
 /// and a map update through a stable closure must.
-int _citationRevision(List<String> ids, String? Function(String id)? resolver) {
+int _citationRevision(
+  List<String> ids,
+  String? Function(String id)? resolver,
+  bool Function(String id)? needsReview,
+) {
   var hash = ids.length;
   for (final id in ids) {
-    hash = Object.hash(hash, id, resolver?.call(id));
+    hash = Object.hash(hash, id, resolver?.call(id), needsReview?.call(id));
   }
   return hash;
 }

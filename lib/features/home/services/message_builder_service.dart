@@ -1,3 +1,4 @@
+import '../../study/providers/study_project_provider.dart';
 import '../../../utils/utf16_safe_cut.dart';
 import '../../chat/utils/thinking_tag_parser.dart';
 import 'package:Kelivo/core/providers/external_mounts_provider.dart';
@@ -20,6 +21,7 @@ import '../../../core/providers/environment_provider.dart';
 import '../../../core/providers/settings_provider.dart';
 import '../../../core/providers/user_provider.dart';
 import '../../../core/services/chat/chat_service.dart';
+import '../../../core/services/chat/generation_attempt.dart';
 import '../../../core/services/chat/document_text_extractor.dart';
 import '../../../utils/mcp_structured_image.dart';
 import '../../../utils/sandbox_path_resolver.dart';
@@ -951,6 +953,7 @@ class MessageBuilderService {
     List<Map<String, dynamic>> apiMessages,
     SettingsProvider settings,
     Assistant? assistant, {
+    GenerationAttempt? attempt,
     Conversation? conversation,
     List<ChatMessage>? sourceMessages,
     bool sandboxDataFiles = false,
@@ -958,6 +961,7 @@ class MessageBuilderService {
     bool previewOnly = false,
     Map<String, AttachmentInfo> workspaceAttachments = const {},
   }) async {
+    attempt?.check();
     final bool ocrActive =
         settings.ocrEnabled &&
         settings.ocrModelProvider != null &&
@@ -992,6 +996,8 @@ class MessageBuilderService {
     final storedPrompts = _repo == null
         ? null
         : await _repo!.getMessagePrompts(persistedRevisionIds);
+
+    attempt?.check();
 
     // Decide which frozen prompts survive before any memory injection. A PDF
     // sent natively drops its extracted text and the snapshot frozen with it;
@@ -1065,15 +1071,20 @@ class MessageBuilderService {
       }
       if (allImagePaths.isNotEmpty) {
         try {
-          ocrSession = await ocrPrefetch!(
+          Future<OcrPrepareSession> prefetch() => ocrPrefetch!(
             revisionIds: revisionIds,
             imagePaths: allImagePaths.toList(growable: false),
           );
+          ocrSession = attempt == null
+              ? await prefetch()
+              : await attempt.cancellation.run(prefetch);
         } catch (_) {
           ocrSession = null;
         }
       }
     }
+
+    attempt?.check();
 
     Future<String?> readDocument(DocumentAttachment d) async {
       if (previewOnly) return null;
@@ -1138,6 +1149,7 @@ class MessageBuilderService {
     final snapshotRevisionIds = <String>{};
 
     for (int i = 0; i < apiMessages.length; i++) {
+      attempt?.check();
       if (!isPersistedUserMessage(apiMessages[i])) continue;
       final revisionId = (apiMessages[i][internalRevisionIdKey] ?? '')
           .toString()
@@ -1307,6 +1319,7 @@ class MessageBuilderService {
       final filePrompts = StringBuffer();
       var leftToSandbox = false;
       for (final d in parsedUser.documents) {
+        attempt?.check();
         final effectiveMime = _effectiveAttachmentMime(d);
         if (nativePdfInput && isPdfMime(effectiveMime)) continue;
         final local = workspaceAttachments[d.path];
@@ -1328,6 +1341,7 @@ class MessageBuilderService {
           continue;
         }
         final text = await readDocument(d);
+        attempt?.check();
         if (text == null || text.trim().isEmpty) continue;
         filePrompts.writeln('## user sent a file: ${d.fileName}');
         filePrompts.writeln('<content>');
@@ -1353,12 +1367,16 @@ class MessageBuilderService {
             .toSet()
             .toList();
         if (ocrTargets.isNotEmpty) {
-          final ocrText = await ocrHandler!(
+          Future<String?> recognize() => ocrHandler!(
             ocrTargets,
             revisionId: revisionId.isEmpty ? null : revisionId,
             session: ocrSession,
-            requestId: conversation?.id,
+            requestId: attempt?.requestId ?? conversation?.id,
           );
+          final ocrText = attempt == null
+              ? await recognize()
+              : await attempt.cancellation.run(recognize);
+          attempt?.check();
           if (ocrText == null) {
             canFreezePrompt = false;
           } else if (ocrText.trim().isNotEmpty) {
@@ -1385,6 +1403,7 @@ class MessageBuilderService {
           conversation: conversation,
           settings: settings,
           apiMessages: apiMessages,
+          attempt: attempt,
           pass: injectionPass,
           readFrozenPrompt: false,
           freezePrompt: canFreezePrompt,
@@ -1414,6 +1433,7 @@ class MessageBuilderService {
       }
     }
 
+    attempt?.check();
     await refreshMemorySnapshots(
       apiMessages,
       assistant: assistant,
@@ -1576,16 +1596,19 @@ class MessageBuilderService {
     required Conversation conversation,
     required SettingsProvider settings,
     required List<Map<String, dynamic>> apiMessages,
+    GenerationAttempt? attempt,
     MemoryInjectionPass? pass,
     bool readFrozenPrompt = true,
     bool freezePrompt = true,
   }) async {
+    attempt?.check();
     final repo = _repo;
     final persist =
         repo != null &&
         !chatService.isTemporaryConversation(message.conversationId);
     if (persist && readFrozenPrompt) {
       final existing = await repo.getMessagePrompt(message.id);
+      attempt?.check();
       if (existing != null) {
         return _legacyAwareFrozenPayload(
           payload: existing.payload,
@@ -1606,6 +1629,7 @@ class MessageBuilderService {
             pass: pass,
             settings: settings,
           );
+    attempt?.check();
     if (memory.prefix.isNotEmpty) {
       pass?.snapshotCarriers.add(message.id);
     }
@@ -1903,6 +1927,32 @@ class MessageBuilderService {
       length: sys.length,
     );
     apiMessages.insert(0, sysMessage);
+  }
+
+  /// Append the bound study project's mode, citation protocol and materials.
+  /// Ordinary conversations, and trees without the study provider, are
+  /// unchanged.
+  Future<void> injectStudyProjectContext(
+    List<Map<String, dynamic>> apiMessages, {
+    Conversation? conversation,
+  }) async {
+    if (conversation == null) return;
+    final study = StudyProjectProvider.maybeOf(contextProvider);
+    if (study == null) return;
+    final String? context;
+    try {
+      context = await study.promptContextForConversation(conversation.id);
+    } catch (e) {
+      // The chat still goes out; the project page shows the material state.
+      debugPrint('Study project context unavailable: $e');
+      return;
+    }
+    if (context == null || context.isEmpty) return;
+    _appendToSystemMessage(
+      apiMessages,
+      context,
+      source: ContextSource.systemPrompt,
+    );
   }
 
   /// Inject §11 memory rules into the system message.
