@@ -5,6 +5,8 @@ import '../../../core/providers/settings_provider.dart';
 import '../../../core/services/api/chat_api_service.dart';
 import '../../../core/services/api/retry_policy.dart';
 
+import '../../../core/services/api/tool_call_cancellation.dart';
+
 /// OCR 缓存条目
 class OcrCacheEntry {
   OcrCacheEntry({required this.text});
@@ -110,10 +112,12 @@ class OcrService {
     BuildContext context, {
     String? requestId,
   }) async {
+    ToolCallCancellation.current?.throwIfCancelled();
     if (imagePaths.isEmpty) return null;
     if (ocrExecutor != null) {
       try {
         final out = (await ocrExecutor!(imagePaths))?.trim();
+        ToolCallCancellation.current?.throwIfCancelled();
         return (out == null || out.isEmpty) ? null : out;
       } catch (e) {
         if (isUserCancelError(e)) rethrow;
@@ -143,6 +147,7 @@ class OcrService {
         ocrActive: true,
         requestId: requestId,
       );
+      ToolCallCancellation.current?.throwIfCancelled();
       out = result.text;
     } catch (e) {
       if (isUserCancelError(e)) rethrow;
@@ -223,6 +228,7 @@ class OcrService {
     required List<String> revisionIds,
     required List<String> imagePaths,
   }) async {
+    ToolCallCancellation.current?.throwIfCancelled();
     final session = OcrPrepareSession();
 
     final paths = <String>[
@@ -233,9 +239,13 @@ class OcrService {
     ];
     if (paths.isNotEmpty && resolveContentHashes != null) {
       try {
-        session.hashesByPath.addAll(await resolveContentHashes!(paths));
+        final hashes = await resolveContentHashes!(paths);
+        ToolCallCancellation.current?.throwIfCancelled();
+        session.hashesByPath.addAll(hashes);
       } catch (_) {}
     }
+
+    ToolCallCancellation.current?.throwIfCancelled();
 
     final ids = revisionIds
         .map((id) => id.trim())
@@ -250,9 +260,11 @@ class OcrService {
     try {
       artifacts = await loadArtifacts!(ids);
     } catch (_) {
+      ToolCallCancellation.current?.throwIfCancelled();
       return session;
     }
 
+    ToolCallCancellation.current?.throwIfCancelled();
     for (final entry in artifacts.entries) {
       final revisionItems = <String, String>{};
       for (final item in entry.value.entries) {
@@ -286,6 +298,7 @@ class OcrService {
     OcrPrepareSession? session,
     String? requestId,
   }) async {
+    ToolCallCancellation.current?.throwIfCancelled();
     if (imagePaths.isEmpty) return null;
 
     // Test doubles inject ocrExecutor and skip SettingsProvider wiring.
@@ -317,6 +330,7 @@ class OcrService {
     if (unresolved.isNotEmpty && resolveContentHashes != null) {
       try {
         final resolved = await resolveContentHashes!(unresolved);
+        ToolCallCancellation.current?.throwIfCancelled();
         for (final entry in resolved.entries) {
           final hash = entry.value.trim();
           if (hash.isEmpty) continue;
@@ -325,6 +339,8 @@ class OcrService {
         }
       } catch (_) {}
     }
+
+    ToolCallCancellation.current?.throwIfCancelled();
 
     final normalizedRevisionId = revisionId?.trim();
     final hasRevision =
@@ -337,6 +353,7 @@ class OcrService {
             !session.loadedRevisionIds.contains(normalizedRevisionId))) {
       try {
         final artifacts = await loadArtifacts!([normalizedRevisionId]);
+        ToolCallCancellation.current?.throwIfCancelled();
         final items = artifacts[normalizedRevisionId] ?? const {};
         session?.loadedRevisionIds.add(normalizedRevisionId);
         if (items.isNotEmpty) {
@@ -358,6 +375,8 @@ class OcrService {
       } catch (_) {}
     }
 
+    ToolCallCancellation.current?.throwIfCancelled();
+
     final existingForRevision = hasRevision
         ? <String, String>{
             ...session?.artifactsByRevision[normalizedRevisionId] ?? const {},
@@ -368,6 +387,7 @@ class OcrService {
     final toPersist = <String, String>{};
 
     for (final path in paths) {
+      ToolCallCancellation.current?.throwIfCancelled();
       final hash = hashesByPath[path]?.trim();
       if (hash != null && hash.isNotEmpty) {
         final cached = _lookupCachedText(hash, session);
@@ -383,6 +403,7 @@ class OcrService {
 
       if (!context.mounted) break;
       final text = await runOcrForImages([path], context, requestId: requestId);
+      ToolCallCancellation.current?.throwIfCancelled();
       if (text != null && text.trim().isNotEmpty) {
         final t = text.trim();
         if (hash != null && hash.isNotEmpty) {
@@ -395,6 +416,7 @@ class OcrService {
       }
     }
 
+    ToolCallCancellation.current?.throwIfCancelled();
     if (toPersist.isNotEmpty && hasRevision && persistArtifact != null) {
       try {
         await persistArtifact!(normalizedRevisionId, toPersist);
@@ -409,6 +431,7 @@ class OcrService {
       }
     }
 
+    ToolCallCancellation.current?.throwIfCancelled();
     final out = combined.toString().trim();
     return out.isEmpty ? null : out;
   }

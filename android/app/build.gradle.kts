@@ -17,8 +17,9 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.psyche.kelivo"
+        // StudyPi installs next to Kelivo. The namespace and Kotlin packages keep
+        // Kelivo's name so upstream Android changes still merge cleanly.
+        applicationId = "app.studypi"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion
@@ -26,9 +27,30 @@ android {
         versionCode = flutter.versionCode
         versionName = flutter.versionName
         // Flutter controls APK ABI filtering, including --split-per-abi.
+        // STUDYPI_ABIS=arm64-v8a limits the whole APK for the arm64 CI job.
+        // --target-platform only covers Flutter's own libraries. The Flutter Gradle
+        // plugin fills ndk.abiFilters with every Flutter ABI when it is applied, so
+        // prebuilt plugin libraries (onnxruntime, ML Kit, proot, ...) would still
+        // ship for all of them; replace that set here. Without STUDYPI_ABIS,
+        // Flutter's defaults and --split-per-abi stay untouched.
+        val studypiAbis = System.getenv("STUDYPI_ABIS")
+            ?.split(",")
+            ?.map { it.trim() }
+            ?.filter { it.isNotEmpty() }
+        val nativeAbis = if (studypiAbis.isNullOrEmpty()) {
+            listOf("armeabi-v7a", "arm64-v8a", "x86_64")
+        } else {
+            studypiAbis
+        }
+        if (!studypiAbis.isNullOrEmpty()) {
+            ndk {
+                abiFilters.clear()
+                abiFilters += studypiAbis
+            }
+        }
         externalNativeBuild {
             cmake {
-                abiFilters += listOf("armeabi-v7a", "arm64-v8a", "x86_64")
+                abiFilters += nativeAbis
             }
         }
     }
@@ -63,6 +85,11 @@ android {
                 storePassword = keystoreProperties["storePassword"] as String
                 keyAlias = keystoreProperties["keyAlias"] as String
                 keyPassword = keystoreProperties["keyPassword"] as String
+                // v1 keeps older package installers from reporting a missing
+                // developer certificate when they ignore the APK signature block.
+                enableV1Signing = true
+                enableV2Signing = true
+                enableV3Signing = true
             }
         }
     }

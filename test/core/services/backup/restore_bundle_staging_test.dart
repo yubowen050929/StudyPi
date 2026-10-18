@@ -1284,15 +1284,13 @@ void main() {
         RestoreBundleStaging.debugIsolateExitDeadline = const Duration(
           milliseconds: 80,
         );
-        RestoreBundleStaging.debugIsolateTimeout = const Duration(
-          milliseconds: 150,
-        );
+        // Cancellation is triggered by candidate-revalidate below. A global
+        // timeout can abort the earlier DB staging before this phase starts.
         debugSkipBackupIsolateKill = true;
         addTearDown(() {
           RestoreBundleStaging.debugCandidateValidateHangSeconds = 0;
           RestoreBundleStaging.debugIsolateKillGrace = null;
           RestoreBundleStaging.debugIsolateExitDeadline = null;
-          RestoreBundleStaging.debugIsolateTimeout = null;
           debugSkipBackupIsolateKill = false;
         });
 

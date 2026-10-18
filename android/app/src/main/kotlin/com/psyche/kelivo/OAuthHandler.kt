@@ -20,7 +20,7 @@ import java.lang.ref.WeakReference
 
 internal object OAuthHandler {
     private const val CHANNEL_NAME = "app.oauth"
-    private const val CALLBACK_SCHEME = "psyche.kelivo"
+    private const val CALLBACK_SCHEME = "app.studypi"
     private const val CALLBACK_HOST = "mcp-oauth-callback"
     private const val BROWSER_BIND_TIMEOUT_MS = 1000L
 

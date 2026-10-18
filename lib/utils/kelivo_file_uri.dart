@@ -106,6 +106,7 @@ final class KelivoFileUri {
   /// Substring matches (e.g. `com.other.kelivo.notes`) are intentionally
   /// rejected — only exact whitelist entries count.
   static const Set<String> _knownBundleIds = {
+    'app.studypi',
     'com.psyche.kelivo',
     'psyche.kelivo',
   };

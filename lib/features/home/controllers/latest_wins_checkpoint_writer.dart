@@ -64,7 +64,9 @@ class LatestWinsCheckpointWriter<T> {
         _pending = null;
         _lastWriteStartedAt = _now();
         try {
-          await write(build());
+          // Even a synchronous builder/write failure must yield before finally
+          // clears _drainFuture; add() has not assigned it until _drain returns.
+          await Future<void>.sync(() => write(build()));
         } catch (error, stackTrace) {
           // Intermediate checkpoints are best-effort. A failed snapshot
           // (e.g. a transient DB busy/locked) is dropped and reported, but

@@ -21,6 +21,7 @@ import '../../../core/services/api/reasoning/reasoning_dialects.dart';
 import '../../../core/services/model_spec/model_spec_resolver.dart';
 import '../../../core/providers/workspace_provider.dart';
 import '../../../core/services/chat/chat_service.dart';
+import '../../../core/services/chat/generation_attempt.dart';
 import '../../../core/services/chat/document_text_extractor.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../core/services/logging/context_logger.dart';
@@ -228,6 +229,10 @@ class MessageGenerationService {
       modelId,
       conversation: promptConversation,
     );
+    await messageBuilderService.injectStudyProjectContext(
+      apiMessages,
+      conversation: promptConversation,
+    );
     await messageBuilderService.injectMemoryAndRecentChats(
       apiMessages,
       assistant,
@@ -397,6 +402,7 @@ class MessageGenerationService {
   /// [requiredAttachmentMessageId] identifies a new submission; retries and
   /// historical context can legitimately reference attachments since removed.
   Future<PreparedGeneration> prepareApiMessagesWithInjections({
+    GenerationAttempt? attempt,
     required List<ChatMessage> messages,
     required Map<String, int> versionSelections,
     required Conversation? currentConversation,
@@ -410,6 +416,7 @@ class MessageGenerationService {
     String? processingMessageId,
     String? requiredAttachmentMessageId,
   }) async {
+    attempt?.check();
     var requestRevision = currentConversation == null
         ? null
         : chatService.contextRevision(currentConversation.id);
@@ -417,6 +424,7 @@ class MessageGenerationService {
     final worldBooks = contextProvider.read<WorldBookProvider?>();
     await instructions?.initialize();
     await worldBooks?.initialize();
+    attempt?.check();
     final configuration = contextUsageConfiguration(
       settings: settings,
       config: settings.getProviderConfig(providerKey),
@@ -439,6 +447,7 @@ class MessageGenerationService {
         assistant: assistant,
       ),
     );
+    attempt?.check();
     final packed = await assembleUnprocessedRequestContext(
       messages: messages,
       versionSelections: versionSelections,
@@ -457,6 +466,7 @@ class MessageGenerationService {
             : null;
       },
     );
+    attempt?.check();
     final cfg = packed.cfg;
     final apiMessages = packed.apiMessages;
     final toolDefs = packed.toolDefs;
@@ -508,6 +518,7 @@ class MessageGenerationService {
             apiMessages,
             settings,
             assistant,
+            attempt: attempt,
             conversation: currentConversation,
             sourceMessages: messages,
             sandboxDataFiles: sandboxDataFiles,
@@ -528,7 +539,9 @@ class MessageGenerationService {
       }
     }
 
+    attempt?.check();
     await messageBuilderService.inlineLocalImages(apiMessages);
+    attempt?.check();
     if (ContextLogger.enabled) {
       final providerName = cfg.name.trim();
       ContextLogger.logPrepared(
@@ -774,6 +787,7 @@ class MessageGenerationService {
 
   /// Build GenerationContext for streaming.
   stream_ctrl.GenerationContext buildGenerationContext({
+    GenerationAttempt? attempt,
     required ChatMessage assistantMessage,
     required PreparedGeneration prepared,
     required List<String> userImagePaths,
@@ -793,6 +807,7 @@ class MessageGenerationService {
     final bool ocrActive = settings.ocrActive;
 
     return stream_ctrl.GenerationContext(
+      attempt: attempt,
       assistantMessage: assistantMessage,
       apiMessages: prepared.apiMessages,
       contextUsageConfiguration: prepared.contextUsageConfiguration,

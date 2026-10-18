@@ -8,6 +8,7 @@ import 'window_title_bar.dart';
 import 'desktop_settings_page.dart';
 import 'desktop_translate_page.dart';
 import '../features/settings/pages/storage_space_page.dart';
+import '../features/study/pages/study_projects_page.dart';
 import '../l10n/app_localizations.dart';
 import 'package:window_manager/window_manager.dart';
 import 'dart:async';
@@ -25,7 +26,7 @@ class DesktopHomePage extends StatefulWidget {
     this.initialProviderKey,
   });
 
-  final int? initialTabIndex; // 0=Chat,1=Translate,2=Storage,3=Settings
+  final int? initialTabIndex; // 0=Chat,1=Translate,2=Storage,3=Settings,4=Study
   final String? initialProviderKey;
 
   @override
@@ -33,8 +34,9 @@ class DesktopHomePage extends StatefulWidget {
 }
 
 class _DesktopHomePageState extends State<DesktopHomePage> {
-  int _tabIndex = 0; // 0=Chat, 1=Translate, 2=Storage, 3=Settings
+  int _tabIndex = 0; // 0=Chat, 1=Translate, 2=Storage, 3=Settings, 4=Study
   bool _storageVisited = false;
+  bool _studyVisited = false;
   bool _globalSearchActive = false;
   StreamSubscription<HotkeyAction>? _hotkeySub;
   StreamSubscription<ChatAction>? _chatActionSub;
@@ -45,9 +47,10 @@ class _DesktopHomePageState extends State<DesktopHomePage> {
   void initState() {
     super.initState();
     if (widget.initialTabIndex != null) {
-      _tabIndex = widget.initialTabIndex!.clamp(0, 3);
+      _tabIndex = widget.initialTabIndex!.clamp(0, 4);
     }
     _storageVisited = _tabIndex == 2;
+    _studyVisited = _tabIndex == 4;
     _conversationOpenSub = NotificationService.conversationTaps.listen((_) {
       if (!mounted) return;
       setState(() {
@@ -207,6 +210,12 @@ class _DesktopHomePageState extends State<DesktopHomePage> {
                 });
                 ChatActionBus.instance.fire(ChatAction.exitGlobalSearch);
               },
+              onTapStudy: () => setState(() {
+                _tabIndex = 4;
+                _globalSearchActive = false;
+                _studyVisited = true;
+                ChatActionBus.instance.fire(ChatAction.exitGlobalSearch);
+              }),
               onTapStorage: () => setState(() {
                 _tabIndex = 2;
                 _globalSearchActive = false;
@@ -241,6 +250,11 @@ class _DesktopHomePageState extends State<DesktopHomePage> {
                     key: const ValueKey('settings_page'),
                     initialProviderKey: widget.initialProviderKey,
                   ),
+                  _studyVisited
+                      ? const StudyProjectsDesktopLayout(
+                          key: ValueKey('study_projects_page'),
+                        )
+                      : const SizedBox.shrink(),
                 ],
               ),
             ),

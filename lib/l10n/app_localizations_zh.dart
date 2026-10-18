@@ -166,7 +166,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get storageSpaceClearDisplacedDatabasesConfirmMessage =>
-      '确定删除这些保留的旧数据库吗？它们是 Kelivo 重建数据库时留下的，可能是那些聊天记录和设置仅存的一份。删除后无法恢复。';
+      '确定删除这些保留的旧数据库吗？它们是 StudyPi 重建数据库时留下的，可能是那些聊天记录和设置仅存的一份。删除后无法恢复。';
 
   @override
   String get storageSpaceRestoreTracesHint => '恢复完成后保留的旧数据快照。清理不会影响当前应用数据。';
@@ -1607,41 +1607,41 @@ class AppLocalizationsZh extends AppLocalizations {
   String get backupPageRestartRequired => '需要重启应用';
 
   @override
-  String get backupPageRestartContent => '导入成功。重启 Kelivo 后将安全应用。';
+  String get backupPageRestartContent => '导入成功。重启 StudyPi 后将安全应用。';
 
   @override
   String backupPageRestartContentWithSkipped(int count) {
-    return '导入已完成，但已跳过 $count 个消息顺序非法的会话。重启 Kelivo 后将安全应用已导入的数据。';
+    return '导入已完成，但已跳过 $count 个消息顺序非法的会话。重启 StudyPi 后将安全应用已导入的数据。';
   }
 
   @override
-  String get restartAppFailedMessage => 'Kelivo 无法自动重启，请完全关闭后重新打开。';
+  String get restartAppFailedMessage => 'StudyPi 无法自动重启，请完全关闭后重新打开。';
 
   @override
   String get backupRestoreRolledBackTitle => '恢复已回滚';
 
   @override
-  String get backupRestoreRolledBackContent => '恢复未能完成。Kelivo 已验证并保留原有数据。';
+  String get backupRestoreRolledBackContent => '恢复未能完成。StudyPi 已验证并保留原有数据。';
 
   @override
   String get backupRestoreFailureTitle => '恢复需要处理';
 
   @override
   String get backupRestoreFailureContent =>
-      'Kelivo 无法验证完整的原有或新数据，因此未打开聊天数据。请关闭 Kelivo 后重试；若问题反复出现，请保留诊断码以便支持人员排查。';
+      'StudyPi 无法验证完整的原有或新数据，因此未打开聊天数据。请关闭 StudyPi 后重试；若问题反复出现，请保留诊断码以便支持人员排查。';
 
   @override
-  String get backupRestoreBusinessLeaseUnavailableTitle => 'Kelivo 已在运行';
+  String get backupRestoreBusinessLeaseUnavailableTitle => 'StudyPi 已在运行';
 
   @override
   String get backupRestoreBusinessLeaseUnavailableContent =>
-      'Kelivo 的数据仍被另一个应用进程占用。请关闭其他 Kelivo 窗口后重新启动；当前进程尚未打开聊天数据。';
+      'StudyPi 的数据仍被另一个应用进程占用。请关闭其他 StudyPi 窗口后重新启动；当前进程尚未打开聊天数据。';
 
   @override
   String get restoreProgressTitle => '正在恢复备份';
 
   @override
-  String get restoreProgressWarning => '请保持 Kelivo 开启直到完成。此时关闭应用，下次启动会从头再来一次。';
+  String get restoreProgressWarning => '请保持 StudyPi 开启直到完成。此时关闭应用，下次启动会从头再来一次。';
 
   @override
   String get restoreProgressStageCheckingBackup => '正在校验备份';
@@ -1662,7 +1662,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get restoreProgressStageFinishing => '即将完成';
 
   @override
-  String get backupRestoreFailureRestartButton => '重启 Kelivo';
+  String get backupRestoreFailureRestartButton => '重启 StudyPi';
 
   @override
   String get backupRestoreFailureCopyButton => '复制诊断码';
@@ -1700,14 +1700,14 @@ class AppLocalizationsZh extends AppLocalizations {
   String get startupRecoveryRepairFailed => '修复未能解决问题。请先导出数据副本，然后重置。';
 
   @override
-  String get startupRecoveryResetFailed => '重置失败。请彻底关闭 Kelivo 后重新打开。';
+  String get startupRecoveryResetFailed => '重置失败。请彻底关闭 StudyPi 后重新打开。';
 
   @override
   String get startupRecoveryResetDialogTitle => '重置全部数据？';
 
   @override
   String get startupRecoveryResetDialogContent =>
-      '这将永久删除本设备上 Kelivo 的数据库并重新开始。如果之后可能还需要这些数据，请先导出一份副本。此操作无法撤销。';
+      '这将永久删除本设备上 StudyPi 的数据库并重新开始。如果之后可能还需要这些数据，请先导出一份副本。此操作无法撤销。';
 
   @override
   String get startupRecoveryResetDialogConfirm => '重置并重启';
@@ -1819,17 +1819,17 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get startupRecoveryDangerBody =>
-      '重置会永久删除本设备上 Kelivo 的数据库。请先导出数据副本——重置同时会销毁排查根本问题所需的证据。';
+      '重置会永久删除本设备上 StudyPi 的数据库。请先导出数据副本——重置同时会销毁排查根本问题所需的证据。';
 
   @override
   String get startupRecoveryResetAcknowledge => '我已导出副本，或不需要这些数据。';
 
   @override
-  String get startupDatabaseUpdateRequiredTitle => '请更新 Kelivo 以继续';
+  String get startupDatabaseUpdateRequiredTitle => '请更新 StudyPi 以继续';
 
   @override
   String get startupDatabaseUpdateRequiredContent =>
-      '本设备上的聊天数据库由更新版本的 Kelivo 创建，当前版本无法打开。数据未被改动。请安装最新版 Kelivo 后重新打开。';
+      '本设备上的聊天数据库由更新版本的 StudyPi 创建，当前版本无法打开。数据未被改动。请安装最新版 StudyPi 后重新打开。';
 
   @override
   String get startupDatabaseUpdateRequiredDowngradeTitle => '若要改用旧版';
@@ -1840,7 +1840,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get startupDatabaseUpdateRequiredDowngradeStep1 =>
-      '先安装并打开最新版 Kelivo，在「设置 → 数据备份」导出一份备份文件。';
+      '先安装并打开最新版 StudyPi，在「设置 → 数据备份」导出一份备份文件。';
 
   @override
   String startupDatabaseUpdateRequiredDowngradeStep2(String url) {
@@ -1899,7 +1899,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String backupPageForwardCompatBody(int backupVersion, int currentVersion) {
-    return '这份备份由更新版本的 Kelivo 创建（数据格式 $backupVersion，当前版本支持 $currentVersion），且未声明旧版本能否读取。\n\n你可以继续导入：当前版本不认识的内容会被跳过，备份文件本身不会被修改。但如果新版本改变了已有数据的存储方式，部分内容可能会被错误导入。\n\n更稳妥的做法是先升级 Kelivo。';
+    return '这份备份由更新版本的 StudyPi 创建（数据格式 $backupVersion，当前版本支持 $currentVersion），且未声明旧版本能否读取。\n\n你可以继续导入：当前版本不认识的内容会被跳过，备份文件本身不会被修改。但如果新版本改变了已有数据的存储方式，部分内容可能会被错误导入。\n\n更稳妥的做法是先升级 StudyPi。';
   }
 
   @override
@@ -1910,7 +1910,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get backupPageSchemaTooNewMessage =>
-      '这份备份由更新版本的 Kelivo 创建，当前版本无法读取。请先升级 Kelivo 后重试。';
+      '这份备份由更新版本的 StudyPi 创建，当前版本无法读取。请先升级 StudyPi 后重试。';
 
   @override
   String get backupPageBackupUploaded => '已上传备份';
@@ -2096,7 +2096,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String backupPageCherryStudioUnsupportedBackupVersion(String version) {
-    return '此备份使用 Cherry Studio 格式版本 $version，Kelivo 目前尚无法导入。请改用 Cherry Studio v1 导出备份，或等待后续版本支持 Cherry Studio v2。';
+    return '此备份使用 Cherry Studio 格式版本 $version，StudyPi 目前尚无法导入。请改用 Cherry Studio v1 导出备份，或等待后续版本支持 Cherry Studio v2。';
   }
 
   @override
@@ -2970,11 +2970,6 @@ class AppLocalizationsZh extends AppLocalizations {
   @override
   String sideDrawerUpdateTitle(String version) {
     return '发现新版本：$version';
-  }
-
-  @override
-  String sideDrawerUpdateTitleWithBuild(String version, int build) {
-    return '发现新版本：$version ($build)';
   }
 
   @override
@@ -4919,7 +4914,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get aboutPageKelivoSearchAlreadyUnlocked => '这扇门你已经推开过了。';
 
   @override
-  String get aboutPageAppName => 'Kelivo';
+  String get aboutPageAppName => 'StudyPi';
 
   @override
   String get aboutPageAppDescription => '开源AI 助手';
@@ -5994,7 +5989,7 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String get settingsShare => 'Kelivo - 开源AI助手';
+  String get settingsShare => 'StudyPi - 开源AI助手';
 
   @override
   String get searchProviderBingLocalDescription =>
@@ -6480,7 +6475,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get healthDataSettingsDescription =>
-      '当前助手在日常对话中可使用的 HealthKit 信号。开关表示 Kelivo 可以尝试读取该范围，实际授权仍由 iOS 管理。';
+      '当前助手在日常对话中可使用的 HealthKit 信号。开关表示 StudyPi 可以尝试读取该范围，实际授权仍由 iOS 管理。';
 
   @override
   String healthDataSettingsBadge(int selected, int total) {
@@ -8384,7 +8379,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get migrationIntroSubtitle =>
-      'Kelivo 将聊天记录迁移到更快的 SQLite 数据库。升级会在应用打开前完成，避免新旧数据同时写入。';
+      'StudyPi 将聊天记录迁移到更快的 SQLite 数据库。升级会在应用打开前完成，避免新旧数据同时写入。';
 
   @override
   String get migrationBackupNote => '迁移开始前，会先导出包含设置、聊天记录和本地文件的 ZIP 备份。';
@@ -8426,14 +8421,14 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get migrationBackingUpSubtitle =>
-      '正在导出设置、聊天记录、上传文件、图片和字体。请保持 Kelivo 开启，等待备份完成。';
+      '正在导出设置、聊天记录、上传文件、图片和字体。请保持 StudyPi 开启，等待备份完成。';
 
   @override
   String get migrationMigratingTitle => '正在迁移到 SQLite';
 
   @override
   String get migrationMigratingSubtitle =>
-      '正在分批写入会话和消息，避免超大聊天记录占满内存。请保持 Kelivo 在前台，等待迁移完成。';
+      '正在分批写入会话和消息，避免超大聊天记录占满内存。请保持 StudyPi 在前台，等待迁移完成。';
 
   @override
   String migrationBackingUpDetail(String fileName) {
@@ -8492,7 +8487,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get migrationCompleteSubtitle =>
-      '你的聊天记录已迁移到 SQLite。请重启 Kelivo 进入升级后的应用。';
+      '你的聊天记录已迁移到 SQLite。请重启 StudyPi 进入升级后的应用。';
 
   @override
   String get migrationConversationCount => '对话';
@@ -8510,7 +8505,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get migrationMissingFilesCount => '缺失文件';
 
   @override
-  String get migrationRestartButton => '重启 Kelivo';
+  String get migrationRestartButton => '重启 StudyPi';
 
   @override
   String get migrationFailedTitle => '迁移失败';
@@ -8536,7 +8531,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get migrationSkipDialogMessage =>
-      'Kelivo 将以空的聊天数据库启动。旧的聊天记录会保留在磁盘上（重命名为 .retired 后缀），但不会被迁移，也不会在应用中显示。之后如需找回，请使用已保存的备份 ZIP。';
+      'StudyPi 将以空的聊天数据库启动。旧的聊天记录会保留在磁盘上（重命名为 .retired 后缀），但不会被迁移，也不会在应用中显示。之后如需找回，请使用已保存的备份 ZIP。';
 
   @override
   String get migrationSkipDialogCancel => '取消';
@@ -8944,7 +8939,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get localSnapshotEnabledTitle => '保留本地副本';
 
   @override
-  String get localSnapshotEnabledSubtitle => 'Kelivo 会定期在本机存一份数据库副本，让数据不只有一份。';
+  String get localSnapshotEnabledSubtitle => 'StudyPi 会定期在本机存一份数据库副本，让数据不只有一份。';
 
   @override
   String get localSnapshotIntervalTitle => '备份频率';
@@ -9741,7 +9736,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get workspaceEnvUpToDate => '已是最新';
 
   @override
-  String get workspaceEnvRestartBanner => '请重启 Kelivo 以完成安装';
+  String get workspaceEnvRestartBanner => '请重启 StudyPi 以完成安装';
 
   @override
   String get workspaceEnvDetectingMirrors => '正在检测最快镜像…';
@@ -9846,7 +9841,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get workspaceEnvNativeExplanation =>
-      '在桌面端，Kelivo 使用系统终端，而不是 Linux 沙箱。';
+      '在桌面端，StudyPi 使用系统终端，而不是 Linux 沙箱。';
 
   @override
   String workspaceEnvNativeShellPath(String path) {
@@ -10755,7 +10750,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get workspaceDesktopFolderMissing => '请选择已存在的文件夹，或输入它的绝对路径。';
 
   @override
-  String get workspaceDesktopManagedHint => '由 Kelivo 为此项目创建并管理文件夹。';
+  String get workspaceDesktopManagedHint => '由 StudyPi 为此项目创建并管理文件夹。';
 
   @override
   String get workspaceDesktopHostHint => '在本机访问文件和执行命令。';
@@ -10988,7 +10983,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get workspaceExternalStorageMessage =>
-      '工作区和 Shell 需要直接读写外部文件夹，请在 Android 系统设置中允许 Kelivo 访问文件。Android 11 及以上需开启“所有文件访问权限”，然后选择要挂载的本地文件夹。';
+      '工作区和 Shell 需要直接读写外部文件夹，请在 Android 系统设置中允许 StudyPi 访问文件。Android 11 及以上需开启“所有文件访问权限”，然后选择要挂载的本地文件夹。';
 
   @override
   String get workspaceExternalGrantAccess => '前往授权';
@@ -11204,7 +11199,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get backgroundSettingsTitle => '后台任务';
 
   @override
-  String get backgroundTaskTitle => 'Kelivo 任务';
+  String get backgroundTaskTitle => 'StudyPi 任务';
 
   @override
   String get backgroundCompleted => '生成完成';
@@ -11333,7 +11328,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get backgroundOverlayIcon => '悬浮窗图标';
 
   @override
-  String get backgroundIconDefault => 'Kelivo 图标';
+  String get backgroundIconDefault => 'StudyPi 图标';
 
   @override
   String get backgroundIconImage => '选择图片';
@@ -11542,7 +11537,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get startupRecoverySnapshotBody =>
-      '即使数据库无法打开，也可以选择本机快照恢复聊天和设置。请勿卸载 Kelivo，卸载会一并删除这些快照。';
+      '即使数据库无法打开，也可以选择本机快照恢复聊天和设置。请勿卸载 StudyPi，卸载会一并删除这些快照。';
 
   @override
   String get startupRecoverySnapshotEmpty => '未在本机找到数据库快照。请先导出数据，再尝试其他恢复操作。';
@@ -11552,7 +11547,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String startupRecoverySnapshotConfirm(String when) {
-    return '将聊天和设置恢复到 $when 的快照？快照之后的更改不会包含在内。现有附件文件和快照会保留，Kelivo 将重启以完成恢复。';
+    return '将聊天和设置恢复到 $when 的快照？快照之后的更改不会包含在内。现有附件文件和快照会保留，StudyPi 将重启以完成恢复。';
   }
 
   @override
@@ -11561,7 +11556,7 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String get startupRecoverySnapshotReady => '快照已准备好，请重启 Kelivo 完成恢复。';
+  String get startupRecoverySnapshotReady => '快照已准备好，请重启 StudyPi 完成恢复。';
 
   @override
   String get scheduledTasksTitle => '定时任务';
@@ -11632,7 +11627,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get scheduledTasksReliability =>
-      '建议在电池设置中允许 Kelivo 后台运行。强行停止后需重新打开应用。错过的任务不会补跑，执行时间跟随设备时区。';
+      '建议在电池设置中允许 StudyPi 后台运行。强行停止后需重新打开应用。错过的任务不会补跑，执行时间跟随设备时区。';
 
   @override
   String get scheduledTasksExecutionDetail =>
@@ -11809,7 +11804,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get scheduledTasksDesktopReliability =>
-      '仅在 Kelivo 运行时执行，最小化或驻留托盘时也会继续。退出或电脑休眠期间错过的任务不会补运行，也不会自动启动应用。';
+      '仅在 StudyPi 运行时执行，最小化或驻留托盘时也会继续。退出或电脑休眠期间错过的任务不会补运行，也不会自动启动应用。';
 
   @override
   String get scheduledTasksDesktopExecutionDetail =>
@@ -12104,7 +12099,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get scheduledTasksIOSDetail =>
-      '受 iOS 后台限制，Kelivo 不能在指定时间自动唤醒并运行模型。此功能会在 App 可运行时提前准备内容，由系统到点展示通知。每次仅准备下一次结果；离开 App 后不保证准备完成，后续任务需再次打开 Kelivo 才能补充。';
+      '受 iOS 后台限制，StudyPi 不能在指定时间自动唤醒并运行模型。此功能会在 App 可运行时提前准备内容，由系统到点展示通知。每次仅准备下一次结果；离开 App 后不保证准备完成，后续任务需再次打开 StudyPi 才能补充。';
 
   @override
   String get scheduledTasksContextPolicy => '对话上下文';
@@ -12168,7 +12163,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get scheduledTasksCancelled => '已取消';
 
   @override
-  String get scheduledTasksReminderBody => '定时任务已到期，打开 Kelivo 继续。';
+  String get scheduledTasksReminderBody => '定时任务已到期，打开 StudyPi 继续。';
 
   @override
   String get scheduledTasksResultBody => '定时任务结果已准备好。';
@@ -12182,7 +12177,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get scheduledTasksAllowPreparationTip =>
-      '在 Kelivo 可运行时，提前生成下一次任务的结果，到期前不会显示在聊天中。仅使用文字，不使用工具、附件或自定义请求体；调用模型可能产生费用。';
+      '在 StudyPi 可运行时，提前生成下一次任务的结果，到期前不会显示在聊天中。仅使用文字，不使用工具、附件或自定义请求体；调用模型可能产生费用。';
 
   @override
   String get scheduledTasksContextPolicyTip =>
@@ -12190,7 +12185,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get scheduledTasksPreparationWindowTip =>
-      '允许在任务到期前多久开始准备，最长 24 小时。例如第二天早上提醒，前一天中午打开 Kelivo 时就有机会准备。时间越长，准备机会越多，但内容也可能更早过时。不会改变任务时间，也不代表能在后台定时运行。「立刻准备」不受这项自动等待和准备次数上限限制。';
+      '允许在任务到期前多久开始准备，最长 24 小时。例如第二天早上提醒，前一天中午打开 StudyPi 时就有机会准备。时间越长，准备机会越多，但内容也可能更早过时。不会改变任务时间，也不代表能在后台定时运行。「立刻准备」不受这项自动等待和准备次数上限限制。';
 
   @override
   String get scheduledTasksPreparationAttemptsTip =>
@@ -12202,7 +12197,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get scheduledTasksUnavailableTip =>
-      '到期时没有可用结果、也无法运行任务，就发送提醒或跳过本次。提醒不包含模型生成的回答，且需要开启通知。如果到期时 Kelivo 正在打开运行，可直接执行任务。';
+      '到期时没有可用结果、也无法运行任务，就发送提醒或跳过本次。提醒不包含模型生成的回答，且需要开启通知。如果到期时 StudyPi 正在打开运行，可直接执行任务。';
 
   @override
   String get scheduledTasksNotifyTip =>
@@ -12378,14 +12373,14 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get phoneControlAssistantHint =>
-      '需要同时完成两项设置：在系统无障碍设置中启用“Kelivo 手机控制”，并在要使用的助手 → 本地工具中开启“手机控制”（也可从对话工具菜单开启）。每个助手单独配置，执行任务时请保持手机解锁。';
+      '需要同时完成两项设置：在系统无障碍设置中启用“StudyPi 手机控制”，并在要使用的助手 → 本地工具中开启“手机控制”（也可从对话工具菜单开启）。每个助手单独配置，执行任务时请保持手机解锁。';
 
   @override
   String get phoneControlRestrictedTitle => '无法开启无障碍？';
 
   @override
   String get phoneControlRestrictedHint =>
-      '部分下载的 APK 需要先在应用信息右上角菜单中选择“允许受限制的设置”。点击打开 Kelivo 应用信息，完成后再返回无障碍设置。';
+      '部分下载的 APK 需要先在应用信息右上角菜单中选择“允许受限制的设置”。点击打开 StudyPi 应用信息，完成后再返回无障碍设置。';
 
   @override
   String get phoneControlEnableAssistant => '允许此助手使用手机控制';
@@ -12478,6 +12473,351 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get mcpOAuthExchangingToken => '正在完成登录…';
+
+  @override
+  String get studyProjectsTitle => '学习项目';
+
+  @override
+  String get studyProjectCreate => '新建项目';
+
+  @override
+  String get studyProjectEdit => '编辑项目';
+
+  @override
+  String get studyProjectDelete => '删除项目';
+
+  @override
+  String studyProjectDeleteMessage(String title) {
+    return '确定删除项目「$title」？项目中的材料和笔记会一并删除，已关联的讨论将保留为普通对话。';
+  }
+
+  @override
+  String get studyProjectsEmptyTitle => '还没有学习项目';
+
+  @override
+  String get studyProjectsEmptyDescription => '材料、讨论、笔记都在项目里，引用可回到原文';
+
+  @override
+  String get studyProjectsSelectHint => '从左侧选择一个学习项目，查看材料、讨论与笔记。';
+
+  @override
+  String get studyProjectTitleLabel => '项目名称';
+
+  @override
+  String get studyProjectTitleHint => '例如：认知负荷理论';
+
+  @override
+  String get studyProjectGoalLabel => '学习目标（可选）';
+
+  @override
+  String get studyProjectGoalHint => '正在解决的问题、章节或研究主题';
+
+  @override
+  String get studyProjectGoalEmpty => '未设置学习目标';
+
+  @override
+  String get studyProjectModeLabel => '学习方式';
+
+  @override
+  String get studyModeExplain => '直接讲解';
+
+  @override
+  String get studyModeGuidedPractice => '引导练习';
+
+  @override
+  String studyProjectUpdatedAt(String date) {
+    return '更新于 $date';
+  }
+
+  @override
+  String studyProjectMaterialCount(int count) {
+    return '$count 份材料';
+  }
+
+  @override
+  String get studyProjectSave => '保存';
+
+  @override
+  String get studyProjectCancel => '取消';
+
+  @override
+  String get studyProjectConfirmDelete => '删除';
+
+  @override
+  String get studyProjectMoreActions => '更多操作';
+
+  @override
+  String get studyMaterialsSection => '材料';
+
+  @override
+  String get studyMaterialsImport => '导入';
+
+  @override
+  String get studyMaterialsImporting => '正在导入材料…';
+
+  @override
+  String get studyMaterialsEmpty => '还没有导入材料，可导入 PDF、Markdown 或文本文件。';
+
+  @override
+  String studyMaterialsImportFailed(String error) {
+    return '导入材料失败：$error';
+  }
+
+  @override
+  String get studyDocStatusReady => '可用';
+
+  @override
+  String get studyDocStatusScannedNeedsOcr => '扫描件，需要解析稿';
+
+  @override
+  String get studyDocStatusUnreadable => '无法读取';
+
+  @override
+  String get studyDocStatusPendingSourceLink => '待确认原文';
+
+  @override
+  String get studyDocScannedHint => '用 MinerU 解析后添加解析稿即可阅读与引用';
+
+  @override
+  String studyDocPhysicalPages(int count) {
+    return '共 $count 页';
+  }
+
+  @override
+  String studyDocCorpusPages(String range) {
+    return '教材 $range 页';
+  }
+
+  @override
+  String get studyDocIndexed => '已建立索引';
+
+  @override
+  String get studyDocNotIndexed => '未建立索引';
+
+  @override
+  String get studyDocIndexing => '正在建立索引';
+
+  @override
+  String get studyDocActionRead => '阅读';
+
+  @override
+  String get studyDocActionBuildIndex => '建立索引';
+
+  @override
+  String get studyDocActionRebuildIndex => '重建索引';
+
+  @override
+  String get studyDocActionAttachParse => '添加解析稿';
+
+  @override
+  String get studyDocActionConfirmSource => '确认原文';
+
+  @override
+  String get studyDocActionDelete => '删除';
+
+  @override
+  String get studyDocDeleteTitle => '删除材料';
+
+  @override
+  String studyDocDeleteMessage(String title) {
+    return '确定从项目中删除「$title」？';
+  }
+
+  @override
+  String get studyDocConfirmSourceTitle => '确认原文 PDF';
+
+  @override
+  String get studyDocAttachMarkdownTitle => '选择解析稿（.md）';
+
+  @override
+  String get studyDocAttachContentListTitle => '选择页码映射（.json，可选）';
+
+  @override
+  String studyDocIndexFailed(String error) {
+    return '建立索引失败：$error';
+  }
+
+  @override
+  String get studyDiscussionsSection => '讨论';
+
+  @override
+  String get studyDiscussionsStart => '开始讨论';
+
+  @override
+  String get studyDiscussionsEmpty => '还没有关联的讨论。';
+
+  @override
+  String get studyDiscussionsCaption => '在项目讨论中，回复会引用材料原文并标注是否核实。';
+
+  @override
+  String get studyDiscussionsUnnamed => '未命名讨论';
+
+  @override
+  String get studyNotesSection => '笔记';
+
+  @override
+  String get studyNotesEmpty => '还没有项目笔记。可从回复引用中保存，或在学习过程中记录。';
+
+  @override
+  String get studyNoteEvidenceGrounded => '有原文依据';
+
+  @override
+  String get studyNoteEvidenceInsufficient => '依据不足';
+
+  @override
+  String studyNoteAnchorsCount(int count) {
+    return '$count 处引用';
+  }
+
+  @override
+  String get studyNoteDetailTitle => '笔记详情';
+
+  @override
+  String get studyNoteAnchorsHeading => '原文锚点';
+
+  @override
+  String get studyNoteNoAnchors => '未附原文锚点。';
+
+  @override
+  String get studyNoteViewSource => '查看原文';
+
+  @override
+  String get studyNoteDeleteTitle => '删除笔记';
+
+  @override
+  String studyNoteDeleteMessage(String title) {
+    return '确定删除笔记「$title」？';
+  }
+
+  @override
+  String get studyReaderSections => '章节目录';
+
+  @override
+  String studyReaderSectionPdfPages(String range) {
+    return 'PDF 第 $range 页';
+  }
+
+  @override
+  String studyReaderSectionSinglePdfPage(int page) {
+    return 'PDF 第 $page 页';
+  }
+
+  @override
+  String get studyReaderPrevSection => '上一节';
+
+  @override
+  String get studyReaderNextSection => '下一节';
+
+  @override
+  String get studyReaderHighlightedQuote => '引用的原文';
+
+  @override
+  String get studyReaderNoIndexNotice => '尚未建立章节索引';
+
+  @override
+  String get studyReaderBuildIndex => '建立索引';
+
+  @override
+  String get studyReaderEmptyText => '该材料暂无可读文本。';
+
+  @override
+  String get studyReaderOpenOriginal => '打开原文件';
+
+  @override
+  String studyReaderOpenOriginalFailed(String error) {
+    return '无法打开原文件：$error';
+  }
+
+  @override
+  String get studyCitationSheetTitle => '引用核查';
+
+  @override
+  String get studyCitationUnavailable => '引用信息暂不可用';
+
+  @override
+  String get studyCitationChecking => '正在核对引用…';
+
+  @override
+  String get studyCitationStatusGrounded => '已核对原文';
+
+  @override
+  String get studyCitationStatusLocatedNoQuote => '已定位，未附原文摘录';
+
+  @override
+  String get studyCitationStatusUnverified => '无法核实';
+
+  @override
+  String get studyCitationMaterialLabel => '材料';
+
+  @override
+  String get studyCitationSectionLabel => '章节';
+
+  @override
+  String studyCitationPdfPage(int page) {
+    return 'PDF 第 $page 页';
+  }
+
+  @override
+  String studyCitationBookPage(int page) {
+    return '教材第 $page 页';
+  }
+
+  @override
+  String get studyCitationSaveAsNote => '存为笔记';
+
+  @override
+  String get studyCitationSaveNoteTitle => '存为笔记';
+
+  @override
+  String get studyCitationNoteTitleLabel => '标题';
+
+  @override
+  String get studyCitationNoteBodyLabel => '笔记内容';
+
+  @override
+  String get studyCitationNoteBodyHint => '记录你的理解、问题或要点…';
+
+  @override
+  String get studyCitationNoteSavedGrounded => '已保存到项目笔记';
+
+  @override
+  String get studyCitationNoteSavedInsufficient => '已保存，但依据不足';
+
+  @override
+  String get studyCitationIssueMalformed => '引用格式有误';
+
+  @override
+  String get studyCitationIssueUnknownDocument => '项目中没有这份材料';
+
+  @override
+  String get studyCitationIssueDocumentNotReady => '材料尚未可读';
+
+  @override
+  String get studyCitationIssueSourceVersionMismatch => '原文已变更';
+
+  @override
+  String get studyCitationIssueMissingLocator => '没有给出任何位置';
+
+  @override
+  String get studyCitationIssueUnknownSection => '索引中没有这个章节';
+
+  @override
+  String get studyCitationIssueSectionUnavailable => '章节索引不可用或已过期，请重建索引';
+
+  @override
+  String get studyCitationIssuePhysicalPageOutOfRange => '超出 PDF 页数';
+
+  @override
+  String get studyCitationIssuePhysicalPageOutsideSection => '页码与摘录所在章节不一致';
+
+  @override
+  String get studyCitationIssueCorpusPageOutOfRange => '超出教材页码范围';
+
+  @override
+  String get studyCitationIssueQuoteTooShort => '摘录太短，无法作为依据';
+
+  @override
+  String get studyCitationIssueQuoteNotFound => '原文中找不到这段摘录';
 }
 
 /// The translations for Chinese, using the Han script (`zh_Hans`).
@@ -12642,7 +12982,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
 
   @override
   String get storageSpaceClearDisplacedDatabasesConfirmMessage =>
-      '确定删除这些保留的旧数据库吗？它们是 Kelivo 重建数据库时留下的，可能是那些聊天记录和设置仅存的一份。删除后无法恢复。';
+      '确定删除这些保留的旧数据库吗？它们是 StudyPi 重建数据库时留下的，可能是那些聊天记录和设置仅存的一份。删除后无法恢复。';
 
   @override
   String get storageSpaceRestoreTracesHint => '恢复完成后保留的旧数据快照。清理不会影响当前应用数据。';
@@ -14083,41 +14423,41 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get backupPageRestartRequired => '需要重启应用';
 
   @override
-  String get backupPageRestartContent => '导入成功。重启 Kelivo 后将安全应用。';
+  String get backupPageRestartContent => '导入成功。重启 StudyPi 后将安全应用。';
 
   @override
   String backupPageRestartContentWithSkipped(int count) {
-    return '导入已完成，但已跳过 $count 个消息顺序非法的会话。重启 Kelivo 后将安全应用已导入的数据。';
+    return '导入已完成，但已跳过 $count 个消息顺序非法的会话。重启 StudyPi 后将安全应用已导入的数据。';
   }
 
   @override
-  String get restartAppFailedMessage => 'Kelivo 无法自动重启，请完全关闭后重新打开。';
+  String get restartAppFailedMessage => 'StudyPi 无法自动重启，请完全关闭后重新打开。';
 
   @override
   String get backupRestoreRolledBackTitle => '恢复已回滚';
 
   @override
-  String get backupRestoreRolledBackContent => '恢复未能完成。Kelivo 已验证并保留原有数据。';
+  String get backupRestoreRolledBackContent => '恢复未能完成。StudyPi 已验证并保留原有数据。';
 
   @override
   String get backupRestoreFailureTitle => '恢复需要处理';
 
   @override
   String get backupRestoreFailureContent =>
-      'Kelivo 无法验证完整的原有或新数据，因此未打开聊天数据。请关闭 Kelivo 后重试；若问题反复出现，请保留诊断码以便支持人员排查。';
+      'StudyPi 无法验证完整的原有或新数据，因此未打开聊天数据。请关闭 StudyPi 后重试；若问题反复出现，请保留诊断码以便支持人员排查。';
 
   @override
-  String get backupRestoreBusinessLeaseUnavailableTitle => 'Kelivo 已在运行';
+  String get backupRestoreBusinessLeaseUnavailableTitle => 'StudyPi 已在运行';
 
   @override
   String get backupRestoreBusinessLeaseUnavailableContent =>
-      'Kelivo 的数据仍被另一个应用进程占用。请关闭其他 Kelivo 窗口后重新启动；当前进程尚未打开聊天数据。';
+      'StudyPi 的数据仍被另一个应用进程占用。请关闭其他 StudyPi 窗口后重新启动；当前进程尚未打开聊天数据。';
 
   @override
   String get restoreProgressTitle => '正在恢复备份';
 
   @override
-  String get restoreProgressWarning => '请保持 Kelivo 开启直到完成。此时关闭应用，下次启动会从头再来一次。';
+  String get restoreProgressWarning => '请保持 StudyPi 开启直到完成。此时关闭应用，下次启动会从头再来一次。';
 
   @override
   String get restoreProgressStageCheckingBackup => '正在校验备份';
@@ -14138,7 +14478,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get restoreProgressStageFinishing => '即将完成';
 
   @override
-  String get backupRestoreFailureRestartButton => '重启 Kelivo';
+  String get backupRestoreFailureRestartButton => '重启 StudyPi';
 
   @override
   String get backupRestoreFailureCopyButton => '复制诊断码';
@@ -14176,14 +14516,14 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get startupRecoveryRepairFailed => '修复未能解决问题。请先导出数据副本，然后重置。';
 
   @override
-  String get startupRecoveryResetFailed => '重置失败。请彻底关闭 Kelivo 后重新打开。';
+  String get startupRecoveryResetFailed => '重置失败。请彻底关闭 StudyPi 后重新打开。';
 
   @override
   String get startupRecoveryResetDialogTitle => '重置全部数据？';
 
   @override
   String get startupRecoveryResetDialogContent =>
-      '这将永久删除本设备上 Kelivo 的数据库并重新开始。如果之后可能还需要这些数据，请先导出一份副本。此操作无法撤销。';
+      '这将永久删除本设备上 StudyPi 的数据库并重新开始。如果之后可能还需要这些数据，请先导出一份副本。此操作无法撤销。';
 
   @override
   String get startupRecoveryResetDialogConfirm => '重置并重启';
@@ -14295,17 +14635,17 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
 
   @override
   String get startupRecoveryDangerBody =>
-      '重置会永久删除本设备上 Kelivo 的数据库。请先导出数据副本——重置同时会销毁排查根本问题所需的证据。';
+      '重置会永久删除本设备上 StudyPi 的数据库。请先导出数据副本——重置同时会销毁排查根本问题所需的证据。';
 
   @override
   String get startupRecoveryResetAcknowledge => '我已导出副本，或不需要这些数据。';
 
   @override
-  String get startupDatabaseUpdateRequiredTitle => '请更新 Kelivo 以继续';
+  String get startupDatabaseUpdateRequiredTitle => '请更新 StudyPi 以继续';
 
   @override
   String get startupDatabaseUpdateRequiredContent =>
-      '本设备上的聊天数据库由更新版本的 Kelivo 创建，当前版本无法打开。数据未被改动。请安装最新版 Kelivo 后重新打开。';
+      '本设备上的聊天数据库由更新版本的 StudyPi 创建，当前版本无法打开。数据未被改动。请安装最新版 StudyPi 后重新打开。';
 
   @override
   String get startupDatabaseUpdateRequiredDowngradeTitle => '若要改用旧版';
@@ -14316,7 +14656,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
 
   @override
   String get startupDatabaseUpdateRequiredDowngradeStep1 =>
-      '先安装并打开最新版 Kelivo，在「设置 → 数据备份」导出一份备份文件。';
+      '先安装并打开最新版 StudyPi，在「设置 → 数据备份」导出一份备份文件。';
 
   @override
   String startupDatabaseUpdateRequiredDowngradeStep2(String url) {
@@ -14375,7 +14715,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
 
   @override
   String backupPageForwardCompatBody(int backupVersion, int currentVersion) {
-    return '这份备份由更新版本的 Kelivo 创建（数据格式 $backupVersion，当前版本支持 $currentVersion），且未声明旧版本能否读取。\n\n你可以继续导入：当前版本不认识的内容会被跳过，备份文件本身不会被修改。但如果新版本改变了已有数据的存储方式，部分内容可能会被错误导入。\n\n更稳妥的做法是先升级 Kelivo。';
+    return '这份备份由更新版本的 StudyPi 创建（数据格式 $backupVersion，当前版本支持 $currentVersion），且未声明旧版本能否读取。\n\n你可以继续导入：当前版本不认识的内容会被跳过，备份文件本身不会被修改。但如果新版本改变了已有数据的存储方式，部分内容可能会被错误导入。\n\n更稳妥的做法是先升级 StudyPi。';
   }
 
   @override
@@ -14386,7 +14726,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
 
   @override
   String get backupPageSchemaTooNewMessage =>
-      '这份备份由更新版本的 Kelivo 创建，当前版本无法读取。请先升级 Kelivo 后重试。';
+      '这份备份由更新版本的 StudyPi 创建，当前版本无法读取。请先升级 StudyPi 后重试。';
 
   @override
   String get backupPageBackupUploaded => '已上传备份';
@@ -14572,7 +14912,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
 
   @override
   String backupPageCherryStudioUnsupportedBackupVersion(String version) {
-    return '此备份使用 Cherry Studio 格式版本 $version，Kelivo 目前尚无法导入。请改用 Cherry Studio v1 导出备份，或等待后续版本支持 Cherry Studio v2。';
+    return '此备份使用 Cherry Studio 格式版本 $version，StudyPi 目前尚无法导入。请改用 Cherry Studio v1 导出备份，或等待后续版本支持 Cherry Studio v2。';
   }
 
   @override
@@ -15446,11 +15786,6 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   @override
   String sideDrawerUpdateTitle(String version) {
     return '发现新版本：$version';
-  }
-
-  @override
-  String sideDrawerUpdateTitleWithBuild(String version, int build) {
-    return '发现新版本：$version ($build)';
   }
 
   @override
@@ -17395,7 +17730,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get aboutPageKelivoSearchAlreadyUnlocked => '这扇门你已经推开过了。';
 
   @override
-  String get aboutPageAppName => 'Kelivo';
+  String get aboutPageAppName => 'StudyPi';
 
   @override
   String get aboutPageAppDescription => '开源 AI 助手';
@@ -18396,7 +18731,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   }
 
   @override
-  String get settingsShare => 'Kelivo - 开源AI助手';
+  String get settingsShare => 'StudyPi - 开源AI助手';
 
   @override
   String get searchProviderBingLocalDescription =>
@@ -18882,7 +19217,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
 
   @override
   String get healthDataSettingsDescription =>
-      '当前助手在日常对话中可使用的 HealthKit 信号。开关表示 Kelivo 可以尝试读取该范围，实际授权仍由 iOS 管理。';
+      '当前助手在日常对话中可使用的 HealthKit 信号。开关表示 StudyPi 可以尝试读取该范围，实际授权仍由 iOS 管理。';
 
   @override
   String healthDataSettingsBadge(int selected, int total) {
@@ -20786,7 +21121,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
 
   @override
   String get migrationIntroSubtitle =>
-      'Kelivo 将聊天记录迁移到更快的 SQLite 数据库。升级会在应用打开前完成，避免新旧数据同时写入。';
+      'StudyPi 将聊天记录迁移到更快的 SQLite 数据库。升级会在应用打开前完成，避免新旧数据同时写入。';
 
   @override
   String get migrationBackupNote => '迁移开始前，会先导出包含设置、聊天记录和本地文件的 ZIP 备份。';
@@ -20828,14 +21163,14 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
 
   @override
   String get migrationBackingUpSubtitle =>
-      '正在导出设置、聊天记录、上传文件、图片和字体。请保持 Kelivo 开启，等待备份完成。';
+      '正在导出设置、聊天记录、上传文件、图片和字体。请保持 StudyPi 开启，等待备份完成。';
 
   @override
   String get migrationMigratingTitle => '正在迁移到 SQLite';
 
   @override
   String get migrationMigratingSubtitle =>
-      '正在分批写入会话和消息，避免超大聊天记录占满内存。请保持 Kelivo 在前台，等待迁移完成。';
+      '正在分批写入会话和消息，避免超大聊天记录占满内存。请保持 StudyPi 在前台，等待迁移完成。';
 
   @override
   String migrationBackingUpDetail(String fileName) {
@@ -20894,7 +21229,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
 
   @override
   String get migrationCompleteSubtitle =>
-      '你的聊天记录已迁移到 SQLite。请重启 Kelivo 进入升级后的应用。';
+      '你的聊天记录已迁移到 SQLite。请重启 StudyPi 进入升级后的应用。';
 
   @override
   String get migrationConversationCount => '对话';
@@ -20912,7 +21247,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get migrationMissingFilesCount => '缺失文件';
 
   @override
-  String get migrationRestartButton => '重启 Kelivo';
+  String get migrationRestartButton => '重启 StudyPi';
 
   @override
   String get migrationFailedTitle => '迁移失败';
@@ -20938,7 +21273,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
 
   @override
   String get migrationSkipDialogMessage =>
-      'Kelivo 将以空的聊天数据库启动。旧的聊天记录会保留在磁盘上（重命名为 .retired 后缀），但不会被迁移，也不会在应用中显示。之后如需找回，请使用已保存的备份 ZIP。';
+      'StudyPi 将以空的聊天数据库启动。旧的聊天记录会保留在磁盘上（重命名为 .retired 后缀），但不会被迁移，也不会在应用中显示。之后如需找回，请使用已保存的备份 ZIP。';
 
   @override
   String get migrationSkipDialogCancel => '取消';
@@ -21346,7 +21681,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get localSnapshotEnabledTitle => '保留本地副本';
 
   @override
-  String get localSnapshotEnabledSubtitle => 'Kelivo 会定期在本机存一份数据库副本，让数据不只有一份。';
+  String get localSnapshotEnabledSubtitle => 'StudyPi 会定期在本机存一份数据库副本，让数据不只有一份。';
 
   @override
   String get localSnapshotIntervalTitle => '备份频率';
@@ -22143,7 +22478,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get workspaceEnvUpToDate => '已是最新';
 
   @override
-  String get workspaceEnvRestartBanner => '请重启 Kelivo 以完成安装';
+  String get workspaceEnvRestartBanner => '请重启 StudyPi 以完成安装';
 
   @override
   String get workspaceEnvDetectingMirrors => '正在检测最快镜像…';
@@ -22248,7 +22583,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
 
   @override
   String get workspaceEnvNativeExplanation =>
-      '在桌面端，Kelivo 使用系统终端，而不是 Linux 沙箱。';
+      '在桌面端，StudyPi 使用系统终端，而不是 Linux 沙箱。';
 
   @override
   String workspaceEnvNativeShellPath(String path) {
@@ -23157,7 +23492,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get workspaceDesktopFolderMissing => '请选择已存在的文件夹，或输入它的绝对路径。';
 
   @override
-  String get workspaceDesktopManagedHint => '由 Kelivo 为此项目创建并管理文件夹。';
+  String get workspaceDesktopManagedHint => '由 StudyPi 为此项目创建并管理文件夹。';
 
   @override
   String get workspaceDesktopHostHint => '在本机访问文件和执行命令。';
@@ -23390,7 +23725,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
 
   @override
   String get workspaceExternalStorageMessage =>
-      '工作区和 Shell 需要直接读写外部文件夹，请在 Android 系统设置中允许 Kelivo 访问文件。Android 11 及以上需开启“所有文件访问权限”，然后选择要挂载的本地文件夹。';
+      '工作区和 Shell 需要直接读写外部文件夹，请在 Android 系统设置中允许 StudyPi 访问文件。Android 11 及以上需开启“所有文件访问权限”，然后选择要挂载的本地文件夹。';
 
   @override
   String get workspaceExternalGrantAccess => '前往授权';
@@ -23606,7 +23941,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get backgroundSettingsTitle => '后台任务';
 
   @override
-  String get backgroundTaskTitle => 'Kelivo 任务';
+  String get backgroundTaskTitle => 'StudyPi 任务';
 
   @override
   String get backgroundCompleted => '生成完成';
@@ -23735,7 +24070,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get backgroundOverlayIcon => '悬浮窗图标';
 
   @override
-  String get backgroundIconDefault => 'Kelivo 图标';
+  String get backgroundIconDefault => 'StudyPi 图标';
 
   @override
   String get backgroundIconImage => '选择图片';
@@ -23944,7 +24279,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
 
   @override
   String get startupRecoverySnapshotBody =>
-      '即使数据库无法打开，也可以选择本机快照恢复聊天和设置。请勿卸载 Kelivo，卸载会一并删除这些快照。';
+      '即使数据库无法打开，也可以选择本机快照恢复聊天和设置。请勿卸载 StudyPi，卸载会一并删除这些快照。';
 
   @override
   String get startupRecoverySnapshotEmpty => '未在本机找到数据库快照。请先导出数据，再尝试其他恢复操作。';
@@ -23954,7 +24289,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
 
   @override
   String startupRecoverySnapshotConfirm(String when) {
-    return '将聊天和设置恢复到 $when 的快照？快照之后的更改不会包含在内。现有附件文件和快照会保留，Kelivo 将重启以完成恢复。';
+    return '将聊天和设置恢复到 $when 的快照？快照之后的更改不会包含在内。现有附件文件和快照会保留，StudyPi 将重启以完成恢复。';
   }
 
   @override
@@ -23963,7 +24298,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   }
 
   @override
-  String get startupRecoverySnapshotReady => '快照已准备好，请重启 Kelivo 完成恢复。';
+  String get startupRecoverySnapshotReady => '快照已准备好，请重启 StudyPi 完成恢复。';
 
   @override
   String get scheduledTasksTitle => '定时任务';
@@ -24034,7 +24369,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
 
   @override
   String get scheduledTasksReliability =>
-      '建议在电池设置中允许 Kelivo 后台运行。强行停止后需重新打开应用。错过的任务不会补跑，执行时间跟随设备时区。';
+      '建议在电池设置中允许 StudyPi 后台运行。强行停止后需重新打开应用。错过的任务不会补跑，执行时间跟随设备时区。';
 
   @override
   String get scheduledTasksExecutionDetail =>
@@ -24211,7 +24546,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
 
   @override
   String get scheduledTasksDesktopReliability =>
-      '仅在 Kelivo 运行时执行，最小化或驻留托盘时也会继续。退出或电脑休眠期间错过的任务不会补运行，也不会自动启动应用。';
+      '仅在 StudyPi 运行时执行，最小化或驻留托盘时也会继续。退出或电脑休眠期间错过的任务不会补运行，也不会自动启动应用。';
 
   @override
   String get scheduledTasksDesktopExecutionDetail =>
@@ -24506,7 +24841,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
 
   @override
   String get scheduledTasksIOSDetail =>
-      '受 iOS 后台限制，Kelivo 不能在指定时间自动唤醒并运行模型。此功能会在 App 可运行时提前准备内容，由系统到点展示通知。每次仅准备下一次结果；离开 App 后不保证准备完成，后续任务需再次打开 Kelivo 才能补充。';
+      '受 iOS 后台限制，StudyPi 不能在指定时间自动唤醒并运行模型。此功能会在 App 可运行时提前准备内容，由系统到点展示通知。每次仅准备下一次结果；离开 App 后不保证准备完成，后续任务需再次打开 StudyPi 才能补充。';
 
   @override
   String get scheduledTasksContextPolicy => '对话上下文';
@@ -24570,7 +24905,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
   String get scheduledTasksCancelled => '已取消';
 
   @override
-  String get scheduledTasksReminderBody => '定时任务已到期，打开 Kelivo 继续。';
+  String get scheduledTasksReminderBody => '定时任务已到期，打开 StudyPi 继续。';
 
   @override
   String get scheduledTasksResultBody => '定时任务结果已准备好。';
@@ -24584,7 +24919,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
 
   @override
   String get scheduledTasksAllowPreparationTip =>
-      '在 Kelivo 可运行时，提前生成下一次任务的结果，到期前不会显示在聊天中。仅使用文字，不使用工具、附件或自定义请求体；调用模型可能产生费用。';
+      '在 StudyPi 可运行时，提前生成下一次任务的结果，到期前不会显示在聊天中。仅使用文字，不使用工具、附件或自定义请求体；调用模型可能产生费用。';
 
   @override
   String get scheduledTasksContextPolicyTip =>
@@ -24592,7 +24927,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
 
   @override
   String get scheduledTasksPreparationWindowTip =>
-      '允许在任务到期前多久开始准备，最长 24 小时。例如第二天早上提醒，前一天中午打开 Kelivo 时就有机会准备。时间越长，准备机会越多，但内容也可能更早过时。不会改变任务时间，也不代表能在后台定时运行。「立刻准备」不受这项自动等待和准备次数上限限制。';
+      '允许在任务到期前多久开始准备，最长 24 小时。例如第二天早上提醒，前一天中午打开 StudyPi 时就有机会准备。时间越长，准备机会越多，但内容也可能更早过时。不会改变任务时间，也不代表能在后台定时运行。「立刻准备」不受这项自动等待和准备次数上限限制。';
 
   @override
   String get scheduledTasksPreparationAttemptsTip =>
@@ -24604,7 +24939,7 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
 
   @override
   String get scheduledTasksUnavailableTip =>
-      '到期时没有可用结果、也无法运行任务，就发送提醒或跳过本次。提醒不包含模型生成的回答，且需要开启通知。如果到期时 Kelivo 正在打开运行，可直接执行任务。';
+      '到期时没有可用结果、也无法运行任务，就发送提醒或跳过本次。提醒不包含模型生成的回答，且需要开启通知。如果到期时 StudyPi 正在打开运行，可直接执行任务。';
 
   @override
   String get scheduledTasksNotifyTip =>
@@ -24780,14 +25115,14 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
 
   @override
   String get phoneControlAssistantHint =>
-      '需要同时完成两项设置：在系统无障碍设置中启用“Kelivo 手机控制”，并在要使用的助手 → 本地工具中开启“手机控制”（也可从对话工具菜单开启）。每个助手单独配置，执行任务时请保持手机解锁。';
+      '需要同时完成两项设置：在系统无障碍设置中启用“StudyPi 手机控制”，并在要使用的助手 → 本地工具中开启“手机控制”（也可从对话工具菜单开启）。每个助手单独配置，执行任务时请保持手机解锁。';
 
   @override
   String get phoneControlRestrictedTitle => '无法开启无障碍？';
 
   @override
   String get phoneControlRestrictedHint =>
-      '部分下载的 APK 需要先在应用信息右上角菜单中选择“允许受限制的设置”。点击打开 Kelivo 应用信息，完成后再返回无障碍设置。';
+      '部分下载的 APK 需要先在应用信息右上角菜单中选择“允许受限制的设置”。点击打开 StudyPi 应用信息，完成后再返回无障碍设置。';
 
   @override
   String get phoneControlEnableAssistant => '允许此助手使用手机控制';
@@ -24880,6 +25215,351 @@ class AppLocalizationsZhHans extends AppLocalizationsZh {
 
   @override
   String get mcpOAuthExchangingToken => '正在完成登录…';
+
+  @override
+  String get studyProjectsTitle => '学习项目';
+
+  @override
+  String get studyProjectCreate => '新建项目';
+
+  @override
+  String get studyProjectEdit => '编辑项目';
+
+  @override
+  String get studyProjectDelete => '删除项目';
+
+  @override
+  String studyProjectDeleteMessage(String title) {
+    return '确定删除项目「$title」？项目中的材料和笔记会一并删除，已关联的讨论将保留为普通对话。';
+  }
+
+  @override
+  String get studyProjectsEmptyTitle => '还没有学习项目';
+
+  @override
+  String get studyProjectsEmptyDescription => '材料、讨论、笔记都在项目里，引用可回到原文';
+
+  @override
+  String get studyProjectsSelectHint => '从左侧选择一个学习项目，查看材料、讨论与笔记。';
+
+  @override
+  String get studyProjectTitleLabel => '项目名称';
+
+  @override
+  String get studyProjectTitleHint => '例如：认知负荷理论';
+
+  @override
+  String get studyProjectGoalLabel => '学习目标（可选）';
+
+  @override
+  String get studyProjectGoalHint => '正在解决的问题、章节或研究主题';
+
+  @override
+  String get studyProjectGoalEmpty => '未设置学习目标';
+
+  @override
+  String get studyProjectModeLabel => '学习方式';
+
+  @override
+  String get studyModeExplain => '直接讲解';
+
+  @override
+  String get studyModeGuidedPractice => '引导练习';
+
+  @override
+  String studyProjectUpdatedAt(String date) {
+    return '更新于 $date';
+  }
+
+  @override
+  String studyProjectMaterialCount(int count) {
+    return '$count 份材料';
+  }
+
+  @override
+  String get studyProjectSave => '保存';
+
+  @override
+  String get studyProjectCancel => '取消';
+
+  @override
+  String get studyProjectConfirmDelete => '删除';
+
+  @override
+  String get studyProjectMoreActions => '更多操作';
+
+  @override
+  String get studyMaterialsSection => '材料';
+
+  @override
+  String get studyMaterialsImport => '导入';
+
+  @override
+  String get studyMaterialsImporting => '正在导入材料…';
+
+  @override
+  String get studyMaterialsEmpty => '还没有导入材料，可导入 PDF、Markdown 或文本文件。';
+
+  @override
+  String studyMaterialsImportFailed(String error) {
+    return '导入材料失败：$error';
+  }
+
+  @override
+  String get studyDocStatusReady => '可用';
+
+  @override
+  String get studyDocStatusScannedNeedsOcr => '扫描件，需要解析稿';
+
+  @override
+  String get studyDocStatusUnreadable => '无法读取';
+
+  @override
+  String get studyDocStatusPendingSourceLink => '待确认原文';
+
+  @override
+  String get studyDocScannedHint => '用 MinerU 解析后添加解析稿即可阅读与引用';
+
+  @override
+  String studyDocPhysicalPages(int count) {
+    return '共 $count 页';
+  }
+
+  @override
+  String studyDocCorpusPages(String range) {
+    return '教材 $range 页';
+  }
+
+  @override
+  String get studyDocIndexed => '已建立索引';
+
+  @override
+  String get studyDocNotIndexed => '未建立索引';
+
+  @override
+  String get studyDocIndexing => '正在建立索引';
+
+  @override
+  String get studyDocActionRead => '阅读';
+
+  @override
+  String get studyDocActionBuildIndex => '建立索引';
+
+  @override
+  String get studyDocActionRebuildIndex => '重建索引';
+
+  @override
+  String get studyDocActionAttachParse => '添加解析稿';
+
+  @override
+  String get studyDocActionConfirmSource => '确认原文';
+
+  @override
+  String get studyDocActionDelete => '删除';
+
+  @override
+  String get studyDocDeleteTitle => '删除材料';
+
+  @override
+  String studyDocDeleteMessage(String title) {
+    return '确定从项目中删除「$title」？';
+  }
+
+  @override
+  String get studyDocConfirmSourceTitle => '确认原文 PDF';
+
+  @override
+  String get studyDocAttachMarkdownTitle => '选择解析稿（.md）';
+
+  @override
+  String get studyDocAttachContentListTitle => '选择页码映射（.json，可选）';
+
+  @override
+  String studyDocIndexFailed(String error) {
+    return '建立索引失败：$error';
+  }
+
+  @override
+  String get studyDiscussionsSection => '讨论';
+
+  @override
+  String get studyDiscussionsStart => '开始讨论';
+
+  @override
+  String get studyDiscussionsEmpty => '还没有关联的讨论。';
+
+  @override
+  String get studyDiscussionsCaption => '在项目讨论中，回复会引用材料原文并标注是否核实。';
+
+  @override
+  String get studyDiscussionsUnnamed => '未命名讨论';
+
+  @override
+  String get studyNotesSection => '笔记';
+
+  @override
+  String get studyNotesEmpty => '还没有项目笔记。可从回复引用中保存，或在学习过程中记录。';
+
+  @override
+  String get studyNoteEvidenceGrounded => '有原文依据';
+
+  @override
+  String get studyNoteEvidenceInsufficient => '依据不足';
+
+  @override
+  String studyNoteAnchorsCount(int count) {
+    return '$count 处引用';
+  }
+
+  @override
+  String get studyNoteDetailTitle => '笔记详情';
+
+  @override
+  String get studyNoteAnchorsHeading => '原文锚点';
+
+  @override
+  String get studyNoteNoAnchors => '未附原文锚点。';
+
+  @override
+  String get studyNoteViewSource => '查看原文';
+
+  @override
+  String get studyNoteDeleteTitle => '删除笔记';
+
+  @override
+  String studyNoteDeleteMessage(String title) {
+    return '确定删除笔记「$title」？';
+  }
+
+  @override
+  String get studyReaderSections => '章节目录';
+
+  @override
+  String studyReaderSectionPdfPages(String range) {
+    return 'PDF 第 $range 页';
+  }
+
+  @override
+  String studyReaderSectionSinglePdfPage(int page) {
+    return 'PDF 第 $page 页';
+  }
+
+  @override
+  String get studyReaderPrevSection => '上一节';
+
+  @override
+  String get studyReaderNextSection => '下一节';
+
+  @override
+  String get studyReaderHighlightedQuote => '引用的原文';
+
+  @override
+  String get studyReaderNoIndexNotice => '尚未建立章节索引';
+
+  @override
+  String get studyReaderBuildIndex => '建立索引';
+
+  @override
+  String get studyReaderEmptyText => '该材料暂无可读文本。';
+
+  @override
+  String get studyReaderOpenOriginal => '打开原文件';
+
+  @override
+  String studyReaderOpenOriginalFailed(String error) {
+    return '无法打开原文件：$error';
+  }
+
+  @override
+  String get studyCitationSheetTitle => '引用核查';
+
+  @override
+  String get studyCitationUnavailable => '引用信息暂不可用';
+
+  @override
+  String get studyCitationChecking => '正在核对引用…';
+
+  @override
+  String get studyCitationStatusGrounded => '已核对原文';
+
+  @override
+  String get studyCitationStatusLocatedNoQuote => '已定位，未附原文摘录';
+
+  @override
+  String get studyCitationStatusUnverified => '无法核实';
+
+  @override
+  String get studyCitationMaterialLabel => '材料';
+
+  @override
+  String get studyCitationSectionLabel => '章节';
+
+  @override
+  String studyCitationPdfPage(int page) {
+    return 'PDF 第 $page 页';
+  }
+
+  @override
+  String studyCitationBookPage(int page) {
+    return '教材第 $page 页';
+  }
+
+  @override
+  String get studyCitationSaveAsNote => '存为笔记';
+
+  @override
+  String get studyCitationSaveNoteTitle => '存为笔记';
+
+  @override
+  String get studyCitationNoteTitleLabel => '标题';
+
+  @override
+  String get studyCitationNoteBodyLabel => '笔记内容';
+
+  @override
+  String get studyCitationNoteBodyHint => '记录你的理解、问题或要点…';
+
+  @override
+  String get studyCitationNoteSavedGrounded => '已保存到项目笔记';
+
+  @override
+  String get studyCitationNoteSavedInsufficient => '已保存，但依据不足';
+
+  @override
+  String get studyCitationIssueMalformed => '引用格式有误';
+
+  @override
+  String get studyCitationIssueUnknownDocument => '项目中没有这份材料';
+
+  @override
+  String get studyCitationIssueDocumentNotReady => '材料尚未可读';
+
+  @override
+  String get studyCitationIssueSourceVersionMismatch => '原文已变更';
+
+  @override
+  String get studyCitationIssueMissingLocator => '没有给出任何位置';
+
+  @override
+  String get studyCitationIssueUnknownSection => '索引中没有这个章节';
+
+  @override
+  String get studyCitationIssueSectionUnavailable => '章节索引不可用或已过期，请重建索引';
+
+  @override
+  String get studyCitationIssuePhysicalPageOutOfRange => '超出 PDF 页数';
+
+  @override
+  String get studyCitationIssuePhysicalPageOutsideSection => '页码与摘录所在章节不一致';
+
+  @override
+  String get studyCitationIssueCorpusPageOutOfRange => '超出教材页码范围';
+
+  @override
+  String get studyCitationIssueQuoteTooShort => '摘录太短，无法作为依据';
+
+  @override
+  String get studyCitationIssueQuoteNotFound => '原文中找不到这段摘录';
 }
 
 /// The translations for Chinese, using the Han script (`zh_Hant`).
@@ -25044,7 +25724,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get storageSpaceClearDisplacedDatabasesConfirmMessage =>
-      '確定刪除這些保留的舊資料庫嗎？它們是 Kelivo 重建資料庫時留下的，可能是那些聊天記錄和設定僅存的一份。刪除後無法復原。';
+      '確定刪除這些保留的舊資料庫嗎？它們是 StudyPi 重建資料庫時留下的，可能是那些聊天記錄和設定僅存的一份。刪除後無法復原。';
 
   @override
   String get storageSpaceRestoreTracesHint => '還原完成後保留的舊資料快照。清理不會影響目前的應用程式資料。';
@@ -26485,42 +27165,42 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get backupPageRestartRequired => '需要重啟應用程式';
 
   @override
-  String get backupPageRestartContent => '匯入成功。重新啟動 Kelivo 後將安全套用。';
+  String get backupPageRestartContent => '匯入成功。重新啟動 StudyPi 後將安全套用。';
 
   @override
   String backupPageRestartContentWithSkipped(int count) {
-    return '匯入已完成，但已略過 $count 個訊息順序無效的會話。重新啟動 Kelivo 後將安全套用已匯入的資料。';
+    return '匯入已完成，但已略過 $count 個訊息順序無效的會話。重新啟動 StudyPi 後將安全套用已匯入的資料。';
   }
 
   @override
-  String get restartAppFailedMessage => 'Kelivo 無法自動重新啟動，請完全關閉後再重新開啟。';
+  String get restartAppFailedMessage => 'StudyPi 無法自動重新啟動，請完全關閉後再重新開啟。';
 
   @override
   String get backupRestoreRolledBackTitle => '已保留原有資料';
 
   @override
-  String get backupRestoreRolledBackContent => '還原未能完成。Kelivo 已驗證並保留先前的資料。';
+  String get backupRestoreRolledBackContent => '還原未能完成。StudyPi 已驗證並保留先前的資料。';
 
   @override
   String get backupRestoreFailureTitle => '還原需要處理';
 
   @override
   String get backupRestoreFailureContent =>
-      'Kelivo 無法驗證完整的原有或新資料，因此未開啟聊天資料。請關閉 Kelivo 後重試；若問題持續發生，請保留診斷碼以供支援人員排查。';
+      'StudyPi 無法驗證完整的原有或新資料，因此未開啟聊天資料。請關閉 StudyPi 後重試；若問題持續發生，請保留診斷碼以供支援人員排查。';
 
   @override
-  String get backupRestoreBusinessLeaseUnavailableTitle => 'Kelivo 已在執行';
+  String get backupRestoreBusinessLeaseUnavailableTitle => 'StudyPi 已在執行';
 
   @override
   String get backupRestoreBusinessLeaseUnavailableContent =>
-      'Kelivo 的資料仍由另一個應用程式程序使用。請關閉其他 Kelivo 視窗後重新啟動；目前程序尚未開啟聊天資料。';
+      'StudyPi 的資料仍由另一個應用程式程序使用。請關閉其他 StudyPi 視窗後重新啟動；目前程序尚未開啟聊天資料。';
 
   @override
   String get restoreProgressTitle => '正在還原備份';
 
   @override
   String get restoreProgressWarning =>
-      '請保持 Kelivo 開啟直到完成。此時關閉應用程式，下次啟動會從頭再來一次。';
+      '請保持 StudyPi 開啟直到完成。此時關閉應用程式，下次啟動會從頭再來一次。';
 
   @override
   String get restoreProgressStageCheckingBackup => '正在驗證備份';
@@ -26541,7 +27221,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get restoreProgressStageFinishing => '即將完成';
 
   @override
-  String get backupRestoreFailureRestartButton => '重新啟動 Kelivo';
+  String get backupRestoreFailureRestartButton => '重新啟動 StudyPi';
 
   @override
   String get backupRestoreFailureCopyButton => '複製診斷碼';
@@ -26579,14 +27259,14 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get startupRecoveryRepairFailed => '修復未能解決問題。請先匯出資料副本，然後重設。';
 
   @override
-  String get startupRecoveryResetFailed => '重設失敗。請完全關閉 Kelivo 後再重新開啟。';
+  String get startupRecoveryResetFailed => '重設失敗。請完全關閉 StudyPi 後再重新開啟。';
 
   @override
   String get startupRecoveryResetDialogTitle => '重設全部資料？';
 
   @override
   String get startupRecoveryResetDialogContent =>
-      '這會永久刪除本裝置上 Kelivo 的資料庫並重新開始。如果之後可能還需要這些資料，請先匯出一份副本。此操作無法復原。';
+      '這會永久刪除本裝置上 StudyPi 的資料庫並重新開始。如果之後可能還需要這些資料，請先匯出一份副本。此操作無法復原。';
 
   @override
   String get startupRecoveryResetDialogConfirm => '重設並重新啟動';
@@ -26698,17 +27378,17 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get startupRecoveryDangerBody =>
-      '重設會永久刪除本裝置上 Kelivo 的資料庫。請先匯出資料副本——重設同時會銷毀排查根本問題所需的證據。';
+      '重設會永久刪除本裝置上 StudyPi 的資料庫。請先匯出資料副本——重設同時會銷毀排查根本問題所需的證據。';
 
   @override
   String get startupRecoveryResetAcknowledge => '我已匯出副本，或不需要這些資料。';
 
   @override
-  String get startupDatabaseUpdateRequiredTitle => '請更新 Kelivo 以繼續';
+  String get startupDatabaseUpdateRequiredTitle => '請更新 StudyPi 以繼續';
 
   @override
   String get startupDatabaseUpdateRequiredContent =>
-      '本裝置上的聊天資料庫由更新版本的 Kelivo 建立，目前版本無法開啟。資料未被改動。請安裝最新版 Kelivo 後重新開啟。';
+      '本裝置上的聊天資料庫由更新版本的 StudyPi 建立，目前版本無法開啟。資料未被改動。請安裝最新版 StudyPi 後重新開啟。';
 
   @override
   String get startupDatabaseUpdateRequiredDowngradeTitle => '若要改用舊版';
@@ -26719,7 +27399,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get startupDatabaseUpdateRequiredDowngradeStep1 =>
-      '先安裝並開啟最新版 Kelivo，在「設定 → 資料備份」匯出一份備份檔。';
+      '先安裝並開啟最新版 StudyPi，在「設定 → 資料備份」匯出一份備份檔。';
 
   @override
   String startupDatabaseUpdateRequiredDowngradeStep2(String url) {
@@ -26778,7 +27458,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String backupPageForwardCompatBody(int backupVersion, int currentVersion) {
-    return '這份備份由更新版本的 Kelivo 建立（資料格式 $backupVersion，目前版本支援 $currentVersion），且未聲明舊版本能否讀取。\n\n你可以繼續匯入：目前版本不認識的內容會被略過，備份檔案本身不會被修改。但如果新版本改變了既有資料的儲存方式，部分內容可能會被錯誤匯入。\n\n更穩妥的做法是先升級 Kelivo。';
+    return '這份備份由更新版本的 StudyPi 建立（資料格式 $backupVersion，目前版本支援 $currentVersion），且未聲明舊版本能否讀取。\n\n你可以繼續匯入：目前版本不認識的內容會被略過，備份檔案本身不會被修改。但如果新版本改變了既有資料的儲存方式，部分內容可能會被錯誤匯入。\n\n更穩妥的做法是先升級 StudyPi。';
   }
 
   @override
@@ -26789,7 +27469,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get backupPageSchemaTooNewMessage =>
-      '這份備份由更新版本的 Kelivo 建立，目前版本無法讀取。請先升級 Kelivo 後重試。';
+      '這份備份由更新版本的 StudyPi 建立，目前版本無法讀取。請先升級 StudyPi 後重試。';
 
   @override
   String get backupPageBackupUploaded => '已上傳備份';
@@ -26975,7 +27655,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String backupPageCherryStudioUnsupportedBackupVersion(String version) {
-    return '此備份使用 Cherry Studio 格式版本 $version，Kelivo 目前尚無法匯入。請改用 Cherry Studio v1 匯出備份，或等待後續版本支援 Cherry Studio v2。';
+    return '此備份使用 Cherry Studio 格式版本 $version，StudyPi 目前尚無法匯入。請改用 Cherry Studio v1 匯出備份，或等待後續版本支援 Cherry Studio v2。';
   }
 
   @override
@@ -27848,11 +28528,6 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   @override
   String sideDrawerUpdateTitle(String version) {
     return '發現新版本：$version';
-  }
-
-  @override
-  String sideDrawerUpdateTitleWithBuild(String version, int build) {
-    return '發現新版本：$version ($build)';
   }
 
   @override
@@ -29796,7 +30471,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get aboutPageKelivoSearchAlreadyUnlocked => '這扇門你已經推開過了。';
 
   @override
-  String get aboutPageAppName => 'Kelivo';
+  String get aboutPageAppName => 'StudyPi';
 
   @override
   String get aboutPageAppDescription => '開源 AI 助理';
@@ -30871,7 +31546,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   }
 
   @override
-  String get settingsShare => 'Kelivo - 開源AI助理';
+  String get settingsShare => 'StudyPi - 開源AI助理';
 
   @override
   String get searchProviderBingLocalDescription =>
@@ -31359,7 +32034,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get healthDataSettingsDescription =>
-      '目前助手在日常對話中可使用的 HealthKit 訊號。開關表示 Kelivo 可以嘗試讀取該範圍，實際授權仍由 iOS 管理。';
+      '目前助手在日常對話中可使用的 HealthKit 訊號。開關表示 StudyPi 可以嘗試讀取該範圍，實際授權仍由 iOS 管理。';
 
   @override
   String healthDataSettingsBadge(int selected, int total) {
@@ -33263,7 +33938,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get migrationIntroSubtitle =>
-      'Kelivo 將聊天記錄遷移到更快的 SQLite 資料庫。升級會在應用程式開啟前完成，避免新舊資料同時寫入。';
+      'StudyPi 將聊天記錄遷移到更快的 SQLite 資料庫。升級會在應用程式開啟前完成，避免新舊資料同時寫入。';
 
   @override
   String get migrationBackupNote => '遷移開始前，會先匯出包含設定、聊天記錄和本地檔案的 ZIP 備份。';
@@ -33305,14 +33980,14 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get migrationBackingUpSubtitle =>
-      '正在匯出設定、聊天記錄、上傳檔案、圖片和字體。請保持 Kelivo 開啟，等待備份完成。';
+      '正在匯出設定、聊天記錄、上傳檔案、圖片和字體。請保持 StudyPi 開啟，等待備份完成。';
 
   @override
   String get migrationMigratingTitle => '正在遷移到 SQLite';
 
   @override
   String get migrationMigratingSubtitle =>
-      '正在分批寫入對話和訊息，避免超大聊天記錄占滿記憶體。請保持 Kelivo 在前台，等待遷移完成。';
+      '正在分批寫入對話和訊息，避免超大聊天記錄占滿記憶體。請保持 StudyPi 在前台，等待遷移完成。';
 
   @override
   String migrationBackingUpDetail(String fileName) {
@@ -33371,7 +34046,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get migrationCompleteSubtitle =>
-      '你的聊天記錄已遷移到 SQLite。請重啟 Kelivo 進入升級後的應用程式。';
+      '你的聊天記錄已遷移到 SQLite。請重啟 StudyPi 進入升級後的應用程式。';
 
   @override
   String get migrationConversationCount => '對話';
@@ -33389,7 +34064,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get migrationMissingFilesCount => '缺失檔案';
 
   @override
-  String get migrationRestartButton => '重啟 Kelivo';
+  String get migrationRestartButton => '重啟 StudyPi';
 
   @override
   String get migrationFailedTitle => '遷移失敗';
@@ -33415,7 +34090,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get migrationSkipDialogMessage =>
-      'Kelivo 將以空的聊天資料庫啟動。舊的聊天記錄會保留在磁碟上（重新命名為 .retired 後綴），但不會被遷移，也不會在應用程式中顯示。之後如需找回，請使用已儲存的備份 ZIP。';
+      'StudyPi 將以空的聊天資料庫啟動。舊的聊天記錄會保留在磁碟上（重新命名為 .retired 後綴），但不會被遷移，也不會在應用程式中顯示。之後如需找回，請使用已儲存的備份 ZIP。';
 
   @override
   String get migrationSkipDialogCancel => '取消';
@@ -33823,7 +34498,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get localSnapshotEnabledTitle => '保留本機副本';
 
   @override
-  String get localSnapshotEnabledSubtitle => 'Kelivo 會定期在本機存一份資料庫副本，讓資料不只有一份。';
+  String get localSnapshotEnabledSubtitle => 'StudyPi 會定期在本機存一份資料庫副本，讓資料不只有一份。';
 
   @override
   String get localSnapshotIntervalTitle => '備份頻率';
@@ -34620,7 +35295,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get workspaceEnvUpToDate => '已是最新';
 
   @override
-  String get workspaceEnvRestartBanner => '請重新啟動 Kelivo 以完成安裝';
+  String get workspaceEnvRestartBanner => '請重新啟動 StudyPi 以完成安裝';
 
   @override
   String get workspaceEnvDetectingMirrors => '正在偵測最快鏡像…';
@@ -34725,7 +35400,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get workspaceEnvNativeExplanation =>
-      '在桌面端，Kelivo 使用系統終端機，而不是 Linux 沙箱。';
+      '在桌面端，StudyPi 使用系統終端機，而不是 Linux 沙箱。';
 
   @override
   String workspaceEnvNativeShellPath(String path) {
@@ -35635,7 +36310,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get workspaceDesktopFolderMissing => '請選擇已存在的資料夾，或輸入它的絕對路徑。';
 
   @override
-  String get workspaceDesktopManagedHint => '由 Kelivo 為此專案建立並管理資料夾。';
+  String get workspaceDesktopManagedHint => '由 StudyPi 為此專案建立並管理資料夾。';
 
   @override
   String get workspaceDesktopHostHint => '在本機存取檔案和執行命令。';
@@ -35869,7 +36544,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get workspaceExternalStorageMessage =>
-      '工作區和 Shell 需要直接讀寫外部資料夾，請在 Android 系統設定中允許 Kelivo 存取檔案。Android 11 及以上需開啟「所有檔案存取權限」，然後選擇要掛載的本機資料夾。';
+      '工作區和 Shell 需要直接讀寫外部資料夾，請在 Android 系統設定中允許 StudyPi 存取檔案。Android 11 及以上需開啟「所有檔案存取權限」，然後選擇要掛載的本機資料夾。';
 
   @override
   String get workspaceExternalGrantAccess => '前往授權';
@@ -36085,7 +36760,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get backgroundSettingsTitle => '背景任務';
 
   @override
-  String get backgroundTaskTitle => 'Kelivo 任務';
+  String get backgroundTaskTitle => 'StudyPi 任務';
 
   @override
   String get backgroundCompleted => '生成完成';
@@ -36216,7 +36891,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get backgroundOverlayIcon => '懸浮視窗圖示';
 
   @override
-  String get backgroundIconDefault => 'Kelivo 圖示';
+  String get backgroundIconDefault => 'StudyPi 圖示';
 
   @override
   String get backgroundIconImage => '選擇圖片';
@@ -36425,7 +37100,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get startupRecoverySnapshotBody =>
-      '即使資料庫無法開啟，也可以選擇本機快照還原聊天和設定。請勿解除安裝 Kelivo，解除安裝會一併刪除這些快照。';
+      '即使資料庫無法開啟，也可以選擇本機快照還原聊天和設定。請勿解除安裝 StudyPi，解除安裝會一併刪除這些快照。';
 
   @override
   String get startupRecoverySnapshotEmpty => '未在本機找到資料庫快照。請先匯出資料，再嘗試其他還原操作。';
@@ -36435,7 +37110,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String startupRecoverySnapshotConfirm(String when) {
-    return '將聊天和設定還原到 $when 的快照？快照之後的變更不會包含在內。現有附件檔案和快照會保留，Kelivo 將重新啟動以完成還原。';
+    return '將聊天和設定還原到 $when 的快照？快照之後的變更不會包含在內。現有附件檔案和快照會保留，StudyPi 將重新啟動以完成還原。';
   }
 
   @override
@@ -36444,7 +37119,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   }
 
   @override
-  String get startupRecoverySnapshotReady => '快照已準備好，請重新啟動 Kelivo 完成還原。';
+  String get startupRecoverySnapshotReady => '快照已準備好，請重新啟動 StudyPi 完成還原。';
 
   @override
   String get scheduledTasksTitle => '定時任務';
@@ -36515,7 +37190,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get scheduledTasksReliability =>
-      '建議在電池設定中允許 Kelivo 背景執行。強制停止後需重新開啟應用程式。錯過的任務不會補跑，執行時間跟隨裝置時區。';
+      '建議在電池設定中允許 StudyPi 背景執行。強制停止後需重新開啟應用程式。錯過的任務不會補跑，執行時間跟隨裝置時區。';
 
   @override
   String get scheduledTasksExecutionDetail =>
@@ -36692,7 +37367,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get scheduledTasksDesktopReliability =>
-      '僅在 Kelivo 執行時運作，最小化或常駐系統匣時也會繼續。結束或電腦休眠期間錯過的任務不會補執行，也不會自動啟動應用程式。';
+      '僅在 StudyPi 執行時運作，最小化或常駐系統匣時也會繼續。結束或電腦休眠期間錯過的任務不會補執行，也不會自動啟動應用程式。';
 
   @override
   String get scheduledTasksDesktopExecutionDetail =>
@@ -36987,7 +37662,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get scheduledTasksIOSDetail =>
-      '受 iOS 背景限制，Kelivo 不能在指定時間自動喚醒並執行模型。此功能會在 App 可執行時提前準備內容，由系統到點顯示通知。每次僅準備下一次結果；離開 App 後不保證準備完成，後續任務需再次開啟 Kelivo 才能補充。';
+      '受 iOS 背景限制，StudyPi 不能在指定時間自動喚醒並執行模型。此功能會在 App 可執行時提前準備內容，由系統到點顯示通知。每次僅準備下一次結果；離開 App 後不保證準備完成，後續任務需再次開啟 StudyPi 才能補充。';
 
   @override
   String get scheduledTasksContextPolicy => '對話上下文';
@@ -37051,7 +37726,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
   String get scheduledTasksCancelled => '已取消';
 
   @override
-  String get scheduledTasksReminderBody => '定時任務已到期，開啟 Kelivo 繼續。';
+  String get scheduledTasksReminderBody => '定時任務已到期，開啟 StudyPi 繼續。';
 
   @override
   String get scheduledTasksResultBody => '定時任務結果已準備好。';
@@ -37065,7 +37740,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get scheduledTasksAllowPreparationTip =>
-      '在 Kelivo 可執行時，提前產生下一次任務的結果，到期前不會顯示在聊天中。僅使用文字，不使用工具、附件或自訂請求內容；呼叫模型可能產生費用。';
+      '在 StudyPi 可執行時，提前產生下一次任務的結果，到期前不會顯示在聊天中。僅使用文字，不使用工具、附件或自訂請求內容；呼叫模型可能產生費用。';
 
   @override
   String get scheduledTasksContextPolicyTip =>
@@ -37073,7 +37748,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get scheduledTasksPreparationWindowTip =>
-      '允許在任務到期前多久開始準備，最長 24 小時。例如第二天早上提醒，前一天中午開啟 Kelivo 時就有機會準備。時間越長，準備機會越多，但內容也可能更早過時。不會改變任務時間，也不代表能在背景定時執行。「立刻準備」不受這項自動等待和準備次數上限限制。';
+      '允許在任務到期前多久開始準備，最長 24 小時。例如第二天早上提醒，前一天中午開啟 StudyPi 時就有機會準備。時間越長，準備機會越多，但內容也可能更早過時。不會改變任務時間，也不代表能在背景定時執行。「立刻準備」不受這項自動等待和準備次數上限限制。';
 
   @override
   String get scheduledTasksPreparationAttemptsTip =>
@@ -37085,7 +37760,7 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get scheduledTasksUnavailableTip =>
-      '到期時沒有可用結果、也無法執行任務，就傳送提醒或略過本次。提醒不包含模型產生的回答，且需要開啟通知。如果到期時 Kelivo 正在開啟執行，可直接執行任務。';
+      '到期時沒有可用結果、也無法執行任務，就傳送提醒或略過本次。提醒不包含模型產生的回答，且需要開啟通知。如果到期時 StudyPi 正在開啟執行，可直接執行任務。';
 
   @override
   String get scheduledTasksNotifyTip =>
@@ -37261,14 +37936,14 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get phoneControlAssistantHint =>
-      '需要同時完成兩項設定：在系統無障礙設定中啟用「Kelivo 手機控制」，並在要使用的助手 → 本地工具中開啟「手機控制」（也可從對話工具選單開啟）。每個助手單獨設定，執行任務時請保持手機解鎖。';
+      '需要同時完成兩項設定：在系統無障礙設定中啟用「StudyPi 手機控制」，並在要使用的助手 → 本地工具中開啟「手機控制」（也可從對話工具選單開啟）。每個助手單獨設定，執行任務時請保持手機解鎖。';
 
   @override
   String get phoneControlRestrictedTitle => '無法開啟無障礙？';
 
   @override
   String get phoneControlRestrictedHint =>
-      '部分下載的 APK 需要先在應用程式資訊右上角選單中選擇「允許受限制的設定」。點擊開啟 Kelivo 應用程式資訊，完成後再返回無障礙設定。';
+      '部分下載的 APK 需要先在應用程式資訊右上角選單中選擇「允許受限制的設定」。點擊開啟 StudyPi 應用程式資訊，完成後再返回無障礙設定。';
 
   @override
   String get phoneControlEnableAssistant => '允許此助手使用手機控制';
@@ -37361,4 +38036,349 @@ class AppLocalizationsZhHant extends AppLocalizationsZh {
 
   @override
   String get mcpOAuthExchangingToken => '正在完成登入…';
+
+  @override
+  String get studyProjectsTitle => '學習專案';
+
+  @override
+  String get studyProjectCreate => '新增專案';
+
+  @override
+  String get studyProjectEdit => '編輯專案';
+
+  @override
+  String get studyProjectDelete => '刪除專案';
+
+  @override
+  String studyProjectDeleteMessage(String title) {
+    return '確定刪除專案「$title」？專案中的材料和筆記會一併刪除，已關聯的討論將保留為一般對話。';
+  }
+
+  @override
+  String get studyProjectsEmptyTitle => '還沒有學習專案';
+
+  @override
+  String get studyProjectsEmptyDescription => '材料、討論、筆記都在專案裡，引用可回到原文';
+
+  @override
+  String get studyProjectsSelectHint => '從左側選擇一個學習專案，查看材料、討論與筆記。';
+
+  @override
+  String get studyProjectTitleLabel => '專案名稱';
+
+  @override
+  String get studyProjectTitleHint => '例如：認知負荷理論';
+
+  @override
+  String get studyProjectGoalLabel => '學習目標（選填）';
+
+  @override
+  String get studyProjectGoalHint => '正在解決的問題、章節或研究主題';
+
+  @override
+  String get studyProjectGoalEmpty => '未設定學習目標';
+
+  @override
+  String get studyProjectModeLabel => '學習方式';
+
+  @override
+  String get studyModeExplain => '直接講解';
+
+  @override
+  String get studyModeGuidedPractice => '引導練習';
+
+  @override
+  String studyProjectUpdatedAt(String date) {
+    return '更新於 $date';
+  }
+
+  @override
+  String studyProjectMaterialCount(int count) {
+    return '$count 份材料';
+  }
+
+  @override
+  String get studyProjectSave => '儲存';
+
+  @override
+  String get studyProjectCancel => '取消';
+
+  @override
+  String get studyProjectConfirmDelete => '刪除';
+
+  @override
+  String get studyProjectMoreActions => '更多操作';
+
+  @override
+  String get studyMaterialsSection => '材料';
+
+  @override
+  String get studyMaterialsImport => '匯入';
+
+  @override
+  String get studyMaterialsImporting => '正在匯入材料…';
+
+  @override
+  String get studyMaterialsEmpty => '還沒有匯入材料，可匯入 PDF、Markdown 或文字檔案。';
+
+  @override
+  String studyMaterialsImportFailed(String error) {
+    return '匯入材料失敗：$error';
+  }
+
+  @override
+  String get studyDocStatusReady => '可用';
+
+  @override
+  String get studyDocStatusScannedNeedsOcr => '掃描檔，需要解析稿';
+
+  @override
+  String get studyDocStatusUnreadable => '無法讀取';
+
+  @override
+  String get studyDocStatusPendingSourceLink => '待確認原文';
+
+  @override
+  String get studyDocScannedHint => '用 MinerU 解析後新增解析稿即可閱讀與引用';
+
+  @override
+  String studyDocPhysicalPages(int count) {
+    return '共 $count 頁';
+  }
+
+  @override
+  String studyDocCorpusPages(String range) {
+    return '教材 $range 頁';
+  }
+
+  @override
+  String get studyDocIndexed => '已建立索引';
+
+  @override
+  String get studyDocNotIndexed => '未建立索引';
+
+  @override
+  String get studyDocIndexing => '正在建立索引';
+
+  @override
+  String get studyDocActionRead => '閱讀';
+
+  @override
+  String get studyDocActionBuildIndex => '建立索引';
+
+  @override
+  String get studyDocActionRebuildIndex => '重建索引';
+
+  @override
+  String get studyDocActionAttachParse => '新增解析稿';
+
+  @override
+  String get studyDocActionConfirmSource => '確認原文';
+
+  @override
+  String get studyDocActionDelete => '刪除';
+
+  @override
+  String get studyDocDeleteTitle => '刪除材料';
+
+  @override
+  String studyDocDeleteMessage(String title) {
+    return '確定從專案中刪除「$title」？';
+  }
+
+  @override
+  String get studyDocConfirmSourceTitle => '確認原文 PDF';
+
+  @override
+  String get studyDocAttachMarkdownTitle => '選擇解析稿（.md）';
+
+  @override
+  String get studyDocAttachContentListTitle => '選擇頁碼對應（.json，選填）';
+
+  @override
+  String studyDocIndexFailed(String error) {
+    return '建立索引失敗：$error';
+  }
+
+  @override
+  String get studyDiscussionsSection => '討論';
+
+  @override
+  String get studyDiscussionsStart => '開始討論';
+
+  @override
+  String get studyDiscussionsEmpty => '還沒有關聯的討論。';
+
+  @override
+  String get studyDiscussionsCaption => '在專案討論中，回覆會引用材料原文並標註是否核實。';
+
+  @override
+  String get studyDiscussionsUnnamed => '未命名討論';
+
+  @override
+  String get studyNotesSection => '筆記';
+
+  @override
+  String get studyNotesEmpty => '還沒有專案筆記。可從回覆引用中儲存，或在學習過程中記錄。';
+
+  @override
+  String get studyNoteEvidenceGrounded => '有原文依據';
+
+  @override
+  String get studyNoteEvidenceInsufficient => '依據不足';
+
+  @override
+  String studyNoteAnchorsCount(int count) {
+    return '$count 處引用';
+  }
+
+  @override
+  String get studyNoteDetailTitle => '筆記詳情';
+
+  @override
+  String get studyNoteAnchorsHeading => '原文錨點';
+
+  @override
+  String get studyNoteNoAnchors => '未附原文錨點。';
+
+  @override
+  String get studyNoteViewSource => '查看原文';
+
+  @override
+  String get studyNoteDeleteTitle => '刪除筆記';
+
+  @override
+  String studyNoteDeleteMessage(String title) {
+    return '確定刪除筆記「$title」？';
+  }
+
+  @override
+  String get studyReaderSections => '章節目錄';
+
+  @override
+  String studyReaderSectionPdfPages(String range) {
+    return 'PDF 第 $range 頁';
+  }
+
+  @override
+  String studyReaderSectionSinglePdfPage(int page) {
+    return 'PDF 第 $page 頁';
+  }
+
+  @override
+  String get studyReaderPrevSection => '上一節';
+
+  @override
+  String get studyReaderNextSection => '下一節';
+
+  @override
+  String get studyReaderHighlightedQuote => '引用的原文';
+
+  @override
+  String get studyReaderNoIndexNotice => '尚未建立章節索引';
+
+  @override
+  String get studyReaderBuildIndex => '建立索引';
+
+  @override
+  String get studyReaderEmptyText => '該材料暫無可讀文字。';
+
+  @override
+  String get studyReaderOpenOriginal => '開啟原檔案';
+
+  @override
+  String studyReaderOpenOriginalFailed(String error) {
+    return '無法開啟原檔案：$error';
+  }
+
+  @override
+  String get studyCitationSheetTitle => '引用核查';
+
+  @override
+  String get studyCitationUnavailable => '引用資訊暫不可用';
+
+  @override
+  String get studyCitationChecking => '正在核對引用…';
+
+  @override
+  String get studyCitationStatusGrounded => '已核對原文';
+
+  @override
+  String get studyCitationStatusLocatedNoQuote => '已定位，未附原文摘錄';
+
+  @override
+  String get studyCitationStatusUnverified => '無法核實';
+
+  @override
+  String get studyCitationMaterialLabel => '材料';
+
+  @override
+  String get studyCitationSectionLabel => '章節';
+
+  @override
+  String studyCitationPdfPage(int page) {
+    return 'PDF 第 $page 頁';
+  }
+
+  @override
+  String studyCitationBookPage(int page) {
+    return '教材第 $page 頁';
+  }
+
+  @override
+  String get studyCitationSaveAsNote => '存為筆記';
+
+  @override
+  String get studyCitationSaveNoteTitle => '存為筆記';
+
+  @override
+  String get studyCitationNoteTitleLabel => '標題';
+
+  @override
+  String get studyCitationNoteBodyLabel => '筆記內容';
+
+  @override
+  String get studyCitationNoteBodyHint => '記錄你的理解、問題或要點…';
+
+  @override
+  String get studyCitationNoteSavedGrounded => '已儲存到專案筆記';
+
+  @override
+  String get studyCitationNoteSavedInsufficient => '已儲存，但依據不足';
+
+  @override
+  String get studyCitationIssueMalformed => '引用格式有誤';
+
+  @override
+  String get studyCitationIssueUnknownDocument => '專案中沒有這份材料';
+
+  @override
+  String get studyCitationIssueDocumentNotReady => '材料尚未可讀';
+
+  @override
+  String get studyCitationIssueSourceVersionMismatch => '原文已變更';
+
+  @override
+  String get studyCitationIssueMissingLocator => '沒有給出任何位置';
+
+  @override
+  String get studyCitationIssueUnknownSection => '索引中沒有這個章節';
+
+  @override
+  String get studyCitationIssueSectionUnavailable => '章節索引不可用或已過期，請重建索引';
+
+  @override
+  String get studyCitationIssuePhysicalPageOutOfRange => '超出 PDF 頁數';
+
+  @override
+  String get studyCitationIssuePhysicalPageOutsideSection => '頁碼與摘錄所在章節不一致';
+
+  @override
+  String get studyCitationIssueCorpusPageOutOfRange => '超出教材頁碼範圍';
+
+  @override
+  String get studyCitationIssueQuoteTooShort => '摘錄太短，無法作為依據';
+
+  @override
+  String get studyCitationIssueQuoteNotFound => '原文中找不到這段摘錄';
 }

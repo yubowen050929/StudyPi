@@ -403,7 +403,7 @@ abstract class AppLocalizations {
   /// No description provided for @storageSpaceClearDisplacedDatabasesConfirmMessage.
   ///
   /// In en, this message translates to:
-  /// **'Delete these set-aside databases? Kelivo kept them when it rebuilt its database, and they may be the only surviving copy of those chats and settings. This cannot be undone.'**
+  /// **'Delete these set-aside databases? StudyPi kept them when it rebuilt its database, and they may be the only surviving copy of those chats and settings. This cannot be undone.'**
   String get storageSpaceClearDisplacedDatabasesConfirmMessage;
 
   /// No description provided for @storageSpaceRestoreTracesHint.
@@ -3175,19 +3175,19 @@ abstract class AppLocalizations {
   /// No description provided for @backupPageRestartContent.
   ///
   /// In en, this message translates to:
-  /// **'Import successful. Restart Kelivo to apply it safely.'**
+  /// **'Import successful. Restart StudyPi to apply it safely.'**
   String get backupPageRestartContent;
 
   /// No description provided for @backupPageRestartContentWithSkipped.
   ///
   /// In en, this message translates to:
-  /// **'Import completed, but {count} conversations with invalid message ordering were skipped. Restart Kelivo to apply the imported data safely.'**
+  /// **'Import completed, but {count} conversations with invalid message ordering were skipped. Restart StudyPi to apply the imported data safely.'**
   String backupPageRestartContentWithSkipped(int count);
 
   /// No description provided for @restartAppFailedMessage.
   ///
   /// In en, this message translates to:
-  /// **'Kelivo could not restart automatically. Fully close it, then open it again.'**
+  /// **'StudyPi could not restart automatically. Fully close it, then open it again.'**
   String get restartAppFailedMessage;
 
   /// No description provided for @backupRestoreRolledBackTitle.
@@ -3199,7 +3199,7 @@ abstract class AppLocalizations {
   /// No description provided for @backupRestoreRolledBackContent.
   ///
   /// In en, this message translates to:
-  /// **'The restore could not be completed. Kelivo verified and kept your previous data.'**
+  /// **'The restore could not be completed. StudyPi verified and kept your previous data.'**
   String get backupRestoreRolledBackContent;
 
   /// No description provided for @backupRestoreFailureTitle.
@@ -3211,19 +3211,19 @@ abstract class AppLocalizations {
   /// No description provided for @backupRestoreFailureContent.
   ///
   /// In en, this message translates to:
-  /// **'Kelivo could not verify a complete old or new data set, so chat data was not opened. Close Kelivo and try again. If this repeats, keep the diagnostic code for support.'**
+  /// **'StudyPi could not verify a complete old or new data set, so chat data was not opened. Close StudyPi and try again. If this repeats, keep the diagnostic code for support.'**
   String get backupRestoreFailureContent;
 
   /// No description provided for @backupRestoreBusinessLeaseUnavailableTitle.
   ///
   /// In en, this message translates to:
-  /// **'Kelivo is already running'**
+  /// **'StudyPi is already running'**
   String get backupRestoreBusinessLeaseUnavailableTitle;
 
   /// No description provided for @backupRestoreBusinessLeaseUnavailableContent.
   ///
   /// In en, this message translates to:
-  /// **'Kelivo\'s data is still in use by another app process. Close any other Kelivo window, then restart. Your chat data has not been opened by this process.'**
+  /// **'StudyPi\'s data is still in use by another app process. Close any other StudyPi window, then restart. Your chat data has not been opened by this process.'**
   String get backupRestoreBusinessLeaseUnavailableContent;
 
   /// No description provided for @restoreProgressTitle.
@@ -3235,7 +3235,7 @@ abstract class AppLocalizations {
   /// No description provided for @restoreProgressWarning.
   ///
   /// In en, this message translates to:
-  /// **'Keep Kelivo open until this finishes. If you close it now, the next launch starts this over.'**
+  /// **'Keep StudyPi open until this finishes. If you close it now, the next launch starts this over.'**
   String get restoreProgressWarning;
 
   /// No description provided for @restoreProgressStageCheckingBackup.
@@ -3277,7 +3277,7 @@ abstract class AppLocalizations {
   /// No description provided for @backupRestoreFailureRestartButton.
   ///
   /// In en, this message translates to:
-  /// **'Restart Kelivo'**
+  /// **'Restart StudyPi'**
   String get backupRestoreFailureRestartButton;
 
   /// No description provided for @backupRestoreFailureCopyButton.
@@ -3349,7 +3349,7 @@ abstract class AppLocalizations {
   /// No description provided for @startupRecoveryResetFailed.
   ///
   /// In en, this message translates to:
-  /// **'Reset failed. Fully close Kelivo, then open it again.'**
+  /// **'Reset failed. Fully close StudyPi, then open it again.'**
   String get startupRecoveryResetFailed;
 
   /// No description provided for @startupRecoveryResetDialogTitle.
@@ -3361,7 +3361,7 @@ abstract class AppLocalizations {
   /// No description provided for @startupRecoveryResetDialogContent.
   ///
   /// In en, this message translates to:
-  /// **'This permanently deletes Kelivo\'s database on this device and starts fresh. If you might need this data, export a copy first. This cannot be undone.'**
+  /// **'This permanently deletes StudyPi\'s database on this device and starts fresh. If you might need this data, export a copy first. This cannot be undone.'**
   String get startupRecoveryResetDialogContent;
 
   /// No description provided for @startupRecoveryResetDialogConfirm.
@@ -3559,7 +3559,7 @@ abstract class AppLocalizations {
   /// No description provided for @startupRecoveryDangerBody.
   ///
   /// In en, this message translates to:
-  /// **'Resetting permanently deletes Kelivo\'s database on this device. Export a copy of your data first — a reset also destroys the evidence needed to fix the underlying problem.'**
+  /// **'Resetting permanently deletes StudyPi\'s database on this device. Export a copy of your data first — a reset also destroys the evidence needed to fix the underlying problem.'**
   String get startupRecoveryDangerBody;
 
   /// No description provided for @startupRecoveryResetAcknowledge.
@@ -3571,13 +3571,13 @@ abstract class AppLocalizations {
   /// No description provided for @startupDatabaseUpdateRequiredTitle.
   ///
   /// In en, this message translates to:
-  /// **'Update Kelivo to continue'**
+  /// **'Update StudyPi to continue'**
   String get startupDatabaseUpdateRequiredTitle;
 
   /// No description provided for @startupDatabaseUpdateRequiredContent.
   ///
   /// In en, this message translates to:
-  /// **'The chat database on this device was created by a newer version of Kelivo and cannot be opened by this version. Your data has not been changed. Install the latest version of Kelivo, then open it again.'**
+  /// **'The chat database on this device was created by a newer version of StudyPi and cannot be opened by this version. Your data has not been changed. Install the latest version of StudyPi, then open it again.'**
   String get startupDatabaseUpdateRequiredContent;
 
   /// No description provided for @startupDatabaseUpdateRequiredDowngradeTitle.
@@ -3595,7 +3595,7 @@ abstract class AppLocalizations {
   /// No description provided for @startupDatabaseUpdateRequiredDowngradeStep1.
   ///
   /// In en, this message translates to:
-  /// **'Install and open the latest Kelivo, then export a backup from Settings → Backup.'**
+  /// **'Install and open the latest StudyPi, then export a backup from Settings → Backup.'**
   String get startupDatabaseUpdateRequiredDowngradeStep1;
 
   /// No description provided for @startupDatabaseUpdateRequiredDowngradeStep2.
@@ -3691,7 +3691,7 @@ abstract class AppLocalizations {
   /// No description provided for @backupPageForwardCompatBody.
   ///
   /// In en, this message translates to:
-  /// **'This backup was created by a newer version of Kelivo (data format {backupVersion}; this version supports {currentVersion}), and it does not say whether older versions can read it.\n\nYou can continue: anything this version does not recognise will be skipped, and the backup file itself is not modified. But if the newer version changed how existing data is stored, some content may be imported incorrectly.\n\nUpdating Kelivo first is the safer choice.'**
+  /// **'This backup was created by a newer version of StudyPi (data format {backupVersion}; this version supports {currentVersion}), and it does not say whether older versions can read it.\n\nYou can continue: anything this version does not recognise will be skipped, and the backup file itself is not modified. But if the newer version changed how existing data is stored, some content may be imported incorrectly.\n\nUpdating StudyPi first is the safer choice.'**
   String backupPageForwardCompatBody(int backupVersion, int currentVersion);
 
   /// No description provided for @backupPageForwardCompatContinue.
@@ -3709,7 +3709,7 @@ abstract class AppLocalizations {
   /// No description provided for @backupPageSchemaTooNewMessage.
   ///
   /// In en, this message translates to:
-  /// **'This backup was created by a newer version of Kelivo and cannot be read by this version. Please update Kelivo and try again.'**
+  /// **'This backup was created by a newer version of StudyPi and cannot be read by this version. Please update StudyPi and try again.'**
   String get backupPageSchemaTooNewMessage;
 
   /// No description provided for @backupPageBackupUploaded.
@@ -4063,7 +4063,7 @@ abstract class AppLocalizations {
   /// No description provided for @backupPageCherryStudioUnsupportedBackupVersion.
   ///
   /// In en, this message translates to:
-  /// **'This backup uses Cherry Studio format version {version}, which Kelivo cannot import yet. Export from Cherry Studio v1 instead, or wait for a Kelivo update that supports Cherry Studio v2 backups.'**
+  /// **'This backup uses Cherry Studio format version {version}, which StudyPi cannot import yet. Export from Cherry Studio v1 instead, or wait for a StudyPi update that supports Cherry Studio v2 backups.'**
   String backupPageCherryStudioUnsupportedBackupVersion(String version);
 
   /// No description provided for @backupPageImportFromChatbox.
@@ -5679,12 +5679,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'New version: {version}'**
   String sideDrawerUpdateTitle(String version);
-
-  /// No description provided for @sideDrawerUpdateTitleWithBuild.
-  ///
-  /// In en, this message translates to:
-  /// **'New version: {version} ({build})'**
-  String sideDrawerUpdateTitleWithBuild(String version, int build);
 
   /// No description provided for @sideDrawerLinkCopied.
   ///
@@ -9340,7 +9334,7 @@ abstract class AppLocalizations {
   /// No description provided for @aboutPageAppName.
   ///
   /// In en, this message translates to:
-  /// **'Kelivo'**
+  /// **'StudyPi'**
   String get aboutPageAppName;
 
   /// No description provided for @aboutPageAppDescription.
@@ -11386,7 +11380,7 @@ abstract class AppLocalizations {
   /// No description provided for @settingsShare.
   ///
   /// In en, this message translates to:
-  /// **'Kelivo - Open Source AI Assistant'**
+  /// **'StudyPi - Open Source AI Assistant'**
   String get settingsShare;
 
   /// No description provided for @searchProviderBingLocalDescription.
@@ -12286,7 +12280,7 @@ abstract class AppLocalizations {
   /// No description provided for @healthDataSettingsDescription.
   ///
   /// In en, this message translates to:
-  /// **'HealthKit signals available to the current assistant in daily conversation. Switches control what Kelivo may try to read; iOS still manages actual Health access.'**
+  /// **'HealthKit signals available to the current assistant in daily conversation. Switches control what StudyPi may try to read; iOS still manages actual Health access.'**
   String get healthDataSettingsDescription;
 
   /// No description provided for @healthDataSettingsBadge.
@@ -15784,13 +15778,13 @@ abstract class AppLocalizations {
   /// No description provided for @migrationIntroSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Kelivo is moving chat history to a faster SQLite database. The upgrade runs before the app opens so your data stays consistent.'**
+  /// **'StudyPi is moving chat history to a faster SQLite database. The upgrade runs before the app opens so your data stays consistent.'**
   String get migrationIntroSubtitle;
 
   /// No description provided for @migrationBackupNote.
   ///
   /// In en, this message translates to:
-  /// **'Before migration starts, Kelivo exports a ZIP backup with settings, chat history, and local files.'**
+  /// **'Before migration starts, StudyPi exports a ZIP backup with settings, chat history, and local files.'**
   String get migrationBackupNote;
 
   /// No description provided for @migrationPerformanceNote.
@@ -15862,7 +15856,7 @@ abstract class AppLocalizations {
   /// No description provided for @migrationBackingUpSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Exporting settings, chat history, uploaded files, images, and fonts. Keep Kelivo open until this finishes.'**
+  /// **'Exporting settings, chat history, uploaded files, images, and fonts. Keep StudyPi open until this finishes.'**
   String get migrationBackingUpSubtitle;
 
   /// No description provided for @migrationMigratingTitle.
@@ -15874,7 +15868,7 @@ abstract class AppLocalizations {
   /// No description provided for @migrationMigratingSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Writing conversations and messages in batches so large histories do not overload memory. Keep Kelivo in the foreground until migration finishes.'**
+  /// **'Writing conversations and messages in batches so large histories do not overload memory. Keep StudyPi in the foreground until migration finishes.'**
   String get migrationMigratingSubtitle;
 
   /// No description provided for @migrationBackingUpDetail.
@@ -15982,7 +15976,7 @@ abstract class AppLocalizations {
   /// No description provided for @migrationCompleteSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Your chat history is now stored in SQLite. Restart Kelivo to enter the upgraded app.'**
+  /// **'Your chat history is now stored in SQLite. Restart StudyPi to enter the upgraded app.'**
   String get migrationCompleteSubtitle;
 
   /// No description provided for @migrationConversationCount.
@@ -16018,7 +16012,7 @@ abstract class AppLocalizations {
   /// No description provided for @migrationRestartButton.
   ///
   /// In en, this message translates to:
-  /// **'Restart Kelivo'**
+  /// **'Restart StudyPi'**
   String get migrationRestartButton;
 
   /// No description provided for @migrationFailedTitle.
@@ -16066,7 +16060,7 @@ abstract class AppLocalizations {
   /// No description provided for @migrationSkipDialogMessage.
   ///
   /// In en, this message translates to:
-  /// **'Kelivo will start with an empty chat database. Your old chat history stays on disk (renamed with a .retired suffix) but will NOT be migrated and will not appear in the app. Use your backup ZIP if you need to recover it later.'**
+  /// **'StudyPi will start with an empty chat database. Your old chat history stays on disk (renamed with a .retired suffix) but will NOT be migrated and will not appear in the app. Use your backup ZIP if you need to recover it later.'**
   String get migrationSkipDialogMessage;
 
   /// No description provided for @migrationSkipDialogCancel.
@@ -16846,7 +16840,7 @@ abstract class AppLocalizations {
   /// No description provided for @localSnapshotEnabledSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Kelivo periodically saves a copy of its database on this device, so it is never the only one.'**
+  /// **'StudyPi periodically saves a copy of its database on this device, so it is never the only one.'**
   String get localSnapshotEnabledSubtitle;
 
   /// No description provided for @localSnapshotIntervalTitle.
@@ -17002,7 +16996,7 @@ abstract class AppLocalizations {
   /// No description provided for @localSnapshotCopiesScopeNote.
   ///
   /// In en, this message translates to:
-  /// **'Local copies live on this device only. They protect against damage to your data inside the app, not against losing the device or uninstalling Kelivo — use WebDAV or S3 backup for that.'**
+  /// **'Local copies live on this device only. They protect against damage to your data inside the app, not against losing the device or uninstalling StudyPi — use WebDAV or S3 backup for that.'**
   String get localSnapshotCopiesScopeNote;
 
   /// No description provided for @localSnapshotOriginAutomatic.
@@ -18244,7 +18238,7 @@ abstract class AppLocalizations {
   /// No description provided for @workspaceEnvRestartBanner.
   ///
   /// In en, this message translates to:
-  /// **'Restart Kelivo to finish'**
+  /// **'Restart StudyPi to finish'**
   String get workspaceEnvRestartBanner;
 
   /// No description provided for @workspaceEnvDetectingMirrors.
@@ -18430,7 +18424,7 @@ abstract class AppLocalizations {
   /// No description provided for @workspaceEnvNativeExplanation.
   ///
   /// In en, this message translates to:
-  /// **'On desktop, Kelivo uses your system shell instead of a Linux sandbox.'**
+  /// **'On desktop, StudyPi uses your system shell instead of a Linux sandbox.'**
   String get workspaceEnvNativeExplanation;
 
   /// No description provided for @workspaceEnvNativeShellPath.
@@ -20106,7 +20100,7 @@ abstract class AppLocalizations {
   /// No description provided for @workspaceDesktopManagedHint.
   ///
   /// In en, this message translates to:
-  /// **'Kelivo creates and manages a folder for this project.'**
+  /// **'StudyPi creates and manages a folder for this project.'**
   String get workspaceDesktopManagedHint;
 
   /// No description provided for @workspaceDesktopHostHint.
@@ -20550,7 +20544,7 @@ abstract class AppLocalizations {
   /// No description provided for @workspaceExternalStorageMessage.
   ///
   /// In en, this message translates to:
-  /// **'To read and write external folders in the workspace and Shell, allow Kelivo to manage files in Android settings. On Android 11 or later, enable All files access. Then select an on-device folder to mount.'**
+  /// **'To read and write external folders in the workspace and Shell, allow StudyPi to manage files in Android settings. On Android 11 or later, enable All files access. Then select an on-device folder to mount.'**
   String get workspaceExternalStorageMessage;
 
   /// No description provided for @workspaceExternalGrantAccess.
@@ -20952,7 +20946,7 @@ abstract class AppLocalizations {
   /// No description provided for @backgroundTaskTitle.
   ///
   /// In en, this message translates to:
-  /// **'Kelivo task'**
+  /// **'StudyPi task'**
   String get backgroundTaskTitle;
 
   /// No description provided for @backgroundCompleted.
@@ -21198,7 +21192,7 @@ abstract class AppLocalizations {
   /// No description provided for @backgroundIconDefault.
   ///
   /// In en, this message translates to:
-  /// **'Kelivo icon'**
+  /// **'StudyPi icon'**
   String get backgroundIconDefault;
 
   /// No description provided for @backgroundIconImage.
@@ -21606,7 +21600,7 @@ abstract class AppLocalizations {
   /// No description provided for @startupRecoverySnapshotBody.
   ///
   /// In en, this message translates to:
-  /// **'Choose a snapshot on this device to recover your chats and settings, even when the database cannot open. Do not uninstall Kelivo: uninstalling also removes these snapshots.'**
+  /// **'Choose a snapshot on this device to recover your chats and settings, even when the database cannot open. Do not uninstall StudyPi: uninstalling also removes these snapshots.'**
   String get startupRecoverySnapshotBody;
 
   /// No description provided for @startupRecoverySnapshotEmpty.
@@ -21624,7 +21618,7 @@ abstract class AppLocalizations {
   /// No description provided for @startupRecoverySnapshotConfirm.
   ///
   /// In en, this message translates to:
-  /// **'Restore chats and settings from {when}? Changes made after this snapshot will not be included. Existing attachment files and the snapshot will be kept. Kelivo will restart to complete the restore.'**
+  /// **'Restore chats and settings from {when}? Changes made after this snapshot will not be included. Existing attachment files and the snapshot will be kept. StudyPi will restart to complete the restore.'**
   String startupRecoverySnapshotConfirm(String when);
 
   /// No description provided for @startupRecoverySnapshotFailed.
@@ -21636,7 +21630,7 @@ abstract class AppLocalizations {
   /// No description provided for @startupRecoverySnapshotReady.
   ///
   /// In en, this message translates to:
-  /// **'The snapshot is ready. Restart Kelivo to complete the restore.'**
+  /// **'The snapshot is ready. Restart StudyPi to complete the restore.'**
   String get startupRecoverySnapshotReady;
 
   /// No description provided for @scheduledTasksTitle.
@@ -21774,7 +21768,7 @@ abstract class AppLocalizations {
   /// No description provided for @scheduledTasksReliability.
   ///
   /// In en, this message translates to:
-  /// **'Keep Kelivo unrestricted in battery settings for more reliable execution. Force stopping the app cancels alarms until you reopen it. Missed runs are skipped; tasks follow the device time zone.'**
+  /// **'Keep StudyPi unrestricted in battery settings for more reliable execution. Force stopping the app cancels alarms until you reopen it. Missed runs are skipped; tasks follow the device time zone.'**
   String get scheduledTasksReliability;
 
   /// No description provided for @scheduledTasksExecutionDetail.
@@ -22116,7 +22110,7 @@ abstract class AppLocalizations {
   /// No description provided for @scheduledTasksDesktopReliability.
   ///
   /// In en, this message translates to:
-  /// **'Tasks run only while Kelivo is running, including when minimized or in the system tray. Missed times are skipped after quitting or computer sleep. Kelivo will not start automatically.'**
+  /// **'Tasks run only while StudyPi is running, including when minimized or in the system tray. Missed times are skipped after quitting or computer sleep. StudyPi will not start automatically.'**
   String get scheduledTasksDesktopReliability;
 
   /// No description provided for @scheduledTasksDesktopExecutionDetail.
@@ -22656,7 +22650,7 @@ abstract class AppLocalizations {
   /// No description provided for @scheduledTasksIOSDetail.
   ///
   /// In en, this message translates to:
-  /// **'iOS background limits prevent Kelivo from waking at a set time to run a model. Instead, content is prepared while the app can run, and the system shows a notification at the scheduled time. Only the next occurrence is prepared. Preparation may not finish after leaving the app; reopen Kelivo to prepare subsequent occurrences.'**
+  /// **'iOS background limits prevent StudyPi from waking at a set time to run a model. Instead, content is prepared while the app can run, and the system shows a notification at the scheduled time. Only the next occurrence is prepared. Preparation may not finish after leaving the app; reopen StudyPi to prepare subsequent occurrences.'**
   String get scheduledTasksIOSDetail;
 
   /// No description provided for @scheduledTasksContextPolicy.
@@ -22782,7 +22776,7 @@ abstract class AppLocalizations {
   /// No description provided for @scheduledTasksReminderBody.
   ///
   /// In en, this message translates to:
-  /// **'Your scheduled task is due. Open Kelivo to continue.'**
+  /// **'Your scheduled task is due. Open StudyPi to continue.'**
   String get scheduledTasksReminderBody;
 
   /// No description provided for @scheduledTasksResultBody.
@@ -22806,7 +22800,7 @@ abstract class AppLocalizations {
   /// No description provided for @scheduledTasksAllowPreparationTip.
   ///
   /// In en, this message translates to:
-  /// **'Generate the next result before its scheduled time, while Kelivo can run. The result stays out of the chat until it is due. Preparation uses text only, without tools, attachments or custom request bodies. It may incur model charges.'**
+  /// **'Generate the next result before its scheduled time, while StudyPi can run. The result stays out of the chat until it is due. Preparation uses text only, without tools, attachments or custom request bodies. It may incur model charges.'**
   String get scheduledTasksAllowPreparationTip;
 
   /// No description provided for @scheduledTasksContextPolicyTip.
@@ -22818,7 +22812,7 @@ abstract class AppLocalizations {
   /// No description provided for @scheduledTasksPreparationWindowTip.
   ///
   /// In en, this message translates to:
-  /// **'How far ahead of the scheduled time preparation may begin, up to 24 hours. For example, opening Kelivo at noon can prepare the next morning’s reminder. A larger window gives more chances to prepare, but the result may be less current. It does not change the scheduled time or guarantee background execution. Prepare now bypasses this automatic waiting period and all attempt limits.'**
+  /// **'How far ahead of the scheduled time preparation may begin, up to 24 hours. For example, opening StudyPi at noon can prepare the next morning’s reminder. A larger window gives more chances to prepare, but the result may be less current. It does not change the scheduled time or guarantee background execution. Prepare now bypasses this automatic waiting period and all attempt limits.'**
   String get scheduledTasksPreparationWindowTip;
 
   /// No description provided for @scheduledTasksPreparationAttemptsTip.
@@ -22836,7 +22830,7 @@ abstract class AppLocalizations {
   /// No description provided for @scheduledTasksUnavailableTip.
   ///
   /// In en, this message translates to:
-  /// **'If no prepared result is available and the task cannot run when due, send a reminder or skip the occurrence. A reminder contains no generated answer and requires notifications to be enabled. If Kelivo is open when the task is due, it can run the task then.'**
+  /// **'If no prepared result is available and the task cannot run when due, send a reminder or skip the occurrence. A reminder contains no generated answer and requires notifications to be enabled. If StudyPi is open when the task is due, it can run the task then.'**
   String get scheduledTasksUnavailableTip;
 
   /// No description provided for @scheduledTasksNotifyTip.
@@ -23139,7 +23133,7 @@ abstract class AppLocalizations {
   /// No description provided for @phoneControlAssistantHint.
   ///
   /// In en, this message translates to:
-  /// **'Both permissions are required: enable Kelivo phone control in system Accessibility settings, then enable Phone Control under your assistant’s Local Tools (also available in the chat tools menu). Each assistant is configured separately. Keep the phone unlocked while running a task.'**
+  /// **'Both permissions are required: enable StudyPi phone control in system Accessibility settings, then enable Phone Control under your assistant’s Local Tools (also available in the chat tools menu). Each assistant is configured separately. Keep the phone unlocked while running a task.'**
   String get phoneControlAssistantHint;
 
   /// No description provided for @phoneControlRestrictedTitle.
@@ -23151,7 +23145,7 @@ abstract class AppLocalizations {
   /// No description provided for @phoneControlRestrictedHint.
   ///
   /// In en, this message translates to:
-  /// **'For some downloaded APKs, Android requires “Allow restricted settings” in the app info menu first. Tap to open Kelivo’s app info, then return to Accessibility settings.'**
+  /// **'For some downloaded APKs, Android requires “Allow restricted settings” in the app info menu first. Tap to open StudyPi’s app info, then return to Accessibility settings.'**
   String get phoneControlRestrictedHint;
 
   /// No description provided for @phoneControlEnableAssistant.
@@ -23333,6 +23327,636 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Completing sign-in…'**
   String get mcpOAuthExchangingToken;
+
+  /// No description provided for @studyProjectsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Study Projects'**
+  String get studyProjectsTitle;
+
+  /// No description provided for @studyProjectCreate.
+  ///
+  /// In en, this message translates to:
+  /// **'New Project'**
+  String get studyProjectCreate;
+
+  /// No description provided for @studyProjectEdit.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Project'**
+  String get studyProjectEdit;
+
+  /// No description provided for @studyProjectDelete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Project'**
+  String get studyProjectDelete;
+
+  /// No description provided for @studyProjectDeleteMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete project \"{title}\"? Its materials and notes will be removed, while bound conversations stay as ordinary chats.'**
+  String studyProjectDeleteMessage(String title);
+
+  /// No description provided for @studyProjectsEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No study projects yet'**
+  String get studyProjectsEmptyTitle;
+
+  /// No description provided for @studyProjectsEmptyDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Materials, discussions, and notes stay together in a project, and citations link back to the original source.'**
+  String get studyProjectsEmptyDescription;
+
+  /// No description provided for @studyProjectsSelectHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Select a study project on the left to view materials, discussions, and notes.'**
+  String get studyProjectsSelectHint;
+
+  /// No description provided for @studyProjectTitleLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Project Title'**
+  String get studyProjectTitleLabel;
+
+  /// No description provided for @studyProjectTitleHint.
+  ///
+  /// In en, this message translates to:
+  /// **'e.g., Cognitive Load Theory'**
+  String get studyProjectTitleHint;
+
+  /// No description provided for @studyProjectGoalLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Learning Goal (optional)'**
+  String get studyProjectGoalLabel;
+
+  /// No description provided for @studyProjectGoalHint.
+  ///
+  /// In en, this message translates to:
+  /// **'What problem, chapter, or question are you working on?'**
+  String get studyProjectGoalHint;
+
+  /// No description provided for @studyProjectGoalEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No learning goal set'**
+  String get studyProjectGoalEmpty;
+
+  /// No description provided for @studyProjectModeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Study Mode'**
+  String get studyProjectModeLabel;
+
+  /// No description provided for @studyModeExplain.
+  ///
+  /// In en, this message translates to:
+  /// **'Direct Explanation'**
+  String get studyModeExplain;
+
+  /// No description provided for @studyModeGuidedPractice.
+  ///
+  /// In en, this message translates to:
+  /// **'Guided Practice'**
+  String get studyModeGuidedPractice;
+
+  /// No description provided for @studyProjectUpdatedAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Updated {date}'**
+  String studyProjectUpdatedAt(String date);
+
+  /// No description provided for @studyProjectMaterialCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} materials'**
+  String studyProjectMaterialCount(int count);
+
+  /// No description provided for @studyProjectSave.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get studyProjectSave;
+
+  /// No description provided for @studyProjectCancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get studyProjectCancel;
+
+  /// No description provided for @studyProjectConfirmDelete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get studyProjectConfirmDelete;
+
+  /// No description provided for @studyProjectMoreActions.
+  ///
+  /// In en, this message translates to:
+  /// **'More actions'**
+  String get studyProjectMoreActions;
+
+  /// No description provided for @studyMaterialsSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Materials'**
+  String get studyMaterialsSection;
+
+  /// No description provided for @studyMaterialsImport.
+  ///
+  /// In en, this message translates to:
+  /// **'Import'**
+  String get studyMaterialsImport;
+
+  /// No description provided for @studyMaterialsImporting.
+  ///
+  /// In en, this message translates to:
+  /// **'Importing materials…'**
+  String get studyMaterialsImporting;
+
+  /// No description provided for @studyMaterialsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No materials imported yet. Import PDF, Markdown, or text files.'**
+  String get studyMaterialsEmpty;
+
+  /// No description provided for @studyMaterialsImportFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to import materials: {error}'**
+  String studyMaterialsImportFailed(String error);
+
+  /// No description provided for @studyDocStatusReady.
+  ///
+  /// In en, this message translates to:
+  /// **'Ready'**
+  String get studyDocStatusReady;
+
+  /// No description provided for @studyDocStatusScannedNeedsOcr.
+  ///
+  /// In en, this message translates to:
+  /// **'Scanned PDF, parse needed'**
+  String get studyDocStatusScannedNeedsOcr;
+
+  /// No description provided for @studyDocStatusUnreadable.
+  ///
+  /// In en, this message translates to:
+  /// **'Unreadable'**
+  String get studyDocStatusUnreadable;
+
+  /// No description provided for @studyDocStatusPendingSourceLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Source PDF pending confirmation'**
+  String get studyDocStatusPendingSourceLink;
+
+  /// No description provided for @studyDocScannedHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Parse with MinerU and attach the Markdown parse to read and cite.'**
+  String get studyDocScannedHint;
+
+  /// No description provided for @studyDocPhysicalPages.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} pages'**
+  String studyDocPhysicalPages(int count);
+
+  /// No description provided for @studyDocCorpusPages.
+  ///
+  /// In en, this message translates to:
+  /// **'Textbook pp. {range}'**
+  String studyDocCorpusPages(String range);
+
+  /// No description provided for @studyDocIndexed.
+  ///
+  /// In en, this message translates to:
+  /// **'Indexed'**
+  String get studyDocIndexed;
+
+  /// No description provided for @studyDocNotIndexed.
+  ///
+  /// In en, this message translates to:
+  /// **'Not indexed'**
+  String get studyDocNotIndexed;
+
+  /// No description provided for @studyDocIndexing.
+  ///
+  /// In en, this message translates to:
+  /// **'Indexing'**
+  String get studyDocIndexing;
+
+  /// No description provided for @studyDocActionRead.
+  ///
+  /// In en, this message translates to:
+  /// **'Read'**
+  String get studyDocActionRead;
+
+  /// No description provided for @studyDocActionBuildIndex.
+  ///
+  /// In en, this message translates to:
+  /// **'Build Index'**
+  String get studyDocActionBuildIndex;
+
+  /// No description provided for @studyDocActionRebuildIndex.
+  ///
+  /// In en, this message translates to:
+  /// **'Rebuild Index'**
+  String get studyDocActionRebuildIndex;
+
+  /// No description provided for @studyDocActionAttachParse.
+  ///
+  /// In en, this message translates to:
+  /// **'Attach Parse'**
+  String get studyDocActionAttachParse;
+
+  /// No description provided for @studyDocActionConfirmSource.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Source PDF'**
+  String get studyDocActionConfirmSource;
+
+  /// No description provided for @studyDocActionDelete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get studyDocActionDelete;
+
+  /// No description provided for @studyDocDeleteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Material'**
+  String get studyDocDeleteTitle;
+
+  /// No description provided for @studyDocDeleteMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete \"{title}\" from this project?'**
+  String studyDocDeleteMessage(String title);
+
+  /// No description provided for @studyDocConfirmSourceTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Source PDF'**
+  String get studyDocConfirmSourceTitle;
+
+  /// No description provided for @studyDocAttachMarkdownTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Parsed Markdown (.md)'**
+  String get studyDocAttachMarkdownTitle;
+
+  /// No description provided for @studyDocAttachContentListTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Select Content List (.json, optional)'**
+  String get studyDocAttachContentListTitle;
+
+  /// No description provided for @studyDocIndexFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to build index: {error}'**
+  String studyDocIndexFailed(String error);
+
+  /// No description provided for @studyDiscussionsSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Discussions'**
+  String get studyDiscussionsSection;
+
+  /// No description provided for @studyDiscussionsStart.
+  ///
+  /// In en, this message translates to:
+  /// **'Start Discussion'**
+  String get studyDiscussionsStart;
+
+  /// No description provided for @studyDiscussionsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No bound discussions yet.'**
+  String get studyDiscussionsEmpty;
+
+  /// No description provided for @studyDiscussionsCaption.
+  ///
+  /// In en, this message translates to:
+  /// **'In project discussions, replies cite source materials and indicate whether each citation is verified.'**
+  String get studyDiscussionsCaption;
+
+  /// No description provided for @studyDiscussionsUnnamed.
+  ///
+  /// In en, this message translates to:
+  /// **'Untitled discussion'**
+  String get studyDiscussionsUnnamed;
+
+  /// No description provided for @studyNotesSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Notes'**
+  String get studyNotesSection;
+
+  /// No description provided for @studyNotesEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No project notes yet. Save citations from replies or add notes as you study.'**
+  String get studyNotesEmpty;
+
+  /// No description provided for @studyNoteEvidenceGrounded.
+  ///
+  /// In en, this message translates to:
+  /// **'Grounded in source'**
+  String get studyNoteEvidenceGrounded;
+
+  /// No description provided for @studyNoteEvidenceInsufficient.
+  ///
+  /// In en, this message translates to:
+  /// **'Insufficient evidence'**
+  String get studyNoteEvidenceInsufficient;
+
+  /// No description provided for @studyNoteAnchorsCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} citations'**
+  String studyNoteAnchorsCount(int count);
+
+  /// No description provided for @studyNoteDetailTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Note Details'**
+  String get studyNoteDetailTitle;
+
+  /// No description provided for @studyNoteAnchorsHeading.
+  ///
+  /// In en, this message translates to:
+  /// **'Source Anchors'**
+  String get studyNoteAnchorsHeading;
+
+  /// No description provided for @studyNoteNoAnchors.
+  ///
+  /// In en, this message translates to:
+  /// **'No source anchors attached.'**
+  String get studyNoteNoAnchors;
+
+  /// No description provided for @studyNoteViewSource.
+  ///
+  /// In en, this message translates to:
+  /// **'View Source'**
+  String get studyNoteViewSource;
+
+  /// No description provided for @studyNoteDeleteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete Note'**
+  String get studyNoteDeleteTitle;
+
+  /// No description provided for @studyNoteDeleteMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete note \"{title}\"?'**
+  String studyNoteDeleteMessage(String title);
+
+  /// No description provided for @studyReaderSections.
+  ///
+  /// In en, this message translates to:
+  /// **'Sections'**
+  String get studyReaderSections;
+
+  /// No description provided for @studyReaderSectionPdfPages.
+  ///
+  /// In en, this message translates to:
+  /// **'PDF pp. {range}'**
+  String studyReaderSectionPdfPages(String range);
+
+  /// No description provided for @studyReaderSectionSinglePdfPage.
+  ///
+  /// In en, this message translates to:
+  /// **'PDF p. {page}'**
+  String studyReaderSectionSinglePdfPage(int page);
+
+  /// No description provided for @studyReaderPrevSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Previous section'**
+  String get studyReaderPrevSection;
+
+  /// No description provided for @studyReaderNextSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Next section'**
+  String get studyReaderNextSection;
+
+  /// No description provided for @studyReaderHighlightedQuote.
+  ///
+  /// In en, this message translates to:
+  /// **'Cited Passage'**
+  String get studyReaderHighlightedQuote;
+
+  /// No description provided for @studyReaderNoIndexNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Section index not built yet'**
+  String get studyReaderNoIndexNotice;
+
+  /// No description provided for @studyReaderBuildIndex.
+  ///
+  /// In en, this message translates to:
+  /// **'Build Index'**
+  String get studyReaderBuildIndex;
+
+  /// No description provided for @studyReaderEmptyText.
+  ///
+  /// In en, this message translates to:
+  /// **'No readable text in this document.'**
+  String get studyReaderEmptyText;
+
+  /// No description provided for @studyReaderOpenOriginal.
+  ///
+  /// In en, this message translates to:
+  /// **'Open Original File'**
+  String get studyReaderOpenOriginal;
+
+  /// No description provided for @studyReaderOpenOriginalFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Unable to open original file: {error}'**
+  String studyReaderOpenOriginalFailed(String error);
+
+  /// No description provided for @studyCitationSheetTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Citation Check'**
+  String get studyCitationSheetTitle;
+
+  /// No description provided for @studyCitationUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Citation details are currently unavailable'**
+  String get studyCitationUnavailable;
+
+  /// No description provided for @studyCitationChecking.
+  ///
+  /// In en, this message translates to:
+  /// **'Checking citation…'**
+  String get studyCitationChecking;
+
+  /// No description provided for @studyCitationStatusGrounded.
+  ///
+  /// In en, this message translates to:
+  /// **'Verified in source'**
+  String get studyCitationStatusGrounded;
+
+  /// No description provided for @studyCitationStatusLocatedNoQuote.
+  ///
+  /// In en, this message translates to:
+  /// **'Located, no source quote attached'**
+  String get studyCitationStatusLocatedNoQuote;
+
+  /// No description provided for @studyCitationStatusUnverified.
+  ///
+  /// In en, this message translates to:
+  /// **'Unable to verify'**
+  String get studyCitationStatusUnverified;
+
+  /// No description provided for @studyCitationMaterialLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Material'**
+  String get studyCitationMaterialLabel;
+
+  /// No description provided for @studyCitationSectionLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Section'**
+  String get studyCitationSectionLabel;
+
+  /// No description provided for @studyCitationPdfPage.
+  ///
+  /// In en, this message translates to:
+  /// **'PDF p. {page}'**
+  String studyCitationPdfPage(int page);
+
+  /// No description provided for @studyCitationBookPage.
+  ///
+  /// In en, this message translates to:
+  /// **'Textbook p. {page}'**
+  String studyCitationBookPage(int page);
+
+  /// No description provided for @studyCitationSaveAsNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Save as Note'**
+  String get studyCitationSaveAsNote;
+
+  /// No description provided for @studyCitationSaveNoteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Save as Note'**
+  String get studyCitationSaveNoteTitle;
+
+  /// No description provided for @studyCitationNoteTitleLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Title'**
+  String get studyCitationNoteTitleLabel;
+
+  /// No description provided for @studyCitationNoteBodyLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Note Content'**
+  String get studyCitationNoteBodyLabel;
+
+  /// No description provided for @studyCitationNoteBodyHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Write your understanding, questions, or takeaways…'**
+  String get studyCitationNoteBodyHint;
+
+  /// No description provided for @studyCitationNoteSavedGrounded.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved to project notes'**
+  String get studyCitationNoteSavedGrounded;
+
+  /// No description provided for @studyCitationNoteSavedInsufficient.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved, but evidence is insufficient'**
+  String get studyCitationNoteSavedInsufficient;
+
+  /// No description provided for @studyCitationIssueMalformed.
+  ///
+  /// In en, this message translates to:
+  /// **'Malformed citation marker'**
+  String get studyCitationIssueMalformed;
+
+  /// No description provided for @studyCitationIssueUnknownDocument.
+  ///
+  /// In en, this message translates to:
+  /// **'This material is not in the project'**
+  String get studyCitationIssueUnknownDocument;
+
+  /// No description provided for @studyCitationIssueDocumentNotReady.
+  ///
+  /// In en, this message translates to:
+  /// **'Material is not readable yet'**
+  String get studyCitationIssueDocumentNotReady;
+
+  /// No description provided for @studyCitationIssueSourceVersionMismatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Source file has changed'**
+  String get studyCitationIssueSourceVersionMismatch;
+
+  /// No description provided for @studyCitationIssueMissingLocator.
+  ///
+  /// In en, this message translates to:
+  /// **'No section, page, or quote locator provided'**
+  String get studyCitationIssueMissingLocator;
+
+  /// No description provided for @studyCitationIssueUnknownSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Section not found in index'**
+  String get studyCitationIssueUnknownSection;
+
+  /// No description provided for @studyCitationIssueSectionUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Section index is unavailable or outdated; please rebuild the index'**
+  String get studyCitationIssueSectionUnavailable;
+
+  /// No description provided for @studyCitationIssuePhysicalPageOutOfRange.
+  ///
+  /// In en, this message translates to:
+  /// **'Exceeds PDF page count'**
+  String get studyCitationIssuePhysicalPageOutOfRange;
+
+  /// No description provided for @studyCitationIssuePhysicalPageOutsideSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Page number does not match the section containing the quote'**
+  String get studyCitationIssuePhysicalPageOutsideSection;
+
+  /// No description provided for @studyCitationIssueCorpusPageOutOfRange.
+  ///
+  /// In en, this message translates to:
+  /// **'Outside textbook page range'**
+  String get studyCitationIssueCorpusPageOutOfRange;
+
+  /// No description provided for @studyCitationIssueQuoteTooShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Quote is too short to serve as evidence'**
+  String get studyCitationIssueQuoteTooShort;
+
+  /// No description provided for @studyCitationIssueQuoteNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'Quote not found in source text'**
+  String get studyCitationIssueQuoteNotFound;
 }
 
 class _AppLocalizationsDelegate

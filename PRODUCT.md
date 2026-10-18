@@ -1,33 +1,34 @@
-# Product
+# StudyPi Product
 
-## Register
+## 用户与目标
 
-product
+StudyPi 基于 Kelivo，首版服务于个人深度学习与研究，Android 优先，桌面共享核心架构。
+帮助用户把材料变成理解，把理解变成独立应用与可检查的研究成果。
+教师备课、考试备考和协作教学作为后续场景扩展。
 
-## Users
+用户在 2026-10-17 确认以上首版方向，并指定参考
+[Pi](https://github.com/badlogic/pi-mono) 与
+[Orca](https://github.com/stablyai/orca)。
 
-People who use multiple LLM providers across mobile and desktop and need a dependable, configurable chat workspace for text, files, tools, search, voice, and custom assistants.
+## 产品原则
 
-## Product Purpose
+- 学习项目承载目标、材料、任务、证据和产物；对话是其中一种交互方式。
+- 依据用户意图选择讲解、引导练习、研究或实验，允许随时改变方式。
+- 掌握判断必须有表现证据；明确区分看过、在帮助下完成、独立完成和迁移应用。
+- 结论关联实际使用的材料，计算和实验关联可复现的方法与环境。
+- 模型、工具、环境与教学策略分开配置；简单问题保持轻量，复杂任务有预算与恢复能力。
+- 本地可独立使用。账号承载跨设备身份与同步，不阻断离线资料和已有产物的访问。
+- 保存的内容由用户检查、修正、导出和删除，学习状态不等同于智力或人格标签。
 
-Kelivo makes advanced LLM capabilities practical in one cross-platform client while keeping conversations, settings, and user-owned data portable and recoverable.
+## 体验与视觉
 
-## Brand Personality
+清楚、耐心、克制。用户首先看到自己正在解决的问题、依据和下一步。
+沿用 Material 3 与现有响应式组件规范，手机重视阅读、语音和短操作，桌面提供材料与成果并排工作。
+后台任务只在完成、失败或需要用户行动时提示，复习负担可调。
+支持深浅色、大字号、键盘与触摸、屏幕阅读器、足够对比度和减少动画。
 
-Practical, calm, and capable. The interface should feel familiar to Material You users, stay out of the conversation, and explain exceptional states without alarming or trapping people.
+## 实施边界
 
-## Anti-references
-
-Avoid harsh monochrome outlines, decorative recovery screens, diagnostic-only dead ends, generic AI-dashboard styling, and controls that diverge from the established Material 3 vocabulary. RikkaHub's practical information density and interaction clarity are positive references, not surfaces to copy verbatim.
-
-## Design Principles
-
-- Keep the conversation and the user's current task visually primary.
-- Make safety mechanisms actionable and understandable, not merely technically correct.
-- Preserve familiar platform and Material 3 interaction patterns across form factors.
-- Use restrained hierarchy and color so status is clear without visual noise.
-- Prefer recoverable, user-owned data flows with explicit outcomes.
-
-## Accessibility & Inclusion
-
-Support light and dark themes, dynamic color, localization, scalable text, keyboard and touch input, sufficient text contrast, meaningful semantics, and reduced-motion-friendly state changes across Android, iOS, Windows, macOS, and Linux.
+本文件是产品方向，不是已交付功能清单。当前状态、设计与验收入口见
+[StudyPi 项目文档](docs/studypi/README.md)。
+Kelivo 的上游功能说明仍保存在仓库原 README 中；应用包名、发行身份与品牌资产在独立里程碑完成。

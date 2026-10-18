@@ -85,6 +85,12 @@ class AppDirectories {
     return dir;
   }
 
+  /// Study project root: `<appData>/study/<id>`, holding imported sources
+  /// and the `.studypi/index` workspace indexes.
+  static Future<Directory> studyProjectDir(String projectId) {
+    return _ensurePath('study/$projectId');
+  }
+
   /// Skill body directory: `<appData>/skills/<id>`.
   static Future<Directory> skillDir(String skillId) {
     return _ensurePath('skills/$skillId');

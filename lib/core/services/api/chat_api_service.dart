@@ -227,7 +227,24 @@ class ChatApiService {
     bool textOnly = false,
     AutoRetryOptions? retryOverride,
   }) async* {
+    final parentCancellation = ToolCallCancellation.current;
+    parentCancellation?.throwIfCancelled();
     final sessionToken = CancelToken();
+    // Cleared when this request ends so a long-lived parent attempt does not
+    // keep every finished child request's token reachable.
+    CancelToken? linkedToken = sessionToken;
+    if (parentCancellation != null) {
+      unawaited(
+        parentCancellation.cancelled.then((_) {
+          final token = linkedToken;
+          if (parentCancellation.isCancelled() &&
+              token != null &&
+              !token.isCancelled) {
+            token.cancel('cancelled');
+          }
+        }),
+      );
+    }
     final toolCancellation = ToolCallCancellation(
       isCancelled: () => sessionToken.isCancelled,
       cancelled: _whenCancelled(sessionToken),
@@ -355,6 +372,7 @@ class ChatApiService {
         ),
       );
     } finally {
+      linkedToken = null;
       if (rid.isNotEmpty) {
         final cur = _activeCancelTokens[rid];
         if (identical(cur, sessionToken)) {

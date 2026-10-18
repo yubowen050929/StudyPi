@@ -180,6 +180,13 @@ void main() {
           ),
           'kelivo-file:///upload/doc.pdf',
         );
+        expect(
+          KelivoFileUri.tryEncodeLegacyAbsolutePath(
+            '/data/user/0/app.studypi/app_flutter/images/b.png',
+            allowGenericFallback: false,
+          ),
+          'kelivo-file:///images/b.png',
+        );
         // Non-kelivo package must not be claimed without generic fallback.
         expect(
           KelivoFileUri.tryEncodeLegacyAbsolutePath(

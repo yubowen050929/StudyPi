@@ -5,6 +5,7 @@ import 'dart:math';
 import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
 
+import 'tool_call_cancellation.dart';
 import '../../models/auto_retry_options.dart';
 
 /// Process-wide auto-retry config, synced from [SettingsProvider].
@@ -126,6 +127,7 @@ bool _isRetryableDioError(DioException error) {
 }
 
 bool isUserCancelError(Object error) {
+  if (error is ToolCallCancelledException) return true;
   if (error is DioException && error.type == DioExceptionType.cancel) {
     return true;
   }

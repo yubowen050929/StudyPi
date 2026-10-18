@@ -5304,7 +5304,7 @@ class ChatDatabaseRepository {
           "INSERT OR IGNORE INTO extension_entity_rows "
           "(kind, id, sort_order, owner_id, payload, updated_at) "
           "SELECT kind, id, sort_order, owner_id, payload, updated_at "
-          "FROM merge_source.extension_entity_rows WHERE kind IN ('workspace', 'skill', 'composerPublishedFile');",
+          "FROM merge_source.extension_entity_rows WHERE kind IN ('workspace', 'skill', 'composerPublishedFile', 'studyProject', 'studyDocument', 'studyNote');",
         );
         final sourceRows = await _db
             .customSelect(

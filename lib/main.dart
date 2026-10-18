@@ -1,5 +1,6 @@
 import 'core/services/scheduled_tasks_service.dart';
 import 'core/services/auth/provider_oauth_service.dart';
+import 'features/study/providers/study_project_provider.dart';
 import 'package:Kelivo/core/services/sandbox/workspace_channel.dart';
 import 'package:Kelivo/core/providers/external_mounts_provider.dart';
 import 'package:Kelivo/core/services/sandbox/environment_dependencies.dart';
@@ -475,7 +476,7 @@ Future<void> _initRestoreFailureWindow() async {
       return;
     }
     await windowManager.waitUntilReadyToShow(
-      const WindowOptions(title: 'Kelivo'),
+      const WindowOptions(title: 'StudyPi'),
       () async {
         await windowManager.show();
         await windowManager.focus();
@@ -500,7 +501,7 @@ class _RestoreProgressApp extends StatelessWidget {
     final palette = ThemePalettes.defaultPalette;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Kelivo',
+      title: 'StudyPi',
       supportedLocales: AppLocalizations.supportedLocales,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       theme: buildLightThemeForScheme(palette.light),
@@ -526,7 +527,7 @@ class _RestoreFailureApp extends StatelessWidget {
     final palette = ThemePalettes.defaultPalette;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Kelivo',
+      title: 'StudyPi',
       supportedLocales: AppLocalizations.supportedLocales,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       theme: buildLightThemeForScheme(palette.light),
@@ -558,7 +559,7 @@ Future<void> _initDesktopWindow() async {
             false);
     // Initialize and show desktop window with persisted size/position
     await DesktopWindowController.instance.initializeAndShow(
-      title: 'Kelivo',
+      title: 'StudyPi',
       linuxHideTitleBar: linuxHideTitleBar,
     );
   } catch (_) {
@@ -627,7 +628,7 @@ class MigrationApp extends StatelessWidget {
     final palette = ThemePalettes.defaultPalette;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Kelivo',
+      title: 'StudyPi',
       supportedLocales: AppLocalizations.supportedLocales,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       theme: buildLightThemeForScheme(palette.light),
@@ -771,6 +772,10 @@ class MyApp extends StatelessWidget {
             store: ctx.read<ExtensionEntityStore>(),
             assistants: ctx.read<AssistantProvider>(),
           ),
+        ),
+        ChangeNotifierProvider(
+          create: (ctx) =>
+              StudyProjectProvider(entities: ctx.read<ExtensionEntityStore>()),
         ),
         ChangeNotifierProvider(
           create: (ctx) => SkillsService(
@@ -1060,7 +1065,7 @@ class MyApp extends StatelessWidget {
               // debugPrint('[Theme/App] Dark scaffoldBg=${dark.colorScheme.surface.value.toRadixString(16)} card≈${dark.colorScheme.surface.value.toRadixString(16)} shadow=${dark.colorScheme.shadow.value.toRadixString(16)}');
               return MaterialApp(
                 debugShowCheckedModeBanner: false,
-                title: 'Kelivo',
+                title: 'StudyPi',
                 navigatorKey: rootNavigatorKey,
                 // App UI language; null = follow system (respects iOS per-app language)
                 locale: settings.appLocaleForMaterialApp,

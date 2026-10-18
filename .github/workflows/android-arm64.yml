@@ -1,0 +1,84 @@
+# StudyPi 的第一份 Android 包。只打 arm64-v8a，不发布 Release。
+# 推送到 codex/studypi-foundation 会开始构建。
+# 合并到 master 之后，Actions 页才会出现 Run workflow 按钮。
+# 构建结束后，在该次运行的 Artifacts 里下载 APK。
+name: Android arm64-v8a
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - codex/studypi-foundation
+
+jobs:
+  apk:
+    name: Build arm64-v8a APK
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: zulu
+          java-version: '17'
+          cache: gradle
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.47.6'
+          channel: stable
+          cache: true
+
+      - name: Resolve dependencies
+        run: flutter pub get
+
+      - name: Write release signing key
+        env:
+          SIGN_KEYSTORE_BASE64: ${{ secrets.SIGN_KEYSTORE_BASE64 }}
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+        run: |
+          set -euo pipefail
+          test -n "$SIGN_KEYSTORE_BASE64"
+          test -n "$KEYSTORE_PASSWORD"
+          test -n "$KEY_ALIAS"
+          test -n "$KEY_PASSWORD"
+          echo "$SIGN_KEYSTORE_BASE64" | base64 --decode > android/app/studypi-dev.jks
+          umask 077
+          printf 'storePassword=%s\nkeyPassword=%s\nkeyAlias=%s\nstoreFile=%s\n' \
+            "$KEYSTORE_PASSWORD" "$KEY_PASSWORD" "$KEY_ALIAS" studypi-dev.jks \
+            > android/key.properties
+
+      - name: Build release APK
+        env:
+          STUDYPI_ABIS: arm64-v8a
+        run: flutter build apk --release --target-platform android-arm64
+
+      - name: Require a signed arm64-only APK
+        run: |
+          python3 - <<'PY'
+          import zipfile
+          import sys
+          apk = "build/app/outputs/flutter-apk/app-release.apk"
+          names = zipfile.ZipFile(apk).namelist()
+          signed = any(name.startswith("META-INF/") and name.endswith(".SF") for name in names)
+          if not signed:
+              sys.exit("APK is unsigned")
+          abis = {name.split("/")[1] for name in names if name.startswith("lib/")}
+          if abis != {"arm64-v8a"}:
+              sys.exit(f"APK native ABIs are {sorted(abis)}, expected only arm64-v8a")
+          PY
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: studypi-android-arm64-v8a
+          path: build/app/outputs/flutter-apk/app-release.apk
+          if-no-files-found: error
+          retention-days: 14

@@ -116,6 +116,8 @@ void main() {
       isStreaming: true,
     );
 
+    viewModel.debugChatActions.debugTrackActiveMessage(assistantMessage);
+
     // Must complete rather than throw: nobody awaits the send generation
     // future, so an escaping error would become an unhandled async error.
     await viewModel.debugChatActions.handleSendGenerationFailure(
@@ -194,18 +196,19 @@ void main() {
       ),
     );
 
+    final assistantMessage = ChatMessage(
+      id: 'assistant-1',
+      role: 'assistant',
+      content: '',
+      conversationId: 'conversation-1',
+      isStreaming: true,
+    );
+    viewModel.debugChatActions.debugTrackActiveMessage(assistantMessage);
     await viewModel.debugChatActions.handleSendGenerationFailure(
       error: http.ClientException('cancelled'),
       conversationId: 'conversation-1',
-      assistantMessage: ChatMessage(
-        id: 'assistant-1',
-        role: 'assistant',
-        content: '',
-        conversationId: 'conversation-1',
-        isStreaming: true,
-      ),
+      assistantMessage: assistantMessage,
     );
-
     expect(streamErrors, isEmpty);
     expect(service.terminalStates, [GenerationRunState.cancelled]);
     expect(service.errorCodes, [null]);

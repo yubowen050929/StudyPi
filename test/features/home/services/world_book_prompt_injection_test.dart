@@ -8,6 +8,7 @@ import 'package:Kelivo/features/home/controllers/stream_controller.dart'
 import 'package:Kelivo/core/services/mcp/mcp_tool_service.dart';
 import 'package:Kelivo/core/services/workspace/workspace_tools_service.dart';
 import 'package:Kelivo/core/services/logging/context_logger.dart';
+import 'package:Kelivo/core/services/logging/context_log_models.dart';
 import 'package:Kelivo/core/providers/settings_provider.dart';
 import 'package:Kelivo/features/home/widgets/conversation_system_prompt_button.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +26,7 @@ import 'package:Kelivo/core/providers/instruction_injection_provider.dart';
 import 'package:Kelivo/core/providers/user_provider.dart';
 import 'package:Kelivo/core/providers/world_book_provider.dart';
 import 'package:Kelivo/core/services/chat/chat_service.dart';
+import 'package:Kelivo/core/services/study/study_prompts.dart';
 import 'package:Kelivo/core/services/world_book_activation.dart';
 import 'package:Kelivo/features/home/services/message_builder_service.dart';
 import 'package:Kelivo/l10n/app_localizations.dart';
@@ -589,6 +591,40 @@ void main() {
   }
 
   testWidgets(
+    'StudyPi core is sent and attributed even without a custom system prompt',
+    (tester) async {
+      await mount(tester);
+      for (final assistant in <Assistant?>[
+        null,
+        const Assistant(id: 'assistant', name: 'Assistant'),
+        const Assistant(
+          id: 'assistant',
+          name: 'Assistant',
+          systemPrompt: '   ',
+        ),
+      ]) {
+        final messages = <Map<String, dynamic>>[
+          {'role': 'user', 'content': '请直接讲解，不要先问我年级。'},
+        ];
+        builder.injectSystemPrompt(messages, assistant, 'model');
+        expect(messages.first['role'], 'system');
+        expect(messages.first['content'], StudyPrompts.soul);
+        expect(messages.last['role'], 'user');
+        expect(messages, hasLength(2));
+        final segments = ContextSegmentTags.read(messages.first);
+        expect(segments, hasLength(1));
+        expect(segments.single['source'], ContextSource.systemPrompt.wireName);
+        expect(segments.single['length'], StudyPrompts.soul.length);
+        builder.stripInternalRevisionIds(messages);
+        expect(messages.first, {
+          'role': 'system',
+          'content': StudyPrompts.soul,
+        });
+      }
+    },
+  );
+
+  testWidgets(
     'conversation system prompt overrides only when allowed; empty restores assistant',
     (tester) async {
       await mount(tester);
@@ -624,7 +660,10 @@ void main() {
           conversation: scenario.$2,
         );
         builder.stripInternalRevisionIds(messages);
-        expect(messages.first, {'role': 'system', 'content': scenario.$3});
+        expect(messages.first, {
+          'role': 'system',
+          'content': StudyPrompts.compose(scenario.$3),
+        });
         expect(messages, hasLength(2));
       }
       final decoded = Assistant.fromJson(
